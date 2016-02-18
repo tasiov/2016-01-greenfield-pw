@@ -8,15 +8,16 @@ module.exports.checkUser = function(username, password, callback) {
 	if(username === 'username' && password === 'password') {
 		callback(null, true);
 	}
-}
+};
 
 module.exports.extractUserInfo = function(username, password, callback) {
-	return fs.readFileAsync(__dirname + '../data/sampleGet.json')
+	console.log(__dirname + '/../data/sampleGet.json');
+	return fs.readFileAsync(__dirname + '/../data/sampleGet.json', 'utf8')
 	.then(function(data) {
-		var userObj = JSON.parse(data);
+		var userObj = {user: 'test1', password: 'password'};
 		return userObj;
 	})
 	.catch(function(err) {
-		return {Error: 0};
+		return {Error: err};
 	});
-}
+};

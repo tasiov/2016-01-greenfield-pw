@@ -5,7 +5,7 @@ Promise.promisifyAll(utils);
 
 module.exports = function(app, express) {
 	app.post('/login', function(req, res) {
-		util.checkUserAsync(req.body.username, req.body.password)
+		utils.checkUserAsync(req.body.username, req.body.password)
 		.then(function(result) {
 			if(result) {
 				req.session.regenerate(function() {
@@ -29,7 +29,7 @@ module.exports = function(app, express) {
 
 	app.get('/login', function(req, res) {
 		if(req.session) {
-			util.extractUserInfo(req)
+			utils.extractUserInfo(req)
 			.then(function(infoObj) {
 				res.send(infoObj);
 			});
