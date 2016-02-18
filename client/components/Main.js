@@ -4,15 +4,11 @@ class Main extends React.Component {
     super(props);
   }
 
-
   render() {
-    if (!this.state.user){
-      return (
-        <div>
-          {this.state.user.firstName}
-          // Hello World
-        </div>
-      )
-    }
+    return (
+      <div>
+        Hello {this.props.username}
+      </div>
+    )
   }
 }
