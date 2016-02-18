@@ -1,14 +1,40 @@
-var fs = require('fs');
 var Promise = require('bluebird');
-Promise.promisifyAll(fs);
+var utils = require('./utils.js');
+Promise.promisifyAll(utils);
 
 
 module.exports = function(app, express) {
-  //making a get request to the index must render the index.ejs file with the appopriate prompt,
-  //and code template. Getting the files from room1 and then injecting them into the ejs template
-  //as a data object ensure they are rendered properly
+	app.post('/login', function(req, res) {
+		util.checkUserAsync(req.body.username, req.body.password)
+		.then(function(result) {
+			if(result) {
+				req.session.regenerate(function() {
+					req.session.user = req.body.username;
+					res.send('You passed');
+				})
+			} else {
+				return res.send('Invalid Password');
+			}
+		})
+		.catch(function(err) {
+			res.send('error ' + err);
+		})
+	});
+
+
 	app.get('/', function(req, res) {
 		res.redirect('/index.html');
 	});
 
+
+	app.get('/login', function(req, res) {
+		if(req.session) {
+			util.extractUserInfo(req)
+			.then(function(infoObj) {
+				res.send(infoObj);
+			});
+		} else {
+			res.send('Not logged in');
+		}
+	});
 }
