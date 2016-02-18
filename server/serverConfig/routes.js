@@ -1,7 +1,5 @@
-var fs = require('fs');
 var Promise = require('bluebird');
 var utils = require('./utils.js');
-Promise.promisifyAll(fs);
 Promise.promisifyAll(utils);
 
 
@@ -31,9 +29,9 @@ module.exports = function(app, express) {
 
 	app.get('/login', function(req, res) {
 		if(req.session) {
-			util.extractUserInfoAsync(req)
-			.then(function(info) {
-				res.send(info);
+			util.extractUserInfo(req)
+			.then(function(infoObj) {
+				res.send(infoObj);
 			});
 		} else {
 			res.send('Not logged in');
