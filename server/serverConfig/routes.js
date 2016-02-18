@@ -28,7 +28,8 @@ module.exports = function(app, express) {
 
 
 	app.get('/login', function(req, res) {
-		if(req.session) {
+		console.log(req.session);
+		if(req.session.user) {
 			utils.extractUserInfo(req)
 			.then(function(infoObj) {
 				res.send(infoObj);
