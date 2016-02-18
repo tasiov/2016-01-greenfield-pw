@@ -5,6 +5,7 @@ Promise.promisifyAll(utils);
 
 module.exports = function(app, express) {
 	app.post('/login', function(req, res) {
+		console.log('post: ', req.body.username, req.body.password);
 		utils.checkUserAsync(req.body.username, req.body.password)
 		.then(function(result) {
 			if(result) {
