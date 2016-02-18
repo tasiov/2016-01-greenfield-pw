@@ -17,15 +17,30 @@ class App extends React.Component {
     });
   }
 
+  setUser(username, password) {
+    var self = this;
+    if (!password || !username) {
+      return;
+    }
+    // Send request to the server
+    $.post( "/login", {username: username, password: password})
+    .done(function(res) {
+      self.setState({username: username, password: password});
+    })
+    .fail(function(res) {
+      console.log('error: ', res);
+    })
+  }
 
   render() {
-    if (!this.state.user){
+    console.log('truth test: ', !this.state.username);
+    if (!this.state.username){
       return (
-        <Login />
+        <Login setUser={this.setUser.bind(this)}/>
       )
     } else {
       return (
-        <Main data={this.state}/>
+        <Main user={this.state.username}/>
       )
     }
   }

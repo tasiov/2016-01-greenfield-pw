@@ -17,18 +17,7 @@ class Login extends React.Component {
     e.preventDefault();
     let username = this.state.username.trim();
     let password = this.state.password.trim();
-    if (!password || !username) {
-      return;
-    }
-    // Send request to the server
-    $.post( "/login", {username: username, password: password})
-    .done(function(res) {
-      console.log('succes: ', res);
-    })
-    .fail(function(res) {
-      console.log('error: ', res);
-    })
-    this.setState({username: '', password: ''});
+    this.props.setUser(username, password);
   }
 
   render() {
