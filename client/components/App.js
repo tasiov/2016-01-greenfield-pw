@@ -1,4 +1,3 @@
-
 class App extends React.Component {
 
   constructor(props) {
@@ -10,8 +9,11 @@ class App extends React.Component {
   getUser() {
     $.get('http://localhost:3000/login')
     .done((resp)=>{
-      console.log(resp);
+      console.log('test: ', resp);
       this.setState({resp});
+    })
+    .fail((resp) => {
+      console.log('error:', resp);
     });
   }
 
@@ -23,7 +25,7 @@ class App extends React.Component {
       )
     } else {
       return (
-        <Main />
+        <Main data={this.state}/>
       )
     }
   }
@@ -57,11 +59,11 @@ ReactDOM.render(
 //             "peanuts": false,
 //             "wheat": false,
 //             "soybeans": false,
-//             "gluten": false,   
+//             "gluten": false,
 //         },
 //     },
 
-//     "meals": { 
+//     "meals": {
 //             "mealId":  {
 //                 "_id": 0000000001,
 //                 "createdAt": 00000000,
@@ -119,5 +121,5 @@ ReactDOM.render(
 //              "usda_fields": null,
 //             }
 //     }
-// };   
+// };
 
