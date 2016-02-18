@@ -5,10 +5,13 @@ class Main extends React.Component {
   }
 
   render() {
+    console.log('username: ', this.props);
     return (
       <div>
-        Hello {this.props.username}
+        Hello {this.props.user}!
       </div>
     )
   }
 }
+
+window.Main = Main;
