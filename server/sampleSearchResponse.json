@@ -1,0 +1,288 @@
+sample response
+
+{
+ "total_hits": 4544,
+ "max_score": 12.272642,
+ "hits": [
+  {
+   "_index": "f762ef22-e660-434f-9071-a10ea6691c27",
+   "_type": "item",
+   "_id": "513fceb775b8dbbc2100306a",
+   "_score": 12.272642,
+   "fields": {
+    "item_id": "513fceb775b8dbbc2100306a",
+    "item_name": "Fast foods, taco with beef, cheese and lettuce, soft - 1 each taco",
+    "brand_id": "513fcc648110a4cafb90ca5e",
+    "brand_name": "USDA",
+    "nf_serving_size_qty": 1,
+    "nf_serving_size_unit": "serving"
+   }
+  },
+  {
+   "_index": "f762ef22-e660-434f-9071-a10ea6691c27",
+   "_type": "item",
+   "_id": "513fc9cb673c4fbc2600536a",
+   "_score": 4.219673,
+   "fields": {
+    "item_id": "513fc9cb673c4fbc2600536a",
+    "item_name": "Taco",
+    "brand_id": "513fbc1283aa2dc80c000b96",
+    "brand_name": "Taco Inn",
+    "nf_serving_size_qty": 1,
+    "nf_serving_size_unit": "serving"
+   }
+  },
+  {
+   "_index": "f762ef22-e660-434f-9071-a10ea6691c27",
+   "_type": "item",
+   "_id": "513fc9cd673c4fbc26006c3e",
+   "_score": 4.0268393,
+   "fields": {
+    "item_id": "513fc9cd673c4fbc26006c3e",
+    "item_name": "Taco",
+    "brand_id": "513fbc1283aa2dc80c00042c",
+    "brand_name": "Taco Tico",
+    "nf_serving_size_qty": 1,
+    "nf_serving_size_unit": "serving"
+   }
+  },
+  {
+   "_index": "f762ef22-e660-434f-9071-a10ea6691c27",
+   "_type": "item",
+   "_id": "ae4975993ac10c688535e506",
+   "_score": 3.8696609,
+   "fields": {
+    "item_id": "ae4975993ac10c688535e506",
+    "item_name": "Taco",
+    "brand_id": "521b95444a56d006cae298e4",
+    "brand_name": "Fosters Freeze",
+    "nf_serving_size_qty": 1,
+    "nf_serving_size_unit": "serving"
+   }
+  },
+  {
+   "_index": "f762ef22-e660-434f-9071-a10ea6691c27",
+   "_type": "item",
+   "_id": "552ff0bfc1dccd3e4e7d44d9",
+   "_score": 3.542911,
+   "fields": {
+    "item_id": "552ff0bfc1dccd3e4e7d44d9",
+    "item_name": "Taco",
+    "brand_id": "552ff179bb51544701d052ab",
+    "brand_name": "Twisties",
+    "nf_serving_size_qty": 1,
+    "nf_serving_size_unit": "serving"
+   }
+  },
+  {
+   "_index": "f762ef22-e660-434f-9071-a10ea6691c27",
+   "_type": "item",
+   "_id": "54761dd7bbd4fdf6606eb0ce",
+   "_score": 3.542911,
+   "fields": {
+    "item_id": "54761dd7bbd4fdf6606eb0ce",
+    "item_name": "Taco",
+    "brand_id": "54761e2959752938643a8c01",
+    "brand_name": "Margarita's",
+    "nf_serving_size_qty": 1,
+    "nf_serving_size_unit": "serving"
+   }
+  },
+  {
+   "_index": "f762ef22-e660-434f-9071-a10ea6691c27",
+   "_type": "item",
+   "_id": "53444ce69a631f1645ecfa2a",
+   "_score": 3.4515848,
+   "fields": {
+    "item_id": "53444ce69a631f1645ecfa2a",
+    "item_name": "Taco",
+    "brand_id": "521b95434a56d006cae297dc",
+    "brand_name": "Amigos Kings Classic",
+    "nf_serving_size_qty": 1,
+    "nf_serving_size_unit": "serving"
+   }
+  },
+  {
+   "_index": "f762ef22-e660-434f-9071-a10ea6691c27",
+   "_type": "item",
+   "_id": "513fc9cb673c4fbc2600524e",
+   "_score": 1.4904361,
+   "fields": {
+    "item_id": "513fc9cb673c4fbc2600524e",
+    "item_name": "Buche Taco",
+    "brand_id": "513fbc1283aa2dc80c00045c",
+    "brand_name": "King Taco",
+    "nf_serving_size_qty": 1,
+    "nf_serving_size_unit": "serving"
+   }
+  },
+  {
+   "_index": "f762ef22-e660-434f-9071-a10ea6691c27",
+   "_type": "item",
+   "_id": "513fc9cb673c4fbc26005255",
+   "_score": 1.4904361,
+   "fields": {
+    "item_id": "513fc9cb673c4fbc26005255",
+    "item_name": "Molleja Taco",
+    "brand_id": "513fbc1283aa2dc80c00045c",
+    "brand_name": "King Taco",
+    "nf_serving_size_qty": 1,
+    "nf_serving_size_unit": "serving"
+   }
+  },
+  {
+   "_index": "f762ef22-e660-434f-9071-a10ea6691c27",
+   "_type": "item",
+   "_id": "513fc99a927da704080067e4",
+   "_score": 1.4904361,
+   "fields": {
+    "item_id": "513fc99a927da704080067e4",
+    "item_name": "Taco Bravo",
+    "brand_id": "513fbc1283aa2dc80c0000b9",
+    "brand_name": "Taco John's",
+    "nf_serving_size_qty": 1,
+    "nf_serving_size_unit": "serving"
+   }
+  },
+  {
+   "_index": "f762ef22-e660-434f-9071-a10ea6691c27",
+   "_type": "item",
+   "_id": "513fc999927da704080053d7",
+   "_score": 1.4904361,
+   "fields": {
+    "item_id": "513fc999927da704080053d7",
+    "item_name": "Taco Burger",
+    "brand_id": "513fbc1283aa2dc80c00016c",
+    "brand_name": "Taco Mayo",
+    "nf_serving_size_qty": 1,
+    "nf_serving_size_unit": "serving"
+   }
+  },
+  {
+   "_index": "f762ef22-e660-434f-9071-a10ea6691c27",
+   "_type": "item",
+   "_id": "513fc997927da70408004587",
+   "_score": 1.440428,
+   "fields": {
+    "item_id": "513fc997927da70408004587",
+    "item_name": "Taco Chips",
+    "brand_id": "513fbc1283aa2dc80c000071",
+    "brand_name": "TacoTime",
+    "nf_serving_size_qty": 1,
+    "nf_serving_size_unit": "serving"
+   }
+  },
+  {
+   "_index": "f762ef22-e660-434f-9071-a10ea6691c27",
+   "_type": "item",
+   "_id": "513fc99c927da70408006ee6",
+   "_score": 1.440428,
+   "fields": {
+    "item_id": "513fc99c927da70408006ee6",
+    "item_name": "Vegetarian Taco",
+    "brand_id": "513fbc1283aa2dc80c000110",
+    "brand_name": "Maui Tacos",
+    "nf_serving_size_qty": 1,
+    "nf_serving_size_unit": "serving"
+   }
+  },
+  {
+   "_index": "f762ef22-e660-434f-9071-a10ea6691c27",
+   "_type": "item",
+   "_id": "54b9bb8a56c10ee03d34aac3",
+   "_score": 1.4215958,
+   "fields": {
+    "item_id": "54b9bb8a56c10ee03d34aac3",
+    "item_name": "Chicken Taco - 1 taco",
+    "brand_id": "546a4142413b47f7107aed0c",
+    "brand_name": "Nutritionix",
+    "nf_serving_size_qty": 1,
+    "nf_serving_size_unit": "serving"
+   }
+  },
+  {
+   "_index": "f762ef22-e660-434f-9071-a10ea6691c27",
+   "_type": "item",
+   "_id": "54b9bc6f9d515d706cda8825",
+   "_score": 1.4215958,
+   "fields": {
+    "item_id": "54b9bc6f9d515d706cda8825",
+    "item_name": "Steak Taco - 1 taco",
+    "brand_id": "546a4142413b47f7107aed0c",
+    "brand_name": "Nutritionix",
+    "nf_serving_size_qty": 1,
+    "nf_serving_size_unit": "serving"
+   }
+  },
+  {
+   "_index": "f762ef22-e660-434f-9071-a10ea6691c27",
+   "_type": "item",
+   "_id": "513fc99a927da704080067e5",
+   "_score": 1.4096713,
+   "fields": {
+    "item_id": "513fc99a927da704080067e5",
+    "item_name": "Crispy Taco",
+    "brand_id": "513fbc1283aa2dc80c0000b9",
+    "brand_name": "Taco John's",
+    "nf_serving_size_qty": 1,
+    "nf_serving_size_unit": "serving"
+   }
+  },
+  {
+   "_index": "f762ef22-e660-434f-9071-a10ea6691c27",
+   "_type": "item",
+   "_id": "513fc9cb673c4fbc26005254",
+   "_score": 1.4096712,
+   "fields": {
+    "item_id": "513fc9cb673c4fbc26005254",
+    "item_name": "Lengua Taco",
+    "brand_id": "513fbc1283aa2dc80c00045c",
+    "brand_name": "King Taco",
+    "nf_serving_size_qty": 1,
+    "nf_serving_size_unit": "serving"
+   }
+  },
+  {
+   "_index": "f762ef22-e660-434f-9071-a10ea6691c27",
+   "_type": "item",
+   "_id": "521b95cd4a56d006d578bed9",
+   "_score": 1.4057863,
+   "fields": {
+    "item_id": "521b95cd4a56d006d578bed9",
+    "item_name": "Regular Taco",
+    "brand_id": "513fbc1283aa2dc80c0000b4",
+    "brand_name": "Del Taco",
+    "nf_serving_size_qty": 1,
+    "nf_serving_size_unit": "serving"
+   }
+  },
+  {
+   "_index": "f762ef22-e660-434f-9071-a10ea6691c27",
+   "_type": "item",
+   "_id": "513fc999927da704080053fa",
+   "_score": 1.4057863,
+   "fields": {
+    "item_id": "513fc999927da704080053fa",
+    "item_name": "Choco Taco",
+    "brand_id": "513fbc1283aa2dc80c00016c",
+    "brand_name": "Taco Mayo",
+    "nf_serving_size_qty": 1,
+    "nf_serving_size_unit": "serving"
+   }
+  },
+  {
+   "_index": "f762ef22-e660-434f-9071-a10ea6691c27",
+   "_type": "item",
+   "_id": "513fc9cb673c4fbc26005252",
+   "_score": 1.4057863,
+   "fields": {
+    "item_id": "513fc9cb673c4fbc26005252",
+    "item_name": "Chicken Taco",
+    "brand_id": "513fbc1283aa2dc80c00045c",
+    "brand_name": "King Taco",
+    "nf_serving_size_qty": 1,
+    "nf_serving_size_unit": "serving"
+   }
+  }
+ ]
+}
