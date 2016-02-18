@@ -8,7 +8,7 @@ class App extends React.Component {
   }
 
   getUser() {
-    $.get('http://localhost:3000/')
+    $.get('http://localhost:3000/login')
     .done((resp)=>{
       console.log(resp);
       this.setState({resp});
