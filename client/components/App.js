@@ -1,3 +1,10 @@
+import { createStore } from './lib/redux.min/index.js'; 
+
+
+
+
+
+
 class App extends React.Component {
 
   constructor(props) {
@@ -47,7 +54,7 @@ class App extends React.Component {
 }
 
 ReactDOM.render(
-  <App />,
+    <App />,
   document.getElementById('app')
 );
 
