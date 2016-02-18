@@ -1,41 +1,41 @@
-{
+'{
     "user":{
-        _id: 000000000,
-        firstName: "Allen",
-        lastName: "Price",
-        birthdate: "01/01/1975",
-        location: "San Francisco",
-        weight: 160,
-        weightGoal: 147,
-        dietaryRestrictions: {
-            paleo: true,
-            vegan: true,
-            vegetarian: false,
+        "_id": 000000000,
+        "firstName": "Allen",
+        "lastName": "Price",
+        "birthdate": "01/01/1975",
+        "location": "San Francisco",
+        "weight": 160,
+        "weightGoal": 147,
+        "dietaryRestrictions": {
+            "paleo": true,
+            "vegan": true,
+            "vegetarian": false,
         },
-        allergies: {
-            milk: false,
-            eggs: false,
-            fish: false,
-            shellfish: false,
-            tree_nuts: false,
-            peanuts: false,
-            wheat: false,
-            soybeans: false,
-            gluten: false,   
+        "allergies": {
+            "milk": false,
+            "eggs": false,
+            "fish": false,
+            "shellfish": false,
+            "tree_nuts": false,
+            "peanuts": false,
+            "wheat": false,
+            "soybeans": false,
+            "gluten": false,   
         },
-    }
+    },
 
     "meals": { 
-            mealId:  {
-                _id:
-                createdAt:
-                eatenAt:
-                food: {
+            "mealId":  {
+                "_id": 0000000001,
+                "createdAt": 00000000,
+                "eatenAt": 00000000,
+                "food": {
                     "513fc9cb673c4fbc26005252": 3
                 } //three tacos
             } ,
 
-    }
+    },
 
     "foods":{
         "513fc9cb673c4fbc26005252": {
@@ -83,5 +83,4 @@
              "usda_fields": null,
             }
     }
-}   
-
+}'
