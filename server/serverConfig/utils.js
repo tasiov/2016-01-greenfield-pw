@@ -19,6 +19,22 @@ module.exports.checkUser = function(username, password, callback) {
 	});
 };
 
+module.exports.makeNewUser = function(username, password, callback) {
+
+    Users.find({username:username}, function(err, foundUser){
+        if(foundUser){
+            callback(null, "User Found"));
+        } else {
+            Users.create({username:username, password:password}, function(err, newUser){
+                if(newUser){
+                    callback(null,newUser);
+                } else {
+                    callback(err, null);
+                }
+            });
+        }
+    });
+};
 
 module.exports.sendUserStateInfo = function(username, password, callback) {
 	var infoObj = {};
