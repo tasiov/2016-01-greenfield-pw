@@ -2,28 +2,59 @@ var fs = require('fs');
 var request = require('request');
 var Promise = require('bluebird');
 Promise.promisifyAll(fs);
-
+var Users = require('../models/users');
 var creds = {
   appId: "faf1bee4", 
   appKey: "ee1bb6aa1dc012b58a06a7fd14ddbef1",
 }
+var Meals = require('../models/meals');
 
 module.exports.checkUser = function(username, password, callback) {
-	if(username === 'username' && password === 'password') {
-		callback(null, true);
-	}
+	Users.find({username:username, password:password}, function(err, res){
+		if(res){
+			callback(null,res);
+		} else {
+			callback(err, null);
+		}
+	});
 };
 
-module.exports.extractUserInfo = function(username, password, callback) {
-	console.log(__dirname + '/../data/sampleGet.json');
-	return fs.readFileAsync(__dirname + '/../data/sampleGet.json', 'utf8')
-	.then(function(data) {
-		var userObj = {user: 'test1', password: 'password'};
-		return userObj;
-	})
-	.catch(function(err) {
-		return {Error: err};
+
+module.exports.sendUserStateInfo = function(username, password, callback) {
+	var infoObj = {};
+
+	Users.find({username:username}, function(err, res){
+		if(res){
+			infoObj.user = res;
+			sendIfComplete();
+		} else {
+			callback( err, null);
+		}
 	});
+
+	Meals.find({eatenBy:username}, function(err, res){
+		if(res){
+			infoObj.meals = res;
+			sendIfComplete();
+		} else {
+			callback( err, null);
+		}
+	});
+
+	var sendIfComplete = function(){
+		if (infoObj.user && infoObj.meals){
+			callback(infoObj,null);
+		}
+	}
+	// console.log(__dirname + '/../data/sampleGet.json');
+	// return fs.readFileAsync(__dirname + '/../data/sampleGet.json', 'utf8')
+	// .then(function(data) {
+	// 	var userObj = {user: 'test1', password: 'password'};
+	// 	return userObj;
+	// })
+	// .catch(function(err) {
+	// 	return {Error: err};
+	// });
 };
 
 module.exports.getSearchResponse = function(query, callback) {

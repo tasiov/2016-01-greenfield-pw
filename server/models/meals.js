@@ -2,7 +2,8 @@ var mongoose = require('mongoose');
 
 var mealSchema = mongoose.Schema({
     eatenAt: {type: 'Date'},
-    food: {type: ['Number']},
+    eatenBy: {type: 'String'},
+    food: {type: ['String']},
 }); 
 
 var Meal = mongoose.model('Meal',mealSchema);

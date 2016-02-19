@@ -1,19 +1,25 @@
 import React from 'react';
+import NavBar from './NavBar.jsx';
+import CalorieLog from './CalorieLog.jsx';
+import RecordMeals from './RecordMeals.jsx';
+import Summary from './Summary.jsx';
 
-class Main extends React.Component {
-
-  constructor(props) {
-    super(props);
+const Main = ({page}) => {
+  var currentPage;
+  if(page === 'Summary') {
+    currentPage = <Summary />;
+  } else if(page === 'CalorieLog') {
+    currentPage = <CalorieLog />;
+  } else if(page === 'RecordMeals') {
+    currentPage = <RecordMeals />;
   }
 
-  render() {
-    console.log('username: ', this.props);
-    return (
-      <div>
-        Hello {this.props.user}!
-      </div>
-    )
-  }
+  return (
+    <div className='main-page'>
+      <NavBar />
+      {currentPage}
+    </div>
+    );
 }
 
 export default Main;

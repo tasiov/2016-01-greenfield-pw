@@ -2,6 +2,7 @@ client/lib
 node_modules
 db/*.sqlite
 *.DS_Store
+client/dist/bundle.js
 
 # Floobits
 .floo

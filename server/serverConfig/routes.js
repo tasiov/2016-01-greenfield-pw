@@ -26,6 +26,19 @@ module.exports = function(app, express) {
 		res.redirect('/index.html');
 	});
 
+	app.post('/signup', function(req, res) {
+	    console.log('post: ', req.body.username, req.body.password);
+	    utils.makeNewUserAsync(req.body.username, req.body.password)
+	    .then(function(result) {
+	        req.session.regenerate(function() {
+	            req.session.user = req.body.username;
+	            res.send(result);
+	        })
+	    })
+	    .catch(function(err) {
+	        res.send('error ' + err);
+	    })
+	});
 
 	app.get('/login', function(req, res) {
 		console.log(req.session);
