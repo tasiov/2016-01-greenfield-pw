@@ -44,12 +44,9 @@
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-redux": "^4.4.0",
-<<<<<<< HEAD
     "redux": "^3.3.1",
     "request": "^2.69.0",
     "mongoose":"^4.4.4",
-=======
     "redux": "^3.3.1"
->>>>>>> Configure database interactions to remove controllers and begin mongo implementation
   }
 }

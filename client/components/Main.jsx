@@ -1,4 +1,8 @@
 import React from 'react';
+import NavBar from './NavBar.jsx';
+import CalorieLog from './CalorieLog.jsx';
+import RecordMeals from './RecordMeals.jsx';
+import Summary from './Summary.jsx';
 
 const Main = ({page}) => {
   var currentPage;
@@ -11,14 +15,11 @@ const Main = ({page}) => {
   }
 
   return (
-    <div className='nav-bar'>
+    <div className='main-page'>
       <NavBar />
-    </div>
-    <div className='curr-page'>
       {currentPage}
     </div>
     );
 }
-
 
 export default Main;
