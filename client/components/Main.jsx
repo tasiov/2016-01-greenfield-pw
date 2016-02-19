@@ -1,19 +1,24 @@
 import React from 'react';
 
-class Main extends React.Component {
-
-  constructor(props) {
-    super(props);
+const Main = ({page}) => {
+  var currentPage;
+  if(page === 'Summary') {
+    currentPage = <Summary />;
+  } else if(page === 'CalorieLog') {
+    currentPage = <CalorieLog />;
+  } else if(page === 'RecordMeals') {
+    currentPage = <RecordMeals />;
   }
 
-  render() {
-    console.log('username: ', this.props);
-    return (
-      <div>
-        Hello {this.props.user}!
-      </div>
-    )
-  }
+  return (
+    <div className='nav-bar'>
+      <NavBar />
+    </div>
+    <div className='curr-page'>
+      {currentPage}
+    </div>
+    );
 }
+
 
 export default Main;
