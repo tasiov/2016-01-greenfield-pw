@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { setuser } from '../actions/index.jsx';
+import { setUser } from '../actions/index.jsx';
 import App from '../components/App.jsx';
 
 
@@ -15,12 +15,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     getUser: (callback) => {
       $.get('http://localhost:3000/login')
       .done((resp)=>{
-        dispatch(setuser(resp));
-        callback();
+        dispatch(setUser(resp));
       })
       .fail((resp) => {
         console.log('error:', resp);
-        callback();
       });
     }
   }

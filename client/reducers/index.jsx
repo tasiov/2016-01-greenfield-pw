@@ -3,7 +3,7 @@ import { combineReducers } from 'redux'
 const configureUser = (state = null, action) => {
 	switch(action.type) {
 		case 'SET_USER':
-			return action.userObj
+			return action.userObj === "Invalid User" ? state : action.userObj; 
 		default:
 			return state
 	}

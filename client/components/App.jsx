@@ -4,7 +4,7 @@ import Main from './Main.jsx';
 
 
 const App = ({user, getUser}) => {
- 
+ 	getUser();
   if(!user) {
     return (<Login/>);
   } else {
