@@ -1,5 +1,6 @@
-var Promise = require('bluebird');
 var fs = require('fs');
+var request = require('request');
+var Promise = require('bluebird');
 Promise.promisifyAll(fs);
 
 
@@ -20,4 +21,16 @@ module.exports.extractUserInfo = function(username, password, callback) {
 	.catch(function(err) {
 		return {Error: err};
 	});
+};
+
+module.exports.getSearchResponse = function(query, callback) {
+	var nutritionUrl = 'http://api.nutritionix.com/v1_1/search/' + query;
+	request({
+			url: nutritionUrl,
+			qs: {results: "0:8", appId: "faf1bee4", appKey: "ee1bb6aa1dc012b58a06a7fd14ddbef1" },
+		},
+		function (error, response, body) {
+	    callback(null, body);
+	  }
+	);
 };
