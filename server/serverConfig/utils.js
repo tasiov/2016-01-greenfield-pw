@@ -22,14 +22,14 @@ module.exports.checkUser = function(username, password, callback) {
 module.exports.makeNewUser = function(username, password, callback) {
 
     Users.find({username:username}, function(err, foundUser){
-        if(foundUser){
-            callback(null, "User Found"));
+        if(Array.isArray(foundUser) && foundUser.length !== 0){ //mongodb sends back an empty array if nothing is found.
+            callback(null, foundUser);
         } else {
             Users.create({username:username, password:password}, function(err, newUser){
-                if(newUser){
-                    callback(null,newUser);
+                if (newUser) {
+                    callback( null, newUser );
                 } else {
-                    callback(err, null);
+                    callback( err, null );
                 }
             });
         }
