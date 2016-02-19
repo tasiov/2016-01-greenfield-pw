@@ -5,7 +5,7 @@ var app = express();
 require(__dirname + '/serverConfig/middleware.js')(app, express);
 require(__dirname + '/serverConfig/routes.js')(app, express);
 
-mongoose.connect('mongodb://localhost/photogenicFood');
+mongoose.connect('mongodb://127.0.0.1/photogenicFood');
 //Above files configure everyting on the server. Clientside is configured in app.js in public
 
 
