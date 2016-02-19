@@ -11,7 +11,7 @@ const App = ({user, getUser}) => {
     return (<Main user= {user} />);
   }
 
- 
+
 }
 
 
