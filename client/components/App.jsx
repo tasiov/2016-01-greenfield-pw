@@ -10,8 +10,6 @@ const App = ({user, getUser}) => {
   } else {
     return (<Main user= {user} />);
   }
-
-
 }
 
 
