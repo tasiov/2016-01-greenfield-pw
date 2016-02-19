@@ -35,7 +35,7 @@ module.exports = function(app, express) {
 				res.send(infoObj);
 			});
 		} else {
-			res.send('Not logged in');
+			res.send('Invalid User');
 		}
 	});
 
