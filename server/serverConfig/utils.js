@@ -3,11 +3,11 @@ var request = require('request');
 var Promise = require('bluebird');
 Promise.promisifyAll(fs);
 var Users = require('../models/users');
-
 var creds = {
   appId: "faf1bee4", 
   appKey: "ee1bb6aa1dc012b58a06a7fd14ddbef1",
 }
+var Meals = require('../models/meals');
 
 module.exports.checkUser = function(username, password, callback) {
 	Users.find({username:username, password:password}, function(err, res){
@@ -19,9 +19,33 @@ module.exports.checkUser = function(username, password, callback) {
 	});
 };
 
-module.exports.sendUserStateInfo = function(username, password, callback) {
-	return Users.find({username:username, password})
 
+module.exports.sendUserStateInfo = function(username, password, callback) {
+	var infoObj = {};
+
+	Users.find({username:username}, function(err, res){
+		if(res){
+			infoObj.user = res;
+			sendIfComplete();
+		} else {
+			callback( err, null);
+		}
+	});
+
+	Meals.find({eatenBy:username}, function(err, res){
+		if(res){
+			infoObj.meals = res;
+			sendIfComplete();
+		} else {
+			callback( err, null);
+		}
+	});
+
+	var sendIfComplete = function(){
+		if (infoObj.user && infoObj.meals){
+			callback(infoObj,null);
+		}
+	}
 	// console.log(__dirname + '/../data/sampleGet.json');
 	// return fs.readFileAsync(__dirname + '/../data/sampleGet.json', 'utf8')
 	// .then(function(data) {

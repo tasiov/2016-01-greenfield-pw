@@ -30,6 +30,7 @@
                 "_id": 0000000001,
                 "createdAt": 00000000,
                 "eatenAt": 00000000,
+                "eatenBy": "allenjprice",
                 "food": {
                     "513fc9cb673c4fbc26005252": 3
                 } //three tacos
