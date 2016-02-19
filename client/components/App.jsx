@@ -1,3 +1,7 @@
+import React from 'react';
+import Login from './Login.jsx';
+import Main from './Main.jsx';
+
 class App extends React.Component {
 
   constructor(props) {
@@ -10,7 +14,7 @@ class App extends React.Component {
     $.get('http://localhost:3000/login')
     .done((resp)=>{
       console.log('test: ', resp);
-      this.setState({resp});
+      this.setState(resp);
     })
     .fail((resp) => {
       console.log('error:', resp);
@@ -46,10 +50,8 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('app')
-);
+export default App;
+
 
 // var templateData = {
 //     "user":{

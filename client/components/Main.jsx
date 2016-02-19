@@ -1,3 +1,5 @@
+import React from 'react';
+
 class Main extends React.Component {
 
   constructor(props) {
@@ -14,4 +16,4 @@ class Main extends React.Component {
   }
 }
 
-window.Main = Main;
+export default Main;
