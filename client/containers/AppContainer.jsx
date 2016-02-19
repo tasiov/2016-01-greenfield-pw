@@ -24,12 +24,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-const AppView = connect(
+const AppContainer = connect(
   mapStateToProps, 
   mapDispatchToProps
 )(App)
 
-export default AppView
+export default AppContainer;
 
 
 
