@@ -14,19 +14,17 @@ GET /login
                                         as a property and a value that
                                         is an object with all that food's info
                                 (See sampleGet.JSON)
-
-
 POST /login
 ->Use: Client makes this request to sign in
 ->Req: req.bod.username and req.body.password
 ->Res: if password isn't valid, sends 'Invalid Password'
         else, sends UserObj as described above
 
-
 POST /signup
 ->Use: Client makes this request to sign up
 ->Req: req.body.username and req.body.password
 ->Res: server initializes new userObj, saves it in the db, and sends it back
+<<<<<<< HEAD
 
 
 POST /search
@@ -44,8 +42,3 @@ POST /meals
                                     -foods: object with each food identifier
                                             as a property and a value that is
                                             an object with al that food's info
-
-
-
-
-
