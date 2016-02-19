@@ -3,7 +3,10 @@ var request = require('request');
 var Promise = require('bluebird');
 Promise.promisifyAll(fs);
 
-
+var creds = {
+  appId: "faf1bee4", 
+  appKey: "ee1bb6aa1dc012b58a06a7fd14ddbef1",
+}
 
 module.exports.checkUser = function(username, password, callback) {
 	if(username === 'username' && password === 'password') {
@@ -26,11 +29,29 @@ module.exports.extractUserInfo = function(username, password, callback) {
 module.exports.getSearchResponse = function(query, callback) {
 	var nutritionUrl = 'http://api.nutritionix.com/v1_1/search/' + query;
 	request({
-			url: nutritionUrl,
-			qs: {results: "0:8", appId: "faf1bee4", appKey: "ee1bb6aa1dc012b58a06a7fd14ddbef1" },
-		},
-		function (error, response, body) {
-	    callback(null, body);
-	  }
-	);
+    url: nutritionUrl,
+    qs: Object.assign({}, creds, {results:"0:8"}),
+  },
+  function (error, response, body) {
+    if(error) {
+      callback(error, null);
+    } else {
+      callback(null, body);
+    }
+  });
+};
+
+module.exports.getFoodItem = function(id, callback) {
+  var nutritionUrl = 'http://api.nutritionix.com/v1_1/item';
+  request({
+    url: nutritionUrl,
+    qs: Object.assign({}, creds, {id:id}),
+  },
+  function(error, response, body) {
+    if(error) {
+      callback(error, null);
+    } else {
+      callback(null, body);
+    }
+  });
 };
