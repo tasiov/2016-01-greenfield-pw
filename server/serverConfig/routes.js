@@ -5,7 +5,6 @@ Promise.promisifyAll(utils);
 
 module.exports = function(app, express) {
 	app.post('/login', function(req, res) {
-		console.log('post: ', req.body.username, req.body.password);
 		utils.checkUserAsync(req.body.username, req.body.password)
 		.then(function(result) {
 			if(result) {
@@ -38,5 +37,17 @@ module.exports = function(app, express) {
 		} else {
 			res.send('Not logged in');
 		}
+	});
+
+	app.post('/search', function(req, res) {
+		if (!req.body.query) return res.send('Invalid query');
+		var query = req.body.query.trim();
+		utils.getSearchResponseAsync(query)
+		.then(function(result) {
+			res.send(result);
+		})
+		.catch(function(err) {
+			res.send('error ' + err);
+		});
 	});
 }

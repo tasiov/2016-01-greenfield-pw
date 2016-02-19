@@ -1,0 +1,10 @@
+
+State.user -> userObj (see routesInfo.txt or sampleGET.json for structure)
+
+State.page -> 'Summary' | 'Calorie Log' | 'record Meals' (used to decide which page is rendered)
+
+State.foodResults -> Object where key is food Identifier        (used to display results from query)
+                                  value is food info Object
+                                  
+
+

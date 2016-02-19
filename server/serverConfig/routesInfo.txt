@@ -1,0 +1,51 @@
+GET /
+->resp is /index html
+
+GET /login
+->Use: Client makes this request to verify user is authenticated
+->Req: Should have req.session.username
+->Res: if no session.username, sends 'Invalid User'
+       else, sends UserObj with -name/age/BD keys: their primitive values
+                                -meals: object with unique
+                                        key identifier as property and
+                                        array of food identifiers as the
+                                        value
+                                -foods: object with each food identifier
+                                        as a property and a value that
+                                        is an object with all that food's info
+                                (See sampleGet.JSON)
+
+
+POST /login
+->Use: Client makes this request to sign in
+->Req: req.bod.username and req.body.password
+->Res: if password isn't valid, sends 'Invalid Password'
+        else, sends UserObj as described above
+
+
+POST /signup
+->Use: Client makes this request to sign up
+->Req: req.body.username and req.body.password
+->Res: server initializes new userObj, saves it in the db, and sends it back
+
+
+POST /search
+->Use: Client makes this request to search for a food item, use Nutritionix API for resp
+->Req: req.body.query with an object => {query: "food-name"}
+->res: server makes get request to Nutrionix and responds with res.result where result is
+       the result object obtained from the Nutrionix API
+
+
+POST /meals
+ ->Use: Client has added a meal entry for logging
+ ->Req: req.body.entry, entry is an object
+                                    -username: primitive string
+                                    -newMeal: array of food identifiers
+                                    -foods: object with each food identifier
+                                            as a property and a value that is
+                                            an object with al that food's info
+
+
+
+
+
