@@ -25,7 +25,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 }
 
 const AppContainer = connect(
-  mapStateToProps, 
+  mapStateToProps,
   mapDispatchToProps
 )(App)
 
@@ -66,7 +66,7 @@ export default AppContainer;
 //     })
 //   }
 
- 
+
 // }
 
 
