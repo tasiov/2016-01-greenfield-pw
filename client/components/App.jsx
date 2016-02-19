@@ -1,9 +1,6 @@
-import { createStore } from './lib/redux.min/index.js'; 
-
-
-
-
-
+import React from 'react';
+import Login from './Login.jsx';
+import Main from './Main.jsx';
 
 class App extends React.Component {
 
@@ -53,10 +50,8 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(
-    <App />,
-  document.getElementById('app')
-);
+export default App;
+
 
 // var templateData = {
 //     "user":{

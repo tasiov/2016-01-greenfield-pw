@@ -6,11 +6,8 @@
   ],
   "main": "",
   "dependencies": {
-    "react": "~0.14.6",
     "jquery": "~2.2.0",
     "lodash": "~4.0.0",
-    "redux.min": "https://cdnjs.cloudflare.com/ajax/libs/redux/3.3.1/redux.min.js",
-    "react-redux.min": "https://cdnjs.cloudflare.com/ajax/libs/react-redux/4.4.0/react-redux.min.js"
   },
   "ignore": [
     "**/.*",
