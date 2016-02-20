@@ -1,35 +1,28 @@
 import { connect } from 'react-redux';
-import { setUser } from '../actions/index.jsx';
-import App from '../components/App.jsx';
-
+import { changePage } from '../actions/index.jsx';
+import Auth from '../components/Auth/Auth.jsx';
 
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    user: state.user
+    page: state.page
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    getUser: (callback) => {
-      $.get('http://localhost:3000/login')
-      .done((resp)=>{
-        dispatch(setUser(resp));
-      })
-      .fail((resp) => {
-        console.log('error:', resp);
-      });
-    }
+const mapDispatchToProps = (dispatch) => {
+	return {
+  	changePage: (newPage) => {
+    	dispatch(changePage(newPage));
+  	}
   }
 }
 
-const AppContainer = connect(
+const AuthContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(App)
+)(Auth)
 
-export default AppContainer;
+export default AuthContainer;
 
 
 

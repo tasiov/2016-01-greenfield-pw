@@ -1,17 +1,18 @@
 import React from 'react';
-import Login from './Login.jsx';
-import Main from './Main.jsx';
+import Main from './Main/Main.jsx';
+import Login from './Auth/Login.jsx';
+import AuthContainer from '../containers/AuthContainer.jsx';
 
 
 const App = ({user, getUser}) => {
- 	getUser();
   if(!user) {
-    return (<Login/>);
+    getUser();
+    return (<AuthContainer />);
   } else {
     return (<Main user= {user} />);
   }
 
- 
+
 }
 
 

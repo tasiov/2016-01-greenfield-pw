@@ -15,7 +15,6 @@ GET /login
                                         is an object with all that food's info
                                 (See sampleGet.JSON)
 
-
 POST /login
 ->Use: Client makes this request to sign in
 ->Req: req.bod.username and req.body.password
@@ -28,13 +27,11 @@ POST /signup
 ->Req: req.body.username and req.body.password
 ->Res: server initializes new userObj, saves it in the db, and sends it back
 
-
 POST /search
 ->Use: Client makes this request to search for a food item, use Nutritionix API for resp
 ->Req: req.body.query with an object => {query: "food-name"}
 ->res: server makes get request to Nutrionix and responds with res.result where result is
        the result object obtained from the Nutrionix API
-
 
 POST /meals
  ->Use: Client has added a meal entry for logging
@@ -46,4 +43,3 @@ POST /meals
                                             an object with al that food's info
  
  
->>>>>>> Add documentation for state and routes info
