@@ -42,7 +42,6 @@ module.exports = function(app, express) {
 	});
 
 	app.get('/login', function(req, res) {
-		console.log(req.session);
 		if(req.session.user) {
 			utils.sendUserStateInfoAsync(req.session.user)
 			.then(function(infoObj) {

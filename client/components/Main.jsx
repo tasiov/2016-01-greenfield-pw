@@ -4,7 +4,7 @@ import CalorieLog from './CalorieLog.jsx';
 import RecordMeals from './RecordMeals.jsx';
 import Summary from './Summary.jsx';
 
-const Main = ({page}) => {
+const Main = ({page, user}) => {
   var currentPage;
   if(page === 'Summary') {
     currentPage = <Summary />;
