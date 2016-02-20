@@ -1,70 +1,67 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { setUser } from '../actions/index.jsx';
 
-const Login = () => (
-  <div className="login-card">
-    <h1>Login</h1>
-    <br/>
-    <form >
-      <input type="text" placeholder="Username"
-        value={this.state.username} />
-      <br/>
-      <input type="password" placeholder="Password"
-        value={this.state.password} />
-      <br/>
-      <input type="submit" />
-    </form>
+let Login = ({ dispatch }) => {
+  let username;
+  let password;
 
-    <div className="login-help">
-      <a href="#">Register</a>
+  let handleSubmit = e => {
+    e.preventDefault();
+    console.log('username: ', username.value);
+    console.log('password: ', password.value);
+    $.post( "/login", {username: "username", password: "password"})
+      .done(function(res) {
+        dispatch(setUser({username: "username", password: "password"}));
+      })
+      .fail(function(res) {
+        console.log('error: ', res);
+      });
+  }
+
+  return (
+    <div className="login-card">
+      <h1>Login</h1>
+      <br/>
+      <form onSubmit={handleSubmit}>
+        <input type="text" name="username" placeholder="Username" ref={(ref) => username = ref} />
+        <br/>
+        <input type="password" name="password" placeholder="Password" ref={(ref) => password = ref} />
+        <br/>
+        <input type="submit" />
+      </form>
+
+      <div className="login-help">
+        <a href="#">Register</a>
+      </div>
     </div>
-  </div>
-)
+  )
+}
 
-// class Login extends React.Component {
+Login = connect()(Login)
 
-//   constructor(props) {
-//     super(props);
-//     this.state = {username: '', password: ''};
-//   }
+export default Login
 
-//   handleUsernameChange(e) {
-//     this.setState({username: e.target.value});
-//   }
 
-//   handlePasswordChange(e) {
-//     this.setState({password: e.target.value});
-//   }
-
-//   handleSubmit(e) {
-//     e.preventDefault();
-//     let username = this.state.username.trim();
-//     let password = this.state.password.trim();
-//     this.props.setUser(username, password);
-//   }
-
-//   render() {
-//     return (
-//       <div className="login-card">
-//         <h1>Login</h1>
-//         <br/>
-//         <form onSubmit={this.handleSubmit.bind(this)}>
-//           <input type="text" placeholder="Username"
-//             value={this.state.username}
-//             onChange={this.handleUsernameChange.bind(this)} />
-//           <br/>
-//           <input type="password" placeholder="Password"
-//             value={this.state.password}
-//             onChange={this.handlePasswordChange.bind(this)} />
-//           <br/>
-//           <input type="submit" />
-//         </form>
-
-//         <div className="login-help">
-//           <a href="#">Register</a>
-//         </div>
-//       </div>
-//     )
+// const mapStateToProps = (state) => {
+//   return {
+//     user: state.user
 //   }
 // }
 
-export default Login;
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     handleSubmit: (e, username, password) => {
+//       e.preventDefault();
+//       console.log('username: ', username);
+//       console.log('password: ', password);
+//       $.post( "/login", {username: "username", password: "password"})
+//         .done(function(res) {
+//           dispatch(setUser({username: "username", password: "password"}));
+//         })
+//         .fail(function(res) {
+//           console.log('error: ', res);
+//         })
+//     }
+//   }
+// }
