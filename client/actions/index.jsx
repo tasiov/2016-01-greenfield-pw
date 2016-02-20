@@ -4,3 +4,10 @@ export const setUser = (userObj) => {
 		userObj
 	}
 }
+
+export const changePage = (newPage) => {
+	return {
+		type: 'CHANGE_PAGE',
+		newPage
+	}
+}

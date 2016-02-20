@@ -5,11 +5,21 @@ const configureUser = (state = null, action) => {
 		case 'SET_USER':
 			return action.userObj === "Invalid User" ? state : action.userObj; 
 		default:
-			return state
+			return state;
+	}
+}
+
+const configurePage = (state = 'Login', action) => {
+	switch(action.type) {
+		case 'CHANGE_PAGE':
+			return action.newPage;
+		default:
+			return state;
 	}
 }
 
 const foodAppHandler = combineReducers({
-	user: configureUser
+	user: configureUser,
+	page: configurePage
 }); 
 export default foodAppHandler;

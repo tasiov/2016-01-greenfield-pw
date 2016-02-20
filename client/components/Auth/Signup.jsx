@@ -1,8 +1,8 @@
-import React from 'react';
+import React from 'react'
 import { connect } from 'react-redux';
-import { setUser } from '../actions/index.jsx';
+import { setUser } from '../../actions/index.jsx';
 
-let Login = ({ dispatch }) => {
+let Signup = ({ dispatch, change }) => {
   let username;
   let password;
 
@@ -10,7 +10,7 @@ let Login = ({ dispatch }) => {
     e.preventDefault();
     console.log('username: ', username.value);
     console.log('password: ', password.value);
-    $.post( "/login", {username: "username", password: "password"})
+    $.post( "/signup", {username: "username", password: "password"})
       .done(function(res) {
         dispatch(setUser({username: "username", password: "password"}));
       })
@@ -19,9 +19,14 @@ let Login = ({ dispatch }) => {
       });
   }
 
+  let changePage = e => {
+    e.preventDefault();
+    change('Login');
+  }
+
   return (
-    <div className="login-card">
-      <h1>Login</h1>
+    <div className="signup-card">
+      <h1>Register</h1>
       <br/>
       <form onSubmit={handleSubmit}>
         <input type="text" name="username" placeholder="Username" ref={(ref) => username = ref} />
@@ -31,16 +36,16 @@ let Login = ({ dispatch }) => {
         <input type="submit" />
       </form>
 
-      <div className="login-help">
-        <a href="#">Register</a>
+      <div className="signup-help">
+        <a href="#" onClick= {changePage} >Login</a>
       </div>
     </div>
   )
 }
 
-Login = connect()(Login)
+Signup = connect()(Signup)
 
-export default Login
+export default Signup
 
 
 // const mapStateToProps = (state) => {
