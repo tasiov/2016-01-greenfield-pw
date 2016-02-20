@@ -1,12 +1,12 @@
 import React from 'react';
-import Login from './Login.jsx';
 import Main from './Main.jsx';
+import Login from './Login.jsx';
 
 
 const App = ({user, getUser}) => {
- 	getUser();
   if(!user) {
-    return (<Login/>);
+    getUser();
+    return (<Login />);
   } else {
     return (<Main user= {user} />);
   }
