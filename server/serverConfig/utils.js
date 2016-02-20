@@ -1,18 +1,22 @@
 var fs = require('fs');
 var request = require('request');
 var Promise = require('bluebird');
-Promise.promisifyAll(fs);
-var Users = require('../models/users');
 var creds = {
   appId: "faf1bee4", 
   appKey: "ee1bb6aa1dc012b58a06a7fd14ddbef1",
 }
+var Users = require('../models/users');
 var Meals = require('../models/meals');
 
+Promise.promisifyAll(fs);
+Promise.promisifyAll(Users);
+Promise.promisifyAll(Meals);
+
+
 module.exports.checkUser = function(username, password, callback) {
-	Users.find({username:username, password:password}, function(err, res){
-		if(res){
-			callback(null,res);
+	Users.find({username:username, password:password}, function(err, foundUser){
+		if(Array.isArray(foundUser) && foundUser.length !== 0){
+			callback(null,foundUser);
 		} else {
 			callback(err, null);
 		}
@@ -20,12 +24,11 @@ module.exports.checkUser = function(username, password, callback) {
 };
 
 module.exports.makeNewUser = function(username, password, callback) {
-
     Users.find({username:username}, function(err, foundUser){
         if(Array.isArray(foundUser) && foundUser.length !== 0){ //mongodb sends back an empty array if nothing is found.
             callback(null, foundUser);
         } else {
-            Users.create({username:username, password:password}, function(err, newUser){
+            Users.create({username:username, password:password}, function(err, newUser){ //create new user if not found.
                 if (newUser) {
                     callback( null, newUser );
                 } else {
@@ -36,32 +39,67 @@ module.exports.makeNewUser = function(username, password, callback) {
     });
 };
 
-module.exports.sendUserStateInfo = function(username, password, callback) {
-	var infoObj = {};
+module.exports.makeNewMeal = function(meal, callback) {
+    Meals.create(meal, function(err, newMeal){
+        if (newMeal) {
+            callback( null, newMeal );
+        } else {
+            callback( err, null );
+        }
+    });
+};
 
-	Users.find({username:username}, function(err, res){
-		if(res){
-			infoObj.user = res;
-			sendIfComplete();
-		} else {
-			callback( err, null);
-		}
-	});
+module.exports.checkMealsByUser = function(username, callback) {
+    Meals.find({eatenBy:username}, function(err, foundMeals){
+        if (Array.isArray(foundMeals) && foundMeals.length !== 0) {
+            callback( null, foundMeals );
+        } else {
+            callback( err, null );
+        }
+    });
+};
 
-	Meals.find({eatenBy:username}, function(err, res){
-		if(res){
-			infoObj.meals = res;
-			sendIfComplete();
-		} else {
-			callback( err, null);
-		}
-	});
 
-	var sendIfComplete = function(){
-		if (infoObj.user && infoObj.meals){
-			callback(infoObj,null);
-		}
-	}
+module.exports.sendUserStateInfo = function(username, callback) {
+
+    Promise.all([Users.findAsync({username:username}), 
+        Meals.findAsync({eatenBy:username})])
+        .then(function(results){
+            var infoObj = {
+                users: results[0][0],
+                meals: results[1]
+            };
+            console.log(infoObj);
+            callback(null, infoObj);
+        })
+        .catch(function(err){
+            callback(err, null);
+        });
+
+	// Users.find({username:username}, function(err, res){
+ //        console.log(username, res);
+	// 	if(Array.isArray(res) && res.length !== 0){
+	// 		infoObj.user = res[0];
+ //            if (infoObj.user && infoObj.meals){
+ //                callback(infoObj);
+ //            }   
+	// 	} else {
+	// 		callback( err, "User not found");
+	// 	}
+	// });
+
+	// Meals.find({eatenBy:username}, function(err, res){
+ //        console.log(username, res);
+ //        if(Array.isArray(res) && res.length !== 0){
+	// 		infoObj.meals = res;
+ //            if (infoObj.user && infoObj.meals){
+ //                callback(infoObj);
+ //            }		
+ //        } else {
+	// 		callback( err, "Meals not Found");
+	// 	}
+	// });
+
 	// console.log(__dirname + '/../data/sampleGet.json');
 	// return fs.readFileAsync(__dirname + '/../data/sampleGet.json', 'utf8')
 	// .then(function(data) {

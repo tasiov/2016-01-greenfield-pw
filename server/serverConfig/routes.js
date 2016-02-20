@@ -7,6 +7,7 @@ module.exports = function(app, express) {
 	app.post('/login', function(req, res) {
 		utils.checkUserAsync(req.body.username, req.body.password)
 		.then(function(result) {
+			console.log("result", result);
 			if(result) {
 				req.session.regenerate(function() {
 					req.session.user = req.body.username;
@@ -43,12 +44,35 @@ module.exports = function(app, express) {
 	app.get('/login', function(req, res) {
 		console.log(req.session);
 		if(req.session.user) {
-			utils.extractUserInfo(req)
+			utils.sendUserStateInfoAsync(req.session.user)
 			.then(function(infoObj) {
 				res.send(infoObj);
 			});
 		} else {
 			res.send('Invalid User');
+		}
+	});
+
+	app.post('/meals', function(req, res) {
+	    console.log('post: ', req.body.meal);
+	    utils.makeNewMealAsync(req.body.meal)
+	    .then(function(newMeal) {
+			res.send(newMeal);
+	    })
+	    .catch(function(err) {
+	        res.send('error ' + err);
+	    })
+	});
+
+	app.get('/meals', function(req, res) {
+		console.log(req.session);
+		if(req.session.user) {
+			utils.checkMealsByUserAsync(req.session.username)
+			.then(function(meals) {
+				res.send(meals);
+			});
+		} else {
+			res.send('Please Log in to check meals.');
 		}
 	});
 
