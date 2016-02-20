@@ -1,9 +1,10 @@
 import React from 'react';
+import Food from './Food.jsx';
 
-const CalorieLog = ({}) => {
+const CalorieLog = ({foods}) => {
 	return (
 			<div className='calorie-log'>
-				This is a calorie log 
+				{foods.map( (food) => <Food item='food' /> )} 
 			</div>
 		);
 }
