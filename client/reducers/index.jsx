@@ -27,9 +27,20 @@ const configureSearch = (state = [], action) => {
 	}
 }
 
+const configureFood = (state = {}, action) => {
+	switch(action.type) {
+		case 'SELECT_FOOD':
+			return action.selectedFood;
+		default:
+			return state;
+	}
+}
+
 const foodAppHandler = combineReducers({
 	user: configureUser,
 	page: configurePage,
-	foodQueries: configureSearch
+	foodQueries: configureSearch,
+	selectedFood: configureFood
 });
+
 export default foodAppHandler;

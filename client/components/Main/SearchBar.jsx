@@ -1,7 +1,7 @@
 import React from 'react';
 import Food from './Food.jsx';
 
-let SearchBar = ({foodList, queryFoods}) => {
+const SearchBar = ({foodList, selectedFood, queryFoods, selectFood}) => {
   let query;
 
   let handleSubmit = (e) => {
@@ -11,7 +11,9 @@ let SearchBar = ({foodList, queryFoods}) => {
 
   let foodListEntries = () => {
     return foodList.map((food) =>
-      <Food name={food.fields.item_name} brand={food.fields.brand_name} key={food._id} />
+      <div onClick={selectFood} key={food._id}>
+        <Food name={food.fields.item_name} brand={food.fields.brand_name} />
+      </div>
     );
   }
 
@@ -24,6 +26,9 @@ let SearchBar = ({foodList, queryFoods}) => {
       </form>
       <br/>
       {foodListEntries()}
+      <br/>
+      <h5>Current Selection</h5>
+      {selectedFood.food}
     </div>
   );
 }

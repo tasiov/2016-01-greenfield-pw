@@ -1,10 +1,12 @@
 import { connect } from 'react-redux';
 import { setSearchResults } from '../actions/index.jsx';
+import { setFood } from '../actions/index.jsx';
 import SearchBar from '../components/Main/SearchBar.jsx';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    foodList: state.foodQueries
+    foodList: state.foodQueries,
+    selectedFood: state.selectedFood
   }
 }
 
@@ -19,6 +21,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         .fail(function(res) {
           console.log('error: ', res);
         });
+    },
+    selectFood: (e) => {
+      var select = {food: e.target};
+      dispatch(setFood(select));
     }
   }
 }

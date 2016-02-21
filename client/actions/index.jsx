@@ -18,3 +18,10 @@ export const setSearchResults = (searchResults) => {
     searchResults
   }
 }
+
+export const setFood = (selectedFood) => {
+  return {
+    type: 'SELECT_FOOD',
+    selectedFood
+  }
+}
