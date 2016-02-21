@@ -54,7 +54,12 @@ module.exports = function(app, express) {
 
 	app.post('/meals', function(req, res) {
 	    console.log('post: ', req.body.meal);
-	    utils.makeNewMealAsync(req.body.meal)
+	    var newMeal = req.body.meal;
+	    if (typeof req.body.meal === 'string') {
+	    	newMeal = JSON.parse(req.body.meal)
+	    }
+	    console.log('new meal is ' + newMeal + ' and type is ' + typeof newMeal);
+	    utils.makeNewMealAsync(newMeal)
 	    .then(function(newMeal) {
 			res.send(newMeal);
 	    })
