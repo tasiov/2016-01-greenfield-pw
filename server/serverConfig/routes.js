@@ -7,7 +7,6 @@ module.exports = function(app, express) {
 	app.post('/login', function(req, res) {
 		utils.checkUserAsync(req.body.username, req.body.password)
 		.then(function(result) {
-			console.log("result", result);
 			if(result) {
 				req.session.regenerate(function() {
 					req.session.user = req.body.username;
@@ -28,7 +27,6 @@ module.exports = function(app, express) {
 	});
 
 	app.post('/signup', function(req, res) {
-	    console.log('post: ', req.body.username, req.body.password);
 	    utils.makeNewUserAsync(req.body.username, req.body.password)
 	    .then(function(result) {
 	        req.session.regenerate(function() {
@@ -53,12 +51,10 @@ module.exports = function(app, express) {
 	});
 
 	app.post('/meals', function(req, res) {
-	    console.log('post: ', req.body.meal);
 	    var newMeal = req.body.meal;
 	    if (typeof req.body.meal === 'string') {
 	    	newMeal = JSON.parse(req.body.meal)
 	    }
-	    console.log('new meal is ' + newMeal + ' and type is ' + typeof newMeal);
 	    utils.makeNewMealAsync(newMeal)
 	    .then(function(newMeal) {
 			res.send(newMeal);
@@ -69,7 +65,6 @@ module.exports = function(app, express) {
 	});
 
 	app.get('/meals', function(req, res) {
-		console.log(req.session);
 		if(req.session.user) {
 			utils.checkMealsByUserAsync(req.session.username)
 			.then(function(meals) {

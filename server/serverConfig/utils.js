@@ -1,5 +1,4 @@
 var fs = require('fs');
-var _ = require('lodash');
 var request = require('request');
 var Promise = require('bluebird');
 var creds = {
@@ -98,31 +97,31 @@ module.exports.checkMealsByUser = function(username, callback) {
 
 
 module.exports.sendUserStateInfo = function(username, callback) {
-
     Promise.all([Users.findAsync({username:username}), 
         Meals.findAsync({eatenBy:username})])
         .then(function(results){
-            var mapIdsToFoods = {};
-            for (var id in results[1].foods) {
-              if(!id in mapIdsToFoods) {
-                mapIdsToFoods[id] = module.exports.getFoodItemAsync(id);
+            var mapIdsToFoods = {};            
+            results[1].forEach( function(meal) {
+              for (var id in meal.foods) {
+                if(!(id in mapIdsToFoods)) {
+                  mapIdsToFoods[id] = module.exports.getFoodItemAsync(id);
+                }
               }
-            }
+            });            
 
-            Promise.all( _.valuesIn(mapIdsToFoods))
+            Promise.props(mapIdsToFoods)
             .then(function(foods) {
               var infoObj = {
                   users: results[0][0],
                   meals: results[1],
                   foods: foods
               };
-              console.log(infoObj);
               callback(null, infoObj);
             })
             .catch(function(err) {
               console.log('err querying for food');
               callback(err, null);
-            })
+            });
             
         })
         .catch(function(err){
