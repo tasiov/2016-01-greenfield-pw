@@ -2,11 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { setUser } from '../../actions/index.jsx';
 
-let Login = ({ dispatch, change, page}) => {
+const Login = ({ dispatch, change}) => {
   let username;
   let password;
 
-  let handleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault();
     console.log('username: ', username.value);
     console.log('password: ', password.value);
@@ -19,7 +19,7 @@ let Login = ({ dispatch, change, page}) => {
       });
   }
 
-  let changePage = e => {
+  const changePage = e => {
     e.preventDefault();
     change('Signup');
   }
