@@ -18,8 +18,10 @@ const configurePage = (state = 'Login', action) => {
 	}
 }
 
-const configureSearch = (state = '', action) => {
+const configureSearch = (state = [], action) => {
 	switch(action.type) {
+		case 'SET_SEARCH_RESULTS':
+			return action.searchResults;
 		default:
 			return state;
 	}

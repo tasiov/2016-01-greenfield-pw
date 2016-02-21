@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Food = ({item}) => {
+const Food = ({name, brand, key}) => {
 	return (
 		<div className='food-item'>
-			Food
+			{name}, {brand}
 		</div>
 	);
 }

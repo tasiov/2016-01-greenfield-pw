@@ -13,26 +13,4 @@ const App = ({user, getUser}) => {
   }
 }
 
-
-// class App extends React.Component {
-
-//   constructor(props) {
-//     super(props);
-//     this.getUser();
-//   }
-
-
-//   render() {
-//     if (!this.props.user){
-//       return (
-//         <Login/>
-//       )
-//     } else {
-//       return (
-//         <Main user={this.props.user}/>
-//       )
-//     }
-//   }
-// }
-
 export default App;

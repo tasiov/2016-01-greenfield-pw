@@ -2,7 +2,7 @@ var fs = require('fs');
 var request = require('request');
 var Promise = require('bluebird');
 var creds = {
-  appId: "faf1bee4", 
+  appId: "faf1bee4",
   appKey: "ee1bb6aa1dc012b58a06a7fd14ddbef1",
 }
 var Users = require('../models/users');
@@ -97,17 +97,17 @@ module.exports.checkMealsByUser = function(username, callback) {
 
 
 module.exports.sendUserStateInfo = function(username, callback) {
-    Promise.all([Users.findAsync({username:username}), 
+    Promise.all([Users.findAsync({username:username}),
         Meals.findAsync({eatenBy:username})])
         .then(function(results){
-            var mapIdsToFoods = {};            
+            var mapIdsToFoods = {};
             results[1].forEach( function(meal) {
               for (var id in meal.foods) {
                 if(!(id in mapIdsToFoods)) {
                   mapIdsToFoods[id] = module.exports.getFoodItemAsync(id);
                 }
               }
-            });            
+            });
 
             Promise.props(mapIdsToFoods)
             .then(function(foods) {
@@ -122,7 +122,7 @@ module.exports.sendUserStateInfo = function(username, callback) {
               console.log('err querying for food');
               callback(err, null);
             });
-            
+
         })
         .catch(function(err){
             callback(err, null);
