@@ -13,6 +13,41 @@ Promise.promisifyAll(Users);
 Promise.promisifyAll(Meals);
 
 
+module.exports.getSearchResponse = function(query, callback) {
+  var nutritionUrl = 'http://api.nutritionix.com/v1_1/search/' + query;
+  request({
+    url: nutritionUrl,
+    qs: Object.assign({}, creds, {results:"0:8"}),
+  },
+  function (error, response, body) {
+    if(error) {
+      callback(error, null);
+    } else {
+      callback(null, body);
+    }
+  });
+};
+
+
+
+module.exports.getFoodItem = function(id, callback) {
+  var nutritionUrl = 'http://api.nutritionix.com/v1_1/item';
+  request({
+    url: nutritionUrl,
+    qs: Object.assign({}, creds, {id:id}),
+  },
+  function(error, response, body) {
+    if(error) {
+      callback(error, null);
+    } else {
+      callback(null, body);
+    }
+  });
+};
+
+module.exports.getFoodItemAsync = Promise.promisify(module.exports.getFoodItem);
+
+
 module.exports.checkUser = function(username, password, callback) {
 	Users.find({username:username, password:password}, function(err, foundUser){
 		if(Array.isArray(foundUser) && foundUser.length !== 0){
@@ -22,6 +57,7 @@ module.exports.checkUser = function(username, password, callback) {
 		}
 	});
 };
+
 
 module.exports.makeNewUser = function(username, password, callback) {
     Users.find({username:username}, function(err, foundUser){
@@ -61,82 +97,36 @@ module.exports.checkMealsByUser = function(username, callback) {
 
 
 module.exports.sendUserStateInfo = function(username, callback) {
-
     Promise.all([Users.findAsync({username:username}), 
         Meals.findAsync({eatenBy:username})])
         .then(function(results){
-            var infoObj = {
-                users: results[0][0],
-                meals: results[1]
-            };
-            console.log(infoObj);
-            callback(null, infoObj);
+            var mapIdsToFoods = {};            
+            results[1].forEach( function(meal) {
+              for (var id in meal.foods) {
+                if(!(id in mapIdsToFoods)) {
+                  mapIdsToFoods[id] = module.exports.getFoodItemAsync(id);
+                }
+              }
+            });            
+
+            Promise.props(mapIdsToFoods)
+            .then(function(foods) {
+              var infoObj = {
+                  users: results[0][0],
+                  meals: results[1],
+                  foods: foods
+              };
+              callback(null, infoObj);
+            })
+            .catch(function(err) {
+              console.log('err querying for food');
+              callback(err, null);
+            });
+            
         })
         .catch(function(err){
             callback(err, null);
         });
-
-	// Users.find({username:username}, function(err, res){
- //        console.log(username, res);
-	// 	if(Array.isArray(res) && res.length !== 0){
-	// 		infoObj.user = res[0];
- //            if (infoObj.user && infoObj.meals){
- //                callback(infoObj);
- //            }   
-	// 	} else {
-	// 		callback( err, "User not found");
-	// 	}
-	// });
-
-	// Meals.find({eatenBy:username}, function(err, res){
- //        console.log(username, res);
- //        if(Array.isArray(res) && res.length !== 0){
-	// 		infoObj.meals = res;
- //            if (infoObj.user && infoObj.meals){
- //                callback(infoObj);
- //            }		
- //        } else {
-	// 		callback( err, "Meals not Found");
-	// 	}
-	// });
-
-	// console.log(__dirname + '/../data/sampleGet.json');
-	// return fs.readFileAsync(__dirname + '/../data/sampleGet.json', 'utf8')
-	// .then(function(data) {
-	// 	var userObj = {user: 'test1', password: 'password'};
-	// 	return userObj;
-	// })
-	// .catch(function(err) {
-	// 	return {Error: err};
-	// });
 };
 
-module.exports.getSearchResponse = function(query, callback) {
-	var nutritionUrl = 'http://api.nutritionix.com/v1_1/search/' + query;
-	request({
-    url: nutritionUrl,
-    qs: Object.assign({}, creds, {results:"0:8"}),
-  },
-  function (error, response, body) {
-    if(error) {
-      callback(error, null);
-    } else {
-      callback(null, body);
-    }
-  });
-};
 
-module.exports.getFoodItem = function(id, callback) {
-  var nutritionUrl = 'http://api.nutritionix.com/v1_1/item';
-  request({
-    url: nutritionUrl,
-    qs: Object.assign({}, creds, {id:id}),
-  },
-  function(error, response, body) {
-    if(error) {
-      callback(error, null);
-    } else {
-      callback(null, body);
-    }
-  });
-};
