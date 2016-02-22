@@ -1,21 +1,20 @@
 import React from 'react';
 import NavButton from './NavButton.jsx';
-import CalorieLog from './CalorieLog.jsx';
 
 
 const NavBar = ({}) => {
 
 	return (
 		<div className='nav-bar'>
-			<NavButton show='Summary'>
+			<NavButton show="Summary">
 				Summary
 			</NavButton>
 
-			<NavButton show="CalorieLog">
-				<CalorieLog />
+			<NavButton show="CalorieLog" >
+				Calorie Log
 			</NavButton>
 
-			<NavButton show="recordMeals">
+			<NavButton show="RecordMeals">
 				Record Meals
 			</NavButton>
 		</div>
