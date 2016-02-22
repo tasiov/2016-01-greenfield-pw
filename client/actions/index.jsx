@@ -25,3 +25,10 @@ export const setFood = (selectedFood) => {
     selectedFood
   }
 }
+
+export const deleteFood = (selectedFood) => {
+	return {
+		type: 'REMOVE_FOOD',
+		selectedFood
+	}
+}

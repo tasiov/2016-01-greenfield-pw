@@ -8,8 +8,6 @@ let Login = ({ dispatch, change}) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log('username: ', username.value);
-    console.log('password: ', password.value);
     $.post( "/login", {username: "username", password: "password"})
       .done(function(res) {
         dispatch(setUser({username: "username", password: "password"}));
