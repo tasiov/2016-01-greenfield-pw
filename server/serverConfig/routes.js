@@ -67,7 +67,7 @@ module.exports = function(app, express) {
 	    }
 	    utils.makeNewMealAsync(newMeal)
 	    .then(function(newMeal) {
-			res.send(newMeal);
+				res.send(newMeal);
 	    })
 	    .catch(function(err) {
 	        res.send('error ' + err);

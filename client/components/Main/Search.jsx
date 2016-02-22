@@ -13,10 +13,6 @@ const Search = ({foodList, queryFoods, selectFood}) => {
     selectFood(food);
   }
 
-  let removeSelectedFood = (food) => {
-    removeFood(food);
-  }
-
   return (
     <div className='search'>
       <h3>SearchBar</h3>
@@ -27,7 +23,7 @@ const Search = ({foodList, queryFoods, selectFood}) => {
       <br/>
         {_.values(foodList).map( (food) => {
           return (
-            <div onClick={onFoodClick.bind(this,food)} key={food._id}>
+            <div onClick={onFoodClick.bind(this,food)}>
               <Food name={food['item_name']} brand={food['brand_name']}/>
             </div>);
         })}

@@ -45,11 +45,21 @@ const configureFood = (state = {}, action) => {
 	}
 }
 
+const configureMeals = (state = [], action) => {
+	switch(action.type) {
+		case 'SET_MEALS':
+			return state.userObj.meals.concat(action.meals);
+		default:
+			return state;
+	}
+}
+
 const foodAppHandler = combineReducers({
 	user: configureUser,
 	page: configurePage,
 	foodQueries: configureSearch,
-	selectedFoods: configureFood
+	selectedFoods: configureFood,
+	userMeals: configureMeals
 });
 
 export default foodAppHandler;
