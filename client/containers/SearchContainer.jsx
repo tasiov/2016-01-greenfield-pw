@@ -1,12 +1,11 @@
 import { connect } from 'react-redux';
 import { setSearchResults } from '../actions/index.jsx';
 import { setFood, deleteFood } from '../actions/index.jsx';
-import SearchBar from '../components/Main/SearchBar.jsx';
+import Search from '../components/Main/Search.jsx';
 
 const mapStateToProps = (state, ownProps) => {
   return {
     foodList: state.foodQueries,
-    selectedFoods: state.selectedFoods
   }
 }
 
@@ -31,10 +30,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     selectFood: (food) => {
       dispatch(setFood(food));
-    },
-
-    removeFood: (food) => {
-      dispatch(deleteFood(food));
     }
   }
 }
@@ -42,6 +37,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 const SearchContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(SearchBar)
+)(Search)
 
 export default SearchContainer;
