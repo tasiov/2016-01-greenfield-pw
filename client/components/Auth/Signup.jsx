@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { setUser } from '../../actions/index.jsx';
 
-const Signup = ({ dispatch, change}) => {
+let Signup = ({ dispatch, change}) => {
   let username;
   let password;
 

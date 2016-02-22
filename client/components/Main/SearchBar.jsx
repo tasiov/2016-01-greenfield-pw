@@ -9,13 +9,9 @@ const SearchBar = ({foodList, selectedFood, queryFoods, selectFood}) => {
     queryFoods(query.value);
   }
 
-  let foodListEntries = () => {
-    return foodList.map((food) =>
-      <div onClick={selectFood} key={food._id}>
-        <Food name={food.fields.item_name} brand={food.fields.brand_name} />
-      </div>
-    );
-  }
+  let selectedFoodElement = selectedFood.fields ?
+    <Food name={selectedFood.fields.item_name} brand={selectedFood.fields.brand_name}/>
+    : <div>No Entry Selected</div>;
 
   return (
     <div className='search'>
@@ -25,10 +21,18 @@ const SearchBar = ({foodList, selectedFood, queryFoods, selectFood}) => {
         <input type="submit" />
       </form>
       <br/>
-      {foodListEntries()}
+        {foodList.map( (food) => {
+          let onFoodClick = () => {
+            selectFood(food);
+          }
+          return (
+            <div onClick={onFoodClick} key={food._id}>
+              <Food name={food.fields.item_name} brand={food.fields.brand_name}/>
+            </div>);
+        })}
       <br/>
       <h5>Current Selection</h5>
-      {selectedFood.food}
+      {selectedFoodElement}
     </div>
   );
 }

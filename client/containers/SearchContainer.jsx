@@ -22,9 +22,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
           console.log('error: ', res);
         });
     },
-    selectFood: (e) => {
-      var select = {food: e.target};
-      dispatch(setFood(select));
+    selectFood: (food) => {
+      console.log(food);
+      dispatch(setFood(food));
     }
   }
 }
