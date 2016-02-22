@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var mealSchema = mongoose.Schema({
     eatenAt: {type: 'Date'},
     eatenBy: {type: 'String'},
-    foods: {type: 'Mixed'},
+    foodsEaten: {type: 'Mixed'},
 }); 
 
 var Meal = mongoose.model('Meal',mealSchema);
