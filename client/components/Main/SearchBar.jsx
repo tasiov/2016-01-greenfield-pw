@@ -3,6 +3,7 @@ import Food from './Food.jsx';
 
 const SearchBar = ({foodList, selectedFoods, queryFoods, selectFood, removeFood}) => {
   let query;
+  let timesEaten = [];
 
   let handleSubmit = (e) => {
     e.preventDefault();
@@ -18,14 +19,16 @@ const SearchBar = ({foodList, selectedFoods, queryFoods, selectFood, removeFood}
   }
 
 
+
   let selectedFoodsDisplay = _.isEmpty(selectedFoods) ?
     <div>No entry selected</div> :
-    (_.values(selectedFoods).map((food) => {
+    (_.values(selectedFoods).map((food, index) => {
       let name = food['item_name'];
       let brand = food['brand_name'];
       let id = food['item_id'];
       return (
         <div className='selectedFoodEntry' >
+          <input type='number' ref={(ref) => timesEaten[index] = ref} />
           <Food name={name} brand={brand} key={id}/>
         <span onClick={removeSelectedFood.bind(this,food)}>[X]</span></div>
       );
