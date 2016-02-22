@@ -7,6 +7,7 @@ var creds = {
 }
 var Users = require('../models/users');
 var Meals = require('../models/meals');
+var _ = require('lodash');
 
 Promise.promisifyAll(fs);
 Promise.promisifyAll(Users);
@@ -27,8 +28,6 @@ module.exports.getSearchResponse = function(query, callback) {
     }
   });
 };
-
-
 
 module.exports.getFoodItem = function(id, callback) {
   var nutritionUrl = 'http://api.nutritionix.com/v1_1/item';
@@ -112,7 +111,7 @@ module.exports.sendUserStateInfo = function(username, callback) {
             Promise.props(mapIdsToFoods)
             .then(function(foods) {
               var infoObj = {
-                  users: results[0][0],
+                  userInfo: _.omit(results[0][0], 'password'),
                   meals: results[1],
                   foods: foods
               };
