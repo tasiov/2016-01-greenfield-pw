@@ -1,6 +1,7 @@
 var fs = require('fs');
 var request = require('request');
 var Promise = require('bluebird');
+var bcrypt = require('bcrypt');
 var creds = {
   appId: "faf1bee4",
   appKey: "ee1bb6aa1dc012b58a06a7fd14ddbef1",
@@ -48,9 +49,16 @@ module.exports.getFoodItemAsync = Promise.promisify(module.exports.getFoodItem);
 
 
 module.exports.checkUser = function(username, password, callback) {
-	Users.find({username:username, password:password}, function(err, foundUser){
+	Users.find({username:username}, function(err, foundUser){
 		if(Array.isArray(foundUser) && foundUser.length !== 0){
-			callback(null,foundUser);
+      for(var i = 0; i < foundUser.length; i++){
+        console.log(bcrypt.compare(password, foundUser[i].password), password, foundUser[i].password)
+        if (bcrypt.compare(password, foundUser[i].password)){
+			     callback(null,foundUser);
+           return;
+        }
+      }
+      callback(err, null);
 		} else {
 			callback(err, null);
 		}
@@ -63,7 +71,9 @@ module.exports.makeNewUser = function(username, password, callback) {
         if(Array.isArray(foundUser) && foundUser.length !== 0){ //mongodb sends back an empty array if nothing is found.
             callback(null, foundUser);
         } else {
-            Users.create({username:username, password:password}, function(err, newUser){ //create new user if not found.
+            var salt = bcrypt.genSaltSync(10);
+            var hash = bcrypt.hashSync("password", salt);
+            Users.create({username:username, password:hash}, function(err, newUser){ //create new user if not found.
                 if (newUser) {
                     callback( null, newUser );
                 } else {

@@ -50,6 +50,14 @@ module.exports = function(app, express) {
 		}
 	});
 
+	app.get('/logout', function(req, res) {
+		if(req.session.user) {
+			req.session.destroy();
+		} else {
+			res.send('You have been logged out. See you next time!');
+		}
+	});
+
 	app.post('/meals', function(req, res) {
 	    var newMeal = req.body.meal;
 	    if (typeof req.body.meal === 'string') {
