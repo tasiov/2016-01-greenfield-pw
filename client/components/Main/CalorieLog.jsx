@@ -4,7 +4,7 @@ import Food from './Food.jsx';
 const CalorieLog = ({foods}) => {
 	return (
 			<div className='calorie-log'>
-				{foods.map( (food) => <Food item='food' /> )} 
+        Calorie Log
 			</div>
 		);
 }

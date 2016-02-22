@@ -41,5 +41,3 @@ POST /meals
                                     -foods: object with each food identifier
                                             as a property and a value that is
                                             an object with al that food's info
- 
- 

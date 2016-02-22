@@ -17,7 +17,7 @@ const Main = ({page, user}) => {
   return (
     <div className='main-page'>
       <NavBar />
-      {currentPage}
+      <RecordMeals />
     </div>
     );
 }

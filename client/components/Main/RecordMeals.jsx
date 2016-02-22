@@ -1,10 +1,11 @@
 import React from 'react'
+import SearchContainer from '../../containers/SearchContainer.jsx';
 
-const RecordMeals = ({}) => {
-
+const RecordMeals = () => {
 	return (
 			<div className = 'record-meals'>
 				Record Meals Page
+        <SearchContainer />
 			</div>
 		);
 }

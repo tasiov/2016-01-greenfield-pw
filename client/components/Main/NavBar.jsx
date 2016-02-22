@@ -1,6 +1,6 @@
 import React from 'react';
 import NavButton from './NavButton.jsx';
-
+import CalorieLog from './CalorieLog.jsx';
 
 
 const NavBar = ({}) => {
@@ -12,11 +12,11 @@ const NavBar = ({}) => {
 			</NavButton>
 
 			<NavButton show="CalorieLog">
-				Calorie Log 
+				<CalorieLog />
 			</NavButton>
 
 			<NavButton show="recordMeals">
-				Record Meals 
+				Record Meals
 			</NavButton>
 		</div>
 		);

@@ -11,3 +11,17 @@ export const changePage = (newPage) => {
 		newPage
 	}
 }
+
+export const setSearchResults = (searchResults) => {
+  return {
+    type: 'SET_SEARCH_RESULTS',
+    searchResults
+  }
+}
+
+export const setFood = (selectedFood) => {
+  return {
+    type: 'SELECT_FOOD',
+    selectedFood
+  }
+}

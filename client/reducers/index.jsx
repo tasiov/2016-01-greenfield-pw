@@ -3,7 +3,7 @@ import { combineReducers } from 'redux'
 const configureUser = (state = null, action) => {
 	switch(action.type) {
 		case 'SET_USER':
-			return action.userObj === "Invalid User" ? state : action.userObj; 
+			return action.userObj === "Invalid User" ? state : action.userObj;
 		default:
 			return state;
 	}
@@ -18,8 +18,29 @@ const configurePage = (state = 'Login', action) => {
 	}
 }
 
+const configureSearch = (state = [], action) => {
+	switch(action.type) {
+		case 'SET_SEARCH_RESULTS':
+			return action.searchResults;
+		default:
+			return state;
+	}
+}
+
+const configureFood = (state = {}, action) => {
+	switch(action.type) {
+		case 'SELECT_FOOD':
+			return action.selectedFood;
+		default:
+			return state;
+	}
+}
+
 const foodAppHandler = combineReducers({
 	user: configureUser,
-	page: configurePage
-}); 
+	page: configurePage,
+	foodQueries: configureSearch,
+	selectedFood: configureFood
+});
+
 export default foodAppHandler;
