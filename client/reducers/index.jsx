@@ -30,7 +30,13 @@ const configureSearch = (state = [], action) => {
 const configureFood = (state = {}, action) => {
 	switch(action.type) {
 		case 'SELECT_FOOD':
-			return action.selectedFood;
+			let id = action.selectedFood['item_id'];
+			let foodObj = {
+				[id]: action.selectedFood
+			}
+			return Object.assign({}, state, foodObj);
+		case 'REMOVE_FOOD':
+			return _.omit(state, action.selectedFood['item_id']);
 		default:
 			return state;
 	}
@@ -40,7 +46,7 @@ const foodAppHandler = combineReducers({
 	user: configureUser,
 	page: configurePage,
 	foodQueries: configureSearch,
-	selectedFood: configureFood
+	selectedFoods: configureFood
 });
 
 export default foodAppHandler;
