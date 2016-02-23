@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-const NutritionCounter = ({meals,foods}) => {
-	console.log(Array.isArray(meals));
-	console.log('meals in NF', meals);
+
+//Function
+export const getNutritionInfo = (meals, foods, additionals) => {
 	let start = {
 		nf_calories: 0,
 		nf_protein: 0,
@@ -11,20 +11,25 @@ const NutritionCounter = ({meals,foods}) => {
 		nf_total_fat: 0
 	}
 
-	const mergeFunc = (dest, source1, source2) => (dest || 0) + (source1 || 0) + (source2 || 0);
-	window.mergeFunc = mergeFunc;
-	let NF = meals.reduce((mealSum, meal) => {
-		let currMeal = _.transform(meal.foodsEaten, (foodSum, timesEaten, foodId) => {
-			let foodNFstats = _.pick(foods[foodId], Object.keys(start));
-			let foodNFtotals = _.mapValues(foodNFstats, val => timesEaten * val || 0);
-			console.log('totals are', foodNFtotals);
-			console.log('foodSum is', foodSum);
-			return _.mapValues(foodNFtotals, (sum, key) => foodNFtotals[key] + foodSum[key]);
-		}, start);
-		console.log('currMeal is', currMeal);
-		return _.mapValues(currMeal, (sum, key) => currMeal[key] + mealSum[key]);
-	}, start);
+	//optional additional nutritional info, must be array
+	if(additionals && Array.isArray(additionals)) {
+		additionals.forEach(val => start[val] = 0);
+	}
 
+	const mergeFunc = (objVal, srcVal) => (objVal || 0) + (srcVal || 0);
+	return meals.reduce((mealSum, meal) => {
+		let currMeal = _.transform(meal.foodsEaten, (foodSum, timesEaten, foodId) => {
+			let foodNFstats = _.pick(foods[foodId], Object.keys(foodSum));
+			let foodNFtotals = _.mapValues(foodNFstats, val => timesEaten * val || 0);
+			 _.mergeWith(foodSum, foodNFtotals, mergeFunc);
+		}, Object.assign({}, start));
+		return _.mapValues(currMeal, (sum, key) => currMeal[key] + mealSum[key]);
+	}, Object.assign({}, start));
+}
+
+//React Component
+export const NutritionCounter = ({meals,foods}) => {
+	let NF = getNutritionInfo(meals, foods);	
 	return (
 			<div className='nutrition-info'>
 				<span className='nutrition-info-calories'>Calories: {NF['nf_calories']}</span>
@@ -35,4 +40,3 @@ const NutritionCounter = ({meals,foods}) => {
 		);
 }
 
-export default NutritionCounter

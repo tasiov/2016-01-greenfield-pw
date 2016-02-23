@@ -1,11 +1,8 @@
 import React from 'react';
 import Food from './Food.jsx';
-import NutritionCounter from './NutritionCounter.jsx'
+import {NutritionCounter} from './NutritionCounter.jsx'
 
 const Meal = ({meal, foods}) => {
-	console.log('in meal and rendering ', meal);
-	console.log('foods are ', foods);
-
 	return (
 	<div className='meal-element'>
 		<div className='meal-title'>{meal.createdAt}</div>
