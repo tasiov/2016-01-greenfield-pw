@@ -3,12 +3,17 @@ import { connect } from 'react-redux';
 
 
 //Function
-export const getNutritionInfo = (meals, foods) => {
+export const getNutritionInfo = (meals, foods, additionals) => {
 	let start = {
 		nf_calories: 0,
 		nf_protein: 0,
 		nf_total_carbohydrate: 0,
 		nf_total_fat: 0
+	}
+
+	//optional additional nutritional info, must be array
+	if(additionals && Array.isArray(additionals)) {
+		additionals.forEach(val => start[val] = 0);
 	}
 
 	const mergeFunc = (objVal, srcVal) => (objVal || 0) + (srcVal || 0);
