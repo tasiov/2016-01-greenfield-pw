@@ -13,7 +13,7 @@ const Main = ({page, user}) => {
   } else if(page === 'RecordMeals') {
     currentPage = <RecordMeals user={user} />;
   } else {
-    currentPage = <Summary user={user} />;
+    currentPage = <RecordMeals user={user} />;
   }
 
   return (
