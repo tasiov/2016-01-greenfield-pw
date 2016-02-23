@@ -4,8 +4,8 @@ var request = require('request');
 var Promise = require('bluebird');
 var bcrypt = require('bcrypt');
 var creds = {
-  appId: "faf1bee4",
-  appKey: "ee1bb6aa1dc012b58a06a7fd14ddbef1",
+  appId: "19dc5ef3",
+  appKey: "1caac1145c265164258e31800a83e01c",
 }
 var Users = require('../models/users');
 var Meals = require('../models/meals');
