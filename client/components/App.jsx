@@ -6,7 +6,7 @@ import MainContainer from '../containers/MainContainer.jsx';
 
 
 const App = ({user, getUser}) => {
-  if(!user) {
+  if(!user || !user.meals) {
     getUser();
     return (<AuthContainer />);
   } else {

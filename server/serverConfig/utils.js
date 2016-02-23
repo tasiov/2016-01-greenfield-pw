@@ -52,8 +52,9 @@ module.exports.checkUser = function(username, password, callback) {
 	Users.find({username:username}, function(err, foundUser){
 		if(Array.isArray(foundUser) && foundUser.length !== 0){
       for(var i = 0; i < foundUser.length; i++){
-        console.log(bcrypt.compare(password, foundUser[i].password), password, foundUser[i].password)
-        if (bcrypt.compare(password, foundUser[i].password)){
+        console.log(bcrypt.compareSync(password, foundUser[i].password), bcrypt.hashSync(password, 10 ), foundUser[i].password)
+        
+        if (bcrypt.compareSync(password, foundUser[i].password)){
 			     callback(null,foundUser);
            return;
         }
@@ -72,8 +73,8 @@ module.exports.makeNewUser = function(username, password, callback) {
             callback(null, foundUser);
         } else {
             var salt = bcrypt.genSaltSync(10);
-            var hash = bcrypt.hashSync("password", salt);
-            Users.create({username:username, password:hash}, function(err, newUser){ //create new user if not found.
+            var hash = bcrypt.hashSync(password, salt);
+            Users.create({username:username, password:hash, salt:salt}, function(err, newUser){ //create new user if not found.
                 if (newUser) {
                     callback( null, newUser );
                 } else {
