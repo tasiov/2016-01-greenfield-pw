@@ -13,7 +13,7 @@ const SelectFood = ({selectedFoods, removeFood, user, sendMeal}) => {
     console.log('user: ', user);
     let meals = {
       eatenAt: Date.now(),
-      eatenBy: user.username,
+      eatenBy: user.userInfo.username,
       foodsEaten: {}
     };
     (_.values(selectedFoods).forEach((food, index) => {

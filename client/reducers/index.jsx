@@ -6,8 +6,8 @@ const configureUser = (state = null, action) => {
 		case 'SET_USER':
 			console.log('changing state user to ' + JSON.stringify(action.userObj));
 			return action.userObj === "Invalid User" ? state : action.userObj;
-		case 'SET_MEALS':
-		  let mealsArr = state.meals.concat(action.meals);
+		case 'SET_MEAL':
+		  let mealsArr = state.meals.concat(action.meal);
 			return Object.assign({}, state, {meals: mealsArr});
 		default:
 			console.log('default triggered');
