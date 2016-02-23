@@ -10,6 +10,8 @@ const configureUser = (state = null, action) => {
     case 'ADD_FOOD_ID':
       let totalFoods = Object.assign({}, state.foods, action.foodIds);
       return Object.assign({}, state, {foods: totalFoods});
+		case 'REMOVE_USER':
+			return {};
 		default:
 			return state;
 	}

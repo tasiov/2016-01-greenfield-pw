@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { changePage } from '../actions/index.jsx';
+import { changePage, removeUser } from '../actions/index.jsx';
 import Main from '../components/Main/Main.jsx';
 
 
@@ -10,9 +10,25 @@ const mapStateToProps = (state) => {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logoutUser: () => {
+      console.log("Logout fired");
+      $.get('/logout')
+      .done((res) => {
+        console.log("User Removed")
+        dispatch(removeUser());
+      })
+      .fail((res) => {
+        console.log('err: ', res);
+      });
+    }
+  }
+}
 
 const MainContainer = connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(Main)
 
 export default MainContainer;

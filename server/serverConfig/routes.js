@@ -55,9 +55,11 @@ module.exports = function(app, express) {
 
 	app.get('/logout', function(req, res) {
 		if(req.session.user) {
-			req.session.destroy();
+			req.session.destroy( function(err){
+				res.send('You have been logged out. See you next time!');
+			});
 		} else {
-			res.send('You have been logged out. See you next time!');
+			res.send('You are already logged out.');
 		}
 	});
 
