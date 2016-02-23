@@ -27,6 +27,7 @@ const SelectFood = ({selectedFoods, removeFood, user, sendMeal, sendFoodItems}) 
 
     sendMeal(meals);
     sendFoodItems(newFoodIds);
+    _.values(selectedFoods).forEach(removeSelectedFood);
 
   }
 

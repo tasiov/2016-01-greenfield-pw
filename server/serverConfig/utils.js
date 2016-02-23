@@ -111,14 +111,13 @@ module.exports.sendUserStateInfo = function(username, callback) {
         .then(function(results){
             var mapIdsToFoods = {};
             results[1].forEach( function(meal) {
-              for (var id in meal.foods) {
-                if(!(id in mapIdsToFoods)) {
-                  mapIdsToFoods[id] = module.exports.getFoodItemAsync(id);
-                }
-              }
+              _.keys(meal.foodsEaten).forEach( function(foodId, index) {
+                mapIdsToFoods[foodId] = module.exports.getFoodItemAsync(foodId);
+              });
             });
             Promise.props(mapIdsToFoods)
-            .then(function(foods) {
+            .then(function(foodStrings) {
+              var foods = _.mapValues(foodStrings, JSON.parse);
               var infoObj = {
                   userInfo: _.omit(results[0][0], ['password','salt']),
                   meals: results[1],

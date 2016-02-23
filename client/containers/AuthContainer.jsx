@@ -3,7 +3,7 @@ import { changePage } from '../actions/index.jsx';
 import Auth from '../components/Auth/Auth.jsx';
 
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
     page: state.page
   }
