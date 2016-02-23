@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-const NutritionCounter = ({meals,foods}) => {
+
+//Function
+export const getNutritionInfo = (meals, foods) => {
 	let start = {
 		nf_calories: 0,
 		nf_protein: 0,
@@ -10,7 +12,7 @@ const NutritionCounter = ({meals,foods}) => {
 	}
 
 	const mergeFunc = (objVal, srcVal) => (objVal || 0) + (srcVal || 0);
-	let NF = meals.reduce((mealSum, meal) => {
+	return meals.reduce((mealSum, meal) => {
 		let currMeal = _.transform(meal.foodsEaten, (foodSum, timesEaten, foodId) => {
 			let foodNFstats = _.pick(foods[foodId], Object.keys(foodSum));
 			let foodNFtotals = _.mapValues(foodNFstats, val => timesEaten * val || 0);
@@ -18,7 +20,11 @@ const NutritionCounter = ({meals,foods}) => {
 		}, Object.assign({}, start));
 		return _.mapValues(currMeal, (sum, key) => currMeal[key] + mealSum[key]);
 	}, Object.assign({}, start));
+}
 
+//React Component
+export const NutritionCounter = ({meals,foods}) => {
+	let NF = getNutritionInfo(meals, foods);	
 	return (
 			<div className='nutrition-info'>
 				<span className='nutrition-info-calories'>Calories: {NF['nf_calories']}</span>
@@ -29,4 +35,3 @@ const NutritionCounter = ({meals,foods}) => {
 		);
 }
 
-export default NutritionCounter
