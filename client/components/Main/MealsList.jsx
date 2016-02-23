@@ -1,27 +1,13 @@
 import React from 'react';
-import Food from './Food.jsx';
+import Meal from './Meal.jsx';
+import { connect } from 'react-redux';
+import NutritionCounter from './NutritionCounter.jsx';
 
-let MealsList = ({meals, foods}) => {
 
+const MealsList = ({meals, foods}) => {	
 	return (
 		<div className='meals-list'>
-			{meals.map(meal => {
-				return (
-				<div className='meal-element'>
-					<div className='meal-title'>{meal.createdAt}</div>
-					{_.keys(meal.foods).map((foodId) => {
-						let name = foods[foodId]['item_name'];
-						return (
-							<div className='food-entry'>
-								<span className='num-eaten'>{meal.foods[foodId]}</span>
-								<Food name={name} key={foodId} />
-							</div>
-							);
-						})
-					}
-				</div>
-				);
-			})}
+		{meals.map(meal => <Meal meal={meal} foods={foods} />)}	
 		</div>
 
 	);

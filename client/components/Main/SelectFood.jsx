@@ -1,7 +1,7 @@
 import React from 'react';
 import Food from './Food.jsx';
 
-const SelectFood = ({selectedFoods, removeFood, user, sendMeal}) => {
+const SelectFood = ({selectedFoods, removeFood, user, sendMeal, sendFoodItems}) => {
   let timesEaten = [];
 
   let removeSelectedFood = (food) => {
@@ -10,22 +10,25 @@ const SelectFood = ({selectedFoods, removeFood, user, sendMeal}) => {
 
   let submitMeal = (e) => {
     e.preventDefault();
-    console.log('user: ', user);
+
     let meals = {
       eatenAt: Date.now(),
       eatenBy: user.userInfo.username,
       foodsEaten: {}
     };
+    let newFoodIds = [];
+
     (_.values(selectedFoods).forEach((food, index) => {
       meals.foodsEaten[food.item_id] = timesEaten[index].value;
+      if(!(food.item_id in user.foods)) {
+        newFoodIds.push(food.item_id);
+      }
     }));
-    $.post( "/meals", {"meal": meals})
-      .done(function(res) {
-        sendMeal(meals);
-      })
-      .fail(function(res) {
-        console.log('error: ', res);
-      });
+
+    sendMeal(meals);
+    sendFoodItems(newFoodIds);
+    _.values(selectedFoods).forEach(removeSelectedFood);
+
   }
 
   let selectedFoodsDisplay = _.isEmpty(selectedFoods) ?

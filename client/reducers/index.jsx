@@ -1,16 +1,16 @@
 import { combineReducers } from 'redux'
 
 const configureUser = (state = null, action) => {
-	window.statePeek = state;
 	switch(action.type) {
 		case 'SET_USER':
-			console.log('changing state user to ' + JSON.stringify(action.userObj));
 			return action.userObj === "Invalid User" ? state : action.userObj;
 		case 'SET_MEAL':
 		  let mealsArr = state.meals.concat(action.meal);
 			return Object.assign({}, state, {meals: mealsArr});
+    case 'ADD_FOOD_ID':
+      let totalFoods = Object.assign({}, state.foods, action.foodIds);
+      return Object.assign({}, state, {foods: totalFoods});
 		default:
-			console.log('default triggered');
 			return state;
 	}
 }

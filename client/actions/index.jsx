@@ -39,3 +39,10 @@ export const setMeal = (meal) => {
     meal
   }
 }
+
+export const addFoodIds = (foodIds) => {
+  return {
+    type: 'ADD_FOOD_ID',
+    foodIds
+  }
+}

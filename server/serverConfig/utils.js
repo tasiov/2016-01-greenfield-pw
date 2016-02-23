@@ -4,8 +4,8 @@ var request = require('request');
 var Promise = require('bluebird');
 var bcrypt = require('bcrypt');
 var creds = {
-  appId: "faf1bee4",
-  appKey: "ee1bb6aa1dc012b58a06a7fd14ddbef1",
+  appId: "19dc5ef3",
+  appKey: "1caac1145c265164258e31800a83e01c",
 }
 var Users = require('../models/users');
 var Meals = require('../models/meals');
@@ -53,8 +53,6 @@ module.exports.checkUser = function(username, password, callback) {
 	Users.find({username:username}, function(err, foundUser){
 		if(Array.isArray(foundUser) && foundUser.length !== 0){
       for(var i = 0; i < foundUser.length; i++){
-        console.log(bcrypt.compareSync(password, foundUser[i].password), bcrypt.hashSync(password, 10 ), foundUser[i].password)
-        
         if (bcrypt.compareSync(password, foundUser[i].password)){
 			     callback(null,foundUser);
            return;
@@ -113,15 +111,13 @@ module.exports.sendUserStateInfo = function(username, callback) {
         .then(function(results){
             var mapIdsToFoods = {};
             results[1].forEach( function(meal) {
-              for (var id in meal.foods) {
-                if(!(id in mapIdsToFoods)) {
-                  mapIdsToFoods[id] = module.exports.getFoodItemAsync(id);
-                }
-              }
+              _.keys(meal.foodsEaten).forEach( function(foodId, index) {
+                mapIdsToFoods[foodId] = module.exports.getFoodItemAsync(foodId);
+              });
             });
-
             Promise.props(mapIdsToFoods)
-            .then(function(foods) {
+            .then(function(foodStrings) {
+              var foods = _.mapValues(foodStrings, JSON.parse);
               var infoObj = {
                   userInfo: _.omit(results[0][0], ['password','salt']),
                   meals: results[1],

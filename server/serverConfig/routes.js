@@ -4,6 +4,11 @@ Promise.promisifyAll(utils);
 
 
 module.exports = function(app, express) {
+
+	app.get('/', function(req, res) {
+		res.redirect('/index.html');
+	});
+
 	app.post('/login', function(req, res) {
 		utils.checkUserAsync(req.body.username, req.body.password)
 		.then(function(result) {
@@ -20,10 +25,17 @@ module.exports = function(app, express) {
 		})
 	});
 
-
-	app.get('/', function(req, res) {
-		res.redirect('/index.html');
+	app.get('/login', function(req, res) {
+		if(req.session.user) {
+			utils.sendUserStateInfoAsync(req.session.user)
+			.then(function(infoObj) {
+				res.send(infoObj);
+			});
+		} else {
+			res.send('Invalid User');
+		}
 	});
+
 
 	app.post('/signup', function(req, res) {
 	    utils.makeNewUserAsync(req.body.username, req.body.password)
@@ -39,17 +51,6 @@ module.exports = function(app, express) {
 	    .catch(function(err) {
 	        res.send('error ' + err);
 	    })
-	});
-
-	app.get('/login', function(req, res) {
-		if(req.session.user) {
-			utils.sendUserStateInfoAsync(req.session.user)
-			.then(function(infoObj) {
-				res.send(infoObj);
-			});
-		} else {
-			res.send('Invalid User');
-		}
 	});
 
 	app.get('/logout', function(req, res) {
@@ -96,4 +97,17 @@ module.exports = function(app, express) {
 			res.send('error ' + err);
 		});
 	});
+
+  app.post('/food_id', function(req, res) {
+  	console.log(req.body);
+    if (!req.body['food_id']) return res.send('Invalid id');
+    var id = req.body['food_id'].trim();
+    utils.getFoodItemAsync(id)
+    .then(function(foodItem) {
+      res.send(foodItem)
+    })
+    .catch(function(err) {
+      res.send('error ' + err);
+    });
+  });
 }
