@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 const NutritionCounter = ({meals,foods}) => {
+	console.log(Array.isArray(meals));
+	console.log('meals in NF', meals);
 	const start = {
 		nf_calories: 0,
 		nf_protein: 0,
@@ -9,14 +11,18 @@ const NutritionCounter = ({meals,foods}) => {
 		nf_total_fat: 0
 	}
 
-	const mergeFunc = (prev, val) => (prev || 0) + (next || 0);
-	
+	const mergeFunc = (dest, source1, source2) => (dest || 0) + (source1 || 0) + (source2 || 0);
+	window.mergeFunc = mergeFunc;
 	let NF = meals.reduce((mealSum, meal) => {
-		let currMeal = _.transform(meal.foods, (foodSum, foodId, timesEaten) => {
-			let foodNFstats = _.pick(foods[id], Object.keys(start));
+		let currMeal = _.transform(meal.foodsEaten, (foodSum, timesEaten, foodId) => {
+			let foodNFstats = _.pick(foods[foodId], Object.keys(start));
 			let foodNFtotals = _.mapValues(foodNFstats, val => timesEaten * val || 0);
-			return _.mergeWith({}, foodNFtotals, foodSum, mergeFunc);
+			console.log('totals are', foodNFtotals);
+			console.log('foodSum is', foodSum);
+			let newSum = _.mergeWith({}, foodNFtotals, foodSum, mergeFunc);
+			return newSum;
 		}, start);
+		console.log('currMeal is', currMeal);
 		return _.mergeWith({}, currMeal, mealSum, mergeFunc);
 	}, start);
 

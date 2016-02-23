@@ -1,6 +1,7 @@
 import React from 'react';
 import Food from './Food.jsx';
 import { connect } from 'react-redux';
+import NutritionCounter from './NutritionCounter.jsx';
 
 
 let MealsList = ({meals, foods}) => {
@@ -22,9 +23,10 @@ let MealsList = ({meals, foods}) => {
 							);
 						})
 					}
+				<NutritionCounter meals={[meal]} foods={foods} />
 				</div>
 				);
-			})}
+			})}	
 		</div>
 
 	);
