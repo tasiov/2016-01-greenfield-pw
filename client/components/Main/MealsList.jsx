@@ -8,7 +8,7 @@ let MealsList = ({meals, foods}) => {
 			{meals.map(meal => {
 				return (
 				<div className='meal-element'>
-					<div className='meal-title'>{meal.createdAt}</div> 
+					<div className='meal-title'>{meal.createdAt}</div>
 					{_.keys(meal.foods).map((foodId) => {
 						let name = foods[foodId]['item_name'];
 						return (
