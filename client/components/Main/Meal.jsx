@@ -1,0 +1,27 @@
+import React from 'react';
+import Food from './Food.jsx';
+import NutritionCounter from './NutritionCounter.jsx'
+
+const Meal = ({meal, foods}) => {
+	console.log('in meal and rendering ', meal);
+	console.log('foods are ', foods);
+
+	return (
+	<div className='meal-element'>
+		<div className='meal-title'>{meal.createdAt}</div>
+		{_.keys(meal.foodsEaten).map((foodId) => {
+			let name = foods[foodId]['item_name'];
+			return (
+				<div className='food-entry'>
+					<span className='num-eaten'>{meal.foodsEaten[foodId]}</span>
+					<Food name={name} key={foodId} />
+				</div>
+				);
+			})
+		}
+	<NutritionCounter meals={[meal]} foods={foods} />
+	</div>
+	);
+}
+
+export default Meal

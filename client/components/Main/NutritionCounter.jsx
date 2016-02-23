@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 const NutritionCounter = ({meals,foods}) => {
 	console.log(Array.isArray(meals));
 	console.log('meals in NF', meals);
-	const start = {
+	let start = {
 		nf_calories: 0,
 		nf_protein: 0,
 		nf_total_carbohydrate: 0,
@@ -19,11 +19,10 @@ const NutritionCounter = ({meals,foods}) => {
 			let foodNFtotals = _.mapValues(foodNFstats, val => timesEaten * val || 0);
 			console.log('totals are', foodNFtotals);
 			console.log('foodSum is', foodSum);
-			let newSum = _.mergeWith({}, foodNFtotals, foodSum, mergeFunc);
-			return newSum;
+			return _.mapValues(foodNFtotals, (sum, key) => foodNFtotals[key] + foodSum[key]);
 		}, start);
 		console.log('currMeal is', currMeal);
-		return _.mergeWith({}, currMeal, mealSum, mergeFunc);
+		return _.mapValues(currMeal, (sum, key) => currMeal[key] + mealSum[key]);
 	}, start);
 
 	return (
