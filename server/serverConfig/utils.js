@@ -53,8 +53,6 @@ module.exports.checkUser = function(username, password, callback) {
 	Users.find({username:username}, function(err, foundUser){
 		if(Array.isArray(foundUser) && foundUser.length !== 0){
       for(var i = 0; i < foundUser.length; i++){
-        console.log(bcrypt.compareSync(password, foundUser[i].password), bcrypt.hashSync(password, 10 ), foundUser[i].password)
-        
         if (bcrypt.compareSync(password, foundUser[i].password)){
 			     callback(null,foundUser);
            return;
@@ -119,7 +117,6 @@ module.exports.sendUserStateInfo = function(username, callback) {
                 }
               }
             });
-
             Promise.props(mapIdsToFoods)
             .then(function(foods) {
               var infoObj = {
