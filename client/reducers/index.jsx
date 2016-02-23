@@ -3,9 +3,12 @@ import { combineReducers } from 'redux'
 const configureUser = (state = null, action) => {
 	window.statePeek = state;
 	switch(action.type) {
-		case 'SET_USER':	
+		case 'SET_USER':
 			console.log('changing state user to ' + JSON.stringify(action.userObj));
 			return action.userObj === "Invalid User" ? state : action.userObj;
+		case 'SET_MEALS':
+		  let mealsArr = state.meals.concat(action.meals);
+			return Object.assign({}, state, {meals: mealsArr});
 		default:
 			console.log('default triggered');
 			return state;
@@ -45,21 +48,11 @@ const configureFood = (state = {}, action) => {
 	}
 }
 
-const configureMeals = (state = [], action) => {
-	switch(action.type) {
-		case 'SET_MEALS':
-			return state.userObj.meals.concat(action.meals);
-		default:
-			return state;
-	}
-}
-
 const foodAppHandler = combineReducers({
 	user: configureUser,
 	page: configurePage,
 	foodQueries: configureSearch,
-	selectedFoods: configureFood,
-	userMeals: configureMeals
+	selectedFoods: configureFood
 });
 
 export default foodAppHandler;
