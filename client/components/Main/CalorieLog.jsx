@@ -6,7 +6,7 @@ const CalorieLog = ({user}) => {
 	let mealsByDate = _.groupBy(user.meals, (meal) => meal.createdAt);
 	return (
 			<div className='calorie-log'>
-			{_.values(mealsByDate).map((meals) => <MealsList meals={meals} foods={user.foods}/> )}        
+			{_.values(mealsByDate).map((meals) => <MealsList meals={meals} foods={user.foods}/> )}
 			</div>
 		);
 }
