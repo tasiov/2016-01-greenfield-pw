@@ -46,3 +46,9 @@ export const addFoodIds = (foodIds) => {
     foodIds
   }
 }
+
+export const removeUser = () => {
+  return {
+    type: 'REMOVE_USER'
+  }
+}
