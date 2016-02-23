@@ -59,7 +59,7 @@ module.exports.checkUser = function(username, password, callback) {
            return;
         }
       }
-      callback(err, null);
+      callback({message: 'password invalid'}, null);
 		} else {
 			callback(err, null);
 		}
@@ -122,7 +122,7 @@ module.exports.sendUserStateInfo = function(username, callback) {
             Promise.props(mapIdsToFoods)
             .then(function(foods) {
               var infoObj = {
-                  userInfo: _.omit(results[0][0], 'password'),
+                  userInfo: _.omit(results[0][0], ['password','salt']),
                   meals: results[1],
                   foods: foods
               };
@@ -138,5 +138,6 @@ module.exports.sendUserStateInfo = function(username, callback) {
             callback(err, null);
         });
 };
+
 
 

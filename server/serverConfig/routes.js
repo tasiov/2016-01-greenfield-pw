@@ -7,14 +7,13 @@ module.exports = function(app, express) {
 	app.post('/login', function(req, res) {
 		utils.checkUserAsync(req.body.username, req.body.password)
 		.then(function(result) {
-			if(result) {
-				req.session.regenerate(function() {
-					req.session.user = req.body.username;
-					res.send('You passed');
-				})
-			} else {
-				return res.send('Invalid Password');
-			}
+			req.session.regenerate(function() {
+				req.session.user = req.body.username;
+				utils.sendUserStateInfoAsync(req.body.username)
+				.then(function(userObj) {
+					res.send(userObj);
+				});
+			})
 		})
 		.catch(function(err) {
 			res.send('error ' + err);
@@ -31,7 +30,10 @@ module.exports = function(app, express) {
 	    .then(function(result) {
 	        req.session.regenerate(function() {
 	            req.session.user = req.body.username;
-	            res.send(result);
+	            utils.sendUserStateInfoAsync(req.body.username)
+	            .then(function(infoObj) {
+	            	res.send(infoObj);
+	            });
 	        })
 	    })
 	    .catch(function(err) {
