@@ -1,10 +1,13 @@
 import { combineReducers } from 'redux'
 
 const configureUser = (state = null, action) => {
+	window.statePeek = state;
 	switch(action.type) {
-		case 'SET_USER':
+		case 'SET_USER':	
+			console.log('changing state user to ' + JSON.stringify(action.userObj));
 			return action.userObj === "Invalid User" ? state : action.userObj;
 		default:
+			console.log('default triggered');
 			return state;
 	}
 }

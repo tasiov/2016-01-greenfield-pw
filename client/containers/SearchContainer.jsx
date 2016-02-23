@@ -21,7 +21,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             let fields = foodEntry['fields'];
             foodObjs[id] = fields;
           });
-          console.log(foodObjs)
           dispatch(setSearchResults(foodObjs));
         })
         .fail(function(res) {

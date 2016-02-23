@@ -7,7 +7,6 @@ import { changePage } from '../../actions/index.jsx';
 let NavButton = ({dispatch, children, show}) => {
 	let changeMainPage = () => {
     dispatch(changePage(show));
-    console.log('changed page to ', show)
   }
 	
 	return (

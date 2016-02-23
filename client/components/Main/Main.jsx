@@ -7,13 +7,13 @@ import Summary from './Summary.jsx';
 const Main = ({page, user}) => {
   let currentPage;
   if(page === 'Summary') {
-    currentPage = <Summary />;
+    currentPage = <Summary user={user} />;
   } else if(page === 'CalorieLog') {
-    currentPage = <CalorieLog />;
+    currentPage = <CalorieLog user={user} />;
   } else if(page === 'RecordMeals') {
-    currentPage = <RecordMeals />;
+    currentPage = <RecordMeals user={user} />;
   } else {
-    currentPage = <Summary />;
+    currentPage = <Summary user={user} />;
   }
 
   return (

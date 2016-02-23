@@ -8,9 +8,9 @@ let Login = ({ dispatch, change}) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    $.post( "/login", {username: "username", password: "password"})
+    $.post( "/login", {username: username.value, password: password.value})
       .done(function(res) {
-        dispatch(setUser({username: "username", password: "password"}));
+        dispatch(setUser(res));
       })
       .fail(function(res) {
         console.log('error: ', res);
@@ -45,26 +45,3 @@ Login = connect()(Login)
 
 export default Login
 
-
-// const mapStateToProps = (state) => {
-//   return {
-//     user: state.user
-//   }
-// }
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     handleSubmit: (e, username, password) => {
-//       e.preventDefault();
-//       console.log('username: ', username);
-//       console.log('password: ', password);
-//       $.post( "/login", {username: "username", password: "password"})
-//         .done(function(res) {
-//           dispatch(setUser({username: "username", password: "password"}));
-//         })
-//         .fail(function(res) {
-//           console.log('error: ', res);
-//         })
-//     }
-//   }
-// }
