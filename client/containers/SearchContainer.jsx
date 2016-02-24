@@ -14,8 +14,11 @@ const mapDispatchToProps = (dispatch) => {
     queryFoods: (query) => {
       $.post( "/search", {"query": query})
         .done(function(res) {
-          if (typeof res === "string") res = JSON.parse(res);
-          let foodObjs = {}
+          console.log('res: ', res.body);
+          if (typeof res === "string") {
+            res = JSON.parse(res);
+          }
+          let foodObjs = {};
           res.hits.forEach( (foodEntry) => {
             let id = foodEntry['_id'];
             let fields = foodEntry['fields'];
@@ -24,6 +27,7 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(setSearchResults(foodObjs));
         })
         .fail(function(res) {
+          console.log('post failure');
           console.log('error: ', res);
         });
     },
