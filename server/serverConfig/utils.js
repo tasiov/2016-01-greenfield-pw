@@ -36,7 +36,6 @@ module.exports.getFoodItem = function(id, callback) {
   Foods.find({'item_id':id})
   .then(function(foundFood) {
     if(foundFood.length !== 0) {
-      console.log('found_food');
       callback(null, foundFood[0]['JSON_result']);
     } else {
       var nutritionUrl = 'http://api.nutritionix.com/v1_1/item';
@@ -49,7 +48,6 @@ module.exports.getFoodItem = function(id, callback) {
         } else {
           Foods.create({'item_id': id, 'JSON_result': body}, function(err, newFood) { //create new user if not found.
             if (newFood) {
-              console.log('created food', newFood);
               callback( null, newFood['JSON_result']);
             } else {
               callback( err, null );
@@ -135,7 +133,6 @@ module.exports.sendUserStateInfo = function(username, callback) {
             });
             Promise.props(mapIdsToFoods)
             .then(function(foodStrings) {
-              console.log(foodStrings);
               var foods = _.mapValues(foodStrings, JSON.parse);
               var infoObj = {
                   userInfo: _.omit(results[0][0], ['password','salt']),
@@ -145,7 +142,6 @@ module.exports.sendUserStateInfo = function(username, callback) {
               callback(null, infoObj);
             })
             .catch(function(err) {
-              console.log('err querying for food');
               callback(err, null);
             });
 
