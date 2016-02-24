@@ -89,6 +89,7 @@ module.exports = function(app, express) {
 	});
 
 	app.post('/search', function(req, res) {
+		console.log('query req: ', req.body);
 		if (!req.body.query) return res.send('Invalid query');
 		var query = req.body.query.trim();
 		utils.getSearchResponseAsync(query)
