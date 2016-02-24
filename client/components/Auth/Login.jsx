@@ -1,10 +1,19 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { setUser } from '../../actions/index.jsx';
+import Paper from 'material-ui/lib/paper';
 
 let Login = ({ dispatch, change}) => {
   let username;
   let password;
+
+  const style = {
+    height: 200,
+    width: 300,
+    margin: '150px auto',
+    textAlign: 'center',
+    fontFamily: 'Roboto'
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -24,19 +33,20 @@ let Login = ({ dispatch, change}) => {
 
   return (
     <div className="login-card">
-      <h1>Login</h1>
-      <br/>
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="username" placeholder="Username" ref={(ref) => username = ref} />
+      <Paper style={style} zDepth={2}>
+        <h1 className="login-header">Login</h1>
         <br/>
-        <input type="password" name="password" placeholder="Password" ref={(ref) => password = ref} />
-        <br/>
-        <input type="submit" />
-      </form>
-
-      <div className="login-help">
-        <a href="#" onClick= {changePage} >Signup</a>
-      </div>
+        <form onSubmit={handleSubmit}>
+          <input type="text" name="username" placeholder="Username" ref={(ref) => username = ref} />
+          <br/>
+          <input type="password" name="password" placeholder="Password" ref={(ref) => password = ref} />
+          <br/>
+          <input type="submit" />
+        </form>
+        <div className="login-help">
+          <a href="#" onClick= {changePage} >Signup</a>
+        </div>
+      </Paper>
     </div>
   )
 }
