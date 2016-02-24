@@ -12,7 +12,7 @@ const NavBar = ({user}) => {
 		<div className="nav-bar">
 				<Tabs>
 					<Tab label="Summary">
-						<Summary user={user} />
+						// <Summary user={user} />
 					</Tab>
 					<Tab label="Calorie Log">
 						<CalorieLog user={user} />
