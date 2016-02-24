@@ -33,7 +33,7 @@ const Main = ({user, logoutUser}) => {
         </Avatar>
         }
       />
-      <NavBar user={{user}} />
+      <NavBar user={user}/>
     </div>
     );
         // {currentPage}
