@@ -9,6 +9,7 @@ var creds = {
 }
 var Users = require('../models/users');
 var Meals = require('../models/meals');
+var Foods = require('../models/foods');
 var _ = require('lodash');
 
 Promise.promisifyAll(fs);
@@ -32,18 +33,35 @@ module.exports.getSearchResponse = function(query, callback) {
 };
 
 module.exports.getFoodItem = function(id, callback) {
-  var nutritionUrl = 'http://api.nutritionix.com/v1_1/item';
-  request({
-    url: nutritionUrl,
-    qs: Object.assign({}, creds, {id:id}),
-  },
-  function(error, response, body) {
-    if(error) {
-      callback(error, null);
+  Foods.find({'item_id': id}, function(err, foundFood) {
+    if(err) {
+      console.log('error finding stuff');
+      callback(err, null);
+    } else if(foundFood.length !== 0) {
+      callback(null, foundFood[0]);
     } else {
-      callback(null, body);
+      console.log('about to query api');
+      var nutritionUrl = 'http://api.nutritionix.com/v1_1/item';
+      request({
+        url: nutritionUrl,
+        qs: Object.assign({}, creds, {id:id}),
+      }, function(error, response, body) {
+        if(error) {
+          callback(error, null);
+        } else {
+          console.log('about to parse ', body);
+          Foods.create(JSON.parse(body), function(err, newFood) { //create new user if not found.
+            if (newFood) {
+              callback( null, newFood);
+            } else {
+              callback( err, null );
+            }
+          });
+        }
+      })
     }
-  });
+  })
+
 };
 
 module.exports.getFoodItemAsync = Promise.promisify(module.exports.getFoodItem);
@@ -116,8 +134,7 @@ module.exports.sendUserStateInfo = function(username, callback) {
               });
             });
             Promise.props(mapIdsToFoods)
-            .then(function(foodStrings) {
-              var foods = _.mapValues(foodStrings, JSON.parse);
+            .then(function(foods) {
               var infoObj = {
                   userInfo: _.omit(results[0][0], ['password','salt']),
                   meals: results[1],

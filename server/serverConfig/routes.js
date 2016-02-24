@@ -106,6 +106,7 @@ module.exports = function(app, express) {
     var id = req.body['food_id'].trim();
     utils.getFoodItemAsync(id)
     .then(function(foodItem) {
+    	console.log(foodItem);
       res.send(foodItem)
     })
     .catch(function(err) {
