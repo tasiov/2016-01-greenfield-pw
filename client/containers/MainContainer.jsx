@@ -13,10 +13,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     logoutUser: () => {
-      console.log("Logout fired");
       $.get('/logout')
       .done((res) => {
-        console.log("User Removed")
         dispatch(removeUser());
       })
       .fail((res) => {
