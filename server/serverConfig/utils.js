@@ -33,14 +33,12 @@ module.exports.getSearchResponse = function(query, callback) {
 };
 
 module.exports.getFoodItem = function(id, callback) {
-  Foods.find({'item_id': id}, function(err, foundFood) {
-    if(err) {
-      console.log('error finding stuff');
-      callback(err, null);
-    } else if(foundFood.length !== 0) {
-      callback(null, foundFood[0]);
+  Foods.find({'item_id':id})
+  .then(function(foundFood) {
+    if(foundFood.length !== 0) {
+      console.log('found_food');
+      callback(null, foundFood[0]['JSON_result']);
     } else {
-      console.log('about to query api');
       var nutritionUrl = 'http://api.nutritionix.com/v1_1/item';
       request({
         url: nutritionUrl,
@@ -49,10 +47,10 @@ module.exports.getFoodItem = function(id, callback) {
         if(error) {
           callback(error, null);
         } else {
-          console.log('about to parse ', body);
-          Foods.create(JSON.parse(body), function(err, newFood) { //create new user if not found.
+          Foods.create({'item_id': id, 'JSON_result': body}, function(err, newFood) { //create new user if not found.
             if (newFood) {
-              callback( null, newFood);
+              console.log('created food', newFood);
+              callback( null, newFood['JSON_result']);
             } else {
               callback( err, null );
             }
@@ -61,7 +59,9 @@ module.exports.getFoodItem = function(id, callback) {
       })
     }
   })
-
+  .catch(function(err) {
+    callback(err, null);
+  });
 };
 
 module.exports.getFoodItemAsync = Promise.promisify(module.exports.getFoodItem);
@@ -134,7 +134,9 @@ module.exports.sendUserStateInfo = function(username, callback) {
               });
             });
             Promise.props(mapIdsToFoods)
-            .then(function(foods) {
+            .then(function(foodStrings) {
+              console.log(foodStrings);
+              var foods = _.mapValues(foodStrings, JSON.parse);
               var infoObj = {
                   userInfo: _.omit(results[0][0], ['password','salt']),
                   meals: results[1],
