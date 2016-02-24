@@ -9,6 +9,7 @@ var creds = {
 }
 var Users = require('../models/users');
 var Meals = require('../models/meals');
+var Foods = require('../models/foods');
 var _ = require('lodash');
 
 Promise.promisifyAll(fs);
@@ -32,17 +33,32 @@ module.exports.getSearchResponse = function(query, callback) {
 };
 
 module.exports.getFoodItem = function(id, callback) {
-  var nutritionUrl = 'http://api.nutritionix.com/v1_1/item';
-  request({
-    url: nutritionUrl,
-    qs: Object.assign({}, creds, {id:id}),
-  },
-  function(error, response, body) {
-    if(error) {
-      callback(error, null);
+  Foods.find({'item_id':id})
+  .then(function(foundFood) {
+    if(foundFood.length !== 0) {
+      callback(null, foundFood[0]['JSON_result']);
     } else {
-      callback(null, body);
+      var nutritionUrl = 'http://api.nutritionix.com/v1_1/item';
+      request({
+        url: nutritionUrl,
+        qs: Object.assign({}, creds, {id:id}),
+      }, function(error, response, body) {
+        if(error) {
+          callback(error, null);
+        } else {
+          Foods.create({'item_id': id, 'JSON_result': body}, function(err, newFood) { //create new user if not found.
+            if (newFood) {
+              callback( null, newFood['JSON_result']);
+            } else {
+              callback( err, null );
+            }
+          });
+        }
+      })
     }
+  })
+  .catch(function(err) {
+    callback(err, null);
   });
 };
 
@@ -126,7 +142,6 @@ module.exports.sendUserStateInfo = function(username, callback) {
               callback(null, infoObj);
             })
             .catch(function(err) {
-              console.log('err querying for food');
               callback(err, null);
             });
 
