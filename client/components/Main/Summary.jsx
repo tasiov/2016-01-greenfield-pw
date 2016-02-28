@@ -5,10 +5,10 @@ import {Pie} from 'react-chartjs';
 const Summary = ({user}) => {
 	if(Array.isArray(user.meals) && user.meals.length !== 0) {
 
+		let dateFunctions = ['getDate', 'getMonth', 'getFullYear'];
 
 		let mealsByDate = _.transform(user.meals,(result, meal) => {
 			let mealDate = new Date(meal.eatenAt);
-			let dateFunctions = ['getDate', 'getMonth', 'getFullYear'];
 			let dateString = dateFunctions.map(func => mealDate[func]()).join('-');
 			result[dateString] = result[dateString] || [];
 			result[dateString].push(meal);
@@ -24,12 +24,7 @@ const Summary = ({user}) => {
 		let NFpercAvgMass = _.mapValues(NFdailyAvg, (gramAvg) => (gramAvg/gramAvgSum*100));
 		delete NFpercAvgMass['nf_calories'];
 
-		let currMeals = user.meals.filter((meal) => {
-			let mealDate = new Date(meal.eatenAt);
-			let currDate = new Date(Date.now());
-			let dateFunctions = ['getDate', 'getMonth', 'getFullYear'];
-			return dateFunctions.reduce( (prev, func) => prev && (mealDate[func]() === currDate[func]()), true);
-		});
+		let currMeals = mealsByDate[dateFunctions.map(func => (new Date())[func]()).join('-')];
 		let currDaySum = getNutritionInfo(currMeals, user.foods);
 		let currDayGramSum = currDaySum['nf_protein'] + currDaySum['nf_total_carbohydrate'] + currDaySum['nf_total_fat'];
 		let currDayPerc = _.mapValues(currDaySum, (gramAvg) => (gramAvg/currDayGramSum*100));
