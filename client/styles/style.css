@@ -10,3 +10,15 @@
   clear: both;
   *zoom: 1;
 }
+
+.summary {
+  position: relative;
+  display: block;
+  text-align: center;
+  left: 17%;
+  width: 66%;
+}
+
+.pie-chart-legend > ul {
+  list-style: none;
+}

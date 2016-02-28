@@ -9,9 +9,9 @@ const Meal = ({meal, foods}) => {
 		{_.keys(meal.foodsEaten).map((foodId) => {
 			let name = foods[foodId]['item_name'];
 			return (
-				<div className='food-entry'>
+				<div className='food-entry' key={foodId}>
 					<span className='num-eaten'>{meal.foodsEaten[foodId]}</span>
-					<Food name={name} key={foodId} />
+					<Food name={name}  />
 				</div>
 				);
 			})
