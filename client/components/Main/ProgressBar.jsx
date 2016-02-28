@@ -2,9 +2,8 @@ import React from 'react';
 import {Line} from 'react-chartjs';
 
 
-const ProgressBar = ({datedNutr}) => {
-	let timeWindow = 7;
-	let filters = ['nf_protein', 'nf_total_fat'];
+const ProgressBar = ({datedNutr, timeWindow, setTime, setFilter, filter}) => {
+	let filters = [filter];
 	let RGBfillColors = ['rgba(220,220,220,0.2)', 'rgba(151,187,205,0.2)', 
 											'rgba(120,100,145,0.2)', 'rgba(170,220,190,0.2)'];
 	let RGBstrokeColors = ['rgba(220,220,220,1)', 'rgba(151,187,205,1)', 
@@ -53,10 +52,25 @@ const ProgressBar = ({datedNutr}) => {
 	return (
 		<div>
 			<Line data={lineChartData} options={chartOptions}/>
+			<div className ='filters'>
+				<div className ='time-filters'>
+					<button onClick={setTime.bind(this,7)}>7-days</button>
+					<button onClick={setTime.bind(this,14)}>14-days</button>
+					<button onClick={setTime.bind(this,30)}>30-days</button>
+					<button onClick={setTime.bind(this,60)}>60-days</button>
+					<button onClick={setTime.bind(this,90)}>90-days</button>
+				</div>
+				<div className ='nutr-filters'>
+					<button onClick={setFilter.bind(this,'nf_calories')}>Calories/day</button>
+					<button onClick={setFilter.bind(this,'nf_protein')}>Protein g/day</button>
+					<button onClick={setFilter.bind(this,'nf_total_carbohydrate')}>Carbs g/day</button>
+					<button onClick={setFilter.bind(this,'nf_total_fat')}>Fat g/day</button>
+				</div>
+			</div>
 		</div>
 		)
 
-
 }
+
 
 export default ProgressBar;

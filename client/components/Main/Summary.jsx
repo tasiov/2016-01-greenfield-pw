@@ -1,7 +1,7 @@
 import React from 'react';
 import {getNutritionInfo} from './NutritionCounter.jsx';
 import MacroPieChart from './MacroPieChart.jsx';
-import ProgressBar from './ProgressBar.jsx';
+import ProgressBarContainer from '../../containers/ProgressBarContainer.jsx';
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
 import Divider from 'material-ui/lib/divider';
@@ -28,6 +28,7 @@ const Summary = ({user}) => {
 
 		return (
 				<div className = 'summary'>
+					<div className = 'current-day-summary'>
 					<List subheader="Today's Nutrition Info">
 						<ListItem primaryText="Calories Consumed Today:" secondaryText= {currDaySum['nf_calories']} />
 						<Divider insert={true} />
@@ -39,7 +40,9 @@ const Summary = ({user}) => {
 						<Divider insert={true} />
 					</List>
 					<MacroPieChart macroPercents={currDayPerc} />	
+					</div>
 					<br></br>
+					<div className = 'nutr-average-summary'>
 					<List subheader="Daily Nutrition Averages">
 						<ListItem primaryText="Daily Calorie consumption:" secondaryText= {NFdailyAvg['nf_calories']}/>
 						<Divider insert={true} />
@@ -48,8 +51,9 @@ const Summary = ({user}) => {
 						<ListItem primaryText="Daily Carbohydrate Consumption:" secondaryText= {NFdailyAvg['nf_total_carbohydrate']}/>
 						<Divider insert={true} />
 						<ListItem primaryText="Daily Fat Consumption:" secondaryText= {NFdailyAvg['nf_total_fat']}/>
-					<ProgressBar datedNutr={nutrByDate} />
+					<ProgressBarContainer datedNutr={nutrByDate} />
 					</List>
+					</div>
 				</div>
 			);
 
