@@ -26,8 +26,7 @@ const Summary = ({user}) => {
 		let NFpercAvgMass = _.mapValues(NFdailyAvg, (gramAvg) => (gramAvg/gramAvgSum*100));
 		delete NFpercAvgMass['nf_calories'];
 
-		let currMeals = mealsByDate[dateFunctions.map(func => (new Date())[func]()).join('-')];
-		let currDaySum = getNutritionInfo(currMeals, user.foods);
+		let currDaySum = nutrByDate[dateFunctions.map(func => (new Date())[func]()).join('-')];
 		let currDayGramSum = currDaySum['nf_protein'] + currDaySum['nf_total_carbohydrate'] + currDaySum['nf_total_fat'];
 		let currDayPerc = _.mapValues(currDaySum, (gramAvg) => (gramAvg/currDayGramSum*100));
 		delete currDayPerc['nf_calories'];
