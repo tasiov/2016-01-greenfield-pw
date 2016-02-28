@@ -7,17 +7,17 @@ const MacroPieChart = ({macroPercents, options}) => {
 			value: macroPercents['nf_protein'],
 			color: '#F7464A',
 			highlight: '#FF545E',
-			label: 'Protein %'
+			label: 'Protein'
 		}, {
 			value: macroPercents['nf_total_carbohydrate'],
 			color: '#46BFBD',
 			highlight: '#5Ad3D1',
-			label: 'Carbs %'
+			label: 'Carbs'
 		}, {
 			value: macroPercents['nf_total_fat'],
 			color: '#FDB45C',
 			highlight: '#FFC870',
-			label: 'Fat %'
+			label: 'Fat'
 	}];
 
 	let pieChartDefaults = {
