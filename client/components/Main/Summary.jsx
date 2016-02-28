@@ -4,6 +4,18 @@ import {Pie} from 'react-chartjs';
 
 const Summary = ({user}) => {
 	if(Array.isArray(user.meals) && user.meals.length !== 0) {
+
+
+		let mealsByDate = _.transform(user.meals,(result, meal) => {
+			let mealDate = new Date(meal.eatenAt);
+			let dateFunctions = ['getDate', 'getMonth', 'getFullYear'];
+			let dateString = dateFunctions.map(func => mealDate[func]()).join('-');
+			result[dateString] = result[dateString] || [];
+			result[dateString].push(meal);
+		}, {});
+
+		window.mealsByDate = mealsByDate;
+
 		let NFsum = getNutritionInfo(user.meals, user.foods);
 		let dateDiffMilli = new Date(Date.now()) - new Date(user.meals[0].eatenAt);
 		let dateDiffDays =  Math.ceil(dateDiffMilli / (24*60*60*1000));
@@ -16,7 +28,7 @@ const Summary = ({user}) => {
 			let mealDate = new Date(meal.eatenAt);
 			let currDate = new Date(Date.now());
 			let dateFunctions = ['getDate', 'getMonth', 'getFullYear'];
-			return dateFunctions.reduce( (prev, func) => prev && mealDate[func]() && currDate[func](), true);
+			return dateFunctions.reduce( (prev, func) => prev && (mealDate[func]() === currDate[func]()), true);
 		});
 		let currDaySum = getNutritionInfo(currMeals, user.foods);
 		let currDayGramSum = currDaySum['nf_protein'] + currDaySum['nf_total_carbohydrate'] + currDaySum['nf_total_fat'];
@@ -49,11 +61,10 @@ const Summary = ({user}) => {
 				animationEasing: 'easeOutBounce',
 				legendTemplate: '<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'
 		};
-	let pieChartLegend = (<ul>Current Day's Macronutrients
+		let pieChartLegend = (<ul>Current Day's Macronutrients
 													{pieChartData.map(data => <li><span style={{backgroundColor: data.color}}></span>{data.label}</li>)}
 												</ul>
 												);
-
 
 
 		return (
