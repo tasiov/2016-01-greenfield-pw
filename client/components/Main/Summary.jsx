@@ -48,7 +48,12 @@ const Summary = ({user}) => {
 				animationSteps: 100,
 				animationEasing: 'easeOutBounce',
 				legendTemplate: '<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'
-		}
+		};
+	let pieChartLegend = (<ul>Current Day's Macronutrients
+													{pieChartData.map(data => <li><span style={{backgroundColor: data.color}}></span>{data.label}</li>)}
+												</ul>
+												);
+
 
 
 		return (
@@ -61,6 +66,7 @@ const Summary = ({user}) => {
 					<p>% Daily Average of Carbs: {NFpercAvgMass['nf_total_carbohydrate']}</p>
 					<p>% Daily Average of Fat: {NFpercAvgMass['nf_total_fat']}</p>
 					<Pie data={pieChartData} options={pieChartOptions}/>
+					{pieChartLegend}
 					<br></br>
 					<p>Current Day % of Protein: {currDayPerc['nf_protein']}</p>
 					<p>Current Day % of Carbs: {currDayPerc['nf_total_carbohydrate']}</p>
