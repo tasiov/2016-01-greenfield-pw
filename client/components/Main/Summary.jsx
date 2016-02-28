@@ -5,8 +5,8 @@ import {Pie} from 'react-chartjs';
 const Summary = ({user}) => {
 	if(Array.isArray(user.meals) && user.meals.length !== 0) {
 		let NFsum = getNutritionInfo(user.meals, user.foods);
-		let dateDiffMilli = new Date(user.meals[user.meals.length - 1].eatenAt) - new Date(user.meals[0].eatenAt);
-		let dateDiffDays =  dateDiffMilli / (24*60*60*1000);
+		let dateDiffMilli = new Date(Date.now()) - new Date(user.meals[0].eatenAt);
+		let dateDiffDays =  Math.ceil(dateDiffMilli / (24*60*60*1000));
 		let NFdailyAvg = _.mapValues(NFsum, (sum) => (sum/dateDiffDays));
 		let gramAvgSum = NFdailyAvg['nf_protein'] + NFdailyAvg['nf_total_carbohydrate'] + NFdailyAvg['nf_total_fat'];
 		let NFpercAvgMass = _.mapValues(NFdailyAvg, (gramAvg) => (gramAvg/gramAvgSum*100));
@@ -39,7 +39,16 @@ const Summary = ({user}) => {
 				color: '#FDB45C',
 				highlight: '#FFC870',
 				label: 'Fat %'
-			}]
+			}];
+
+		let pieChartOptions = {
+				segmentShowStroke: true,
+				segmentStrokeColor: '#fff',
+				segmentStrokeWidth: 2,
+				animationSteps: 100,
+				animationEasing: 'easeOutBounce',
+				legendTemplate: '<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'
+		}
 
 
 		return (
@@ -51,7 +60,7 @@ const Summary = ({user}) => {
 					<p>% Daily Average of Protein: {NFpercAvgMass['nf_protein']}</p>
 					<p>% Daily Average of Carbs: {NFpercAvgMass['nf_total_carbohydrate']}</p>
 					<p>% Daily Average of Fat: {NFpercAvgMass['nf_total_fat']}</p>
-					<Pie data={pieChartData}/>
+					<Pie data={pieChartData} options={pieChartOptions}/>
 					<br></br>
 					<p>Current Day % of Protein: {currDayPerc['nf_protein']}</p>
 					<p>Current Day % of Carbs: {currDayPerc['nf_total_carbohydrate']}</p>
