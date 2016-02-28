@@ -13,13 +13,15 @@ const Summary = ({user}) => {
 			result[dateString] = result[dateString] || [];
 			result[dateString].push(meal);
 		}, {});
+		let nutrByDate = _.mapValues(mealsByDate, mealsArr => getNutritionInfo(mealsArr, user.foods));
+		let NFdailyAvg = _.values(nutrByDate).reduce( (prev, nutrObj, index) => {
+			return _.mergeWith(prev, nutrObj, (prevV, nutrV) => ((prevV || 0)*(index) + (nutrV || 0))/(index + 1));
+		});
 
-		window.mealsByDate = mealsByDate;
-
-		let NFsum = getNutritionInfo(user.meals, user.foods);
-		let dateDiffMilli = new Date(Date.now()) - new Date(user.meals[0].eatenAt);
-		let dateDiffDays =  Math.ceil(dateDiffMilli / (24*60*60*1000));
-		let NFdailyAvg = _.mapValues(NFsum, (sum) => (sum/dateDiffDays));
+		// let NFsum = getNutritionInfo(user.meals, user.foods);
+		// let dateDiffMilli = new Date(Date.now()) - new Date(user.meals[0].eatenAt);
+		// let dateDiffDays =  Math.ceil(dateDiffMilli / (24*60*60*1000));
+		// let NFdailyAvg = _.mapValues(NFsum, (sum) => (sum/dateDiffDays));
 		let gramAvgSum = NFdailyAvg['nf_protein'] + NFdailyAvg['nf_total_carbohydrate'] + NFdailyAvg['nf_total_fat'];
 		let NFpercAvgMass = _.mapValues(NFdailyAvg, (gramAvg) => (gramAvg/gramAvgSum*100));
 		delete NFpercAvgMass['nf_calories'];
