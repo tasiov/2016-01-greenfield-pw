@@ -1,6 +1,6 @@
 import React from 'react';
 import {Line} from 'react-chartjs';
-
+import RaisedButton from 'material-ui/lib/raised-button';
 
 const ProgressBar = ({datedNutr, timeWindow, setTime, setFilter, filter}) => {
 	let filters = [filter];
@@ -54,17 +54,17 @@ const ProgressBar = ({datedNutr, timeWindow, setTime, setFilter, filter}) => {
 			<Line data={lineChartData} options={chartOptions}/>
 			<div className ='filters'>
 				<div className ='time-filters'>
-					<button onClick={setTime.bind(this,7)}>7-days</button>
-					<button onClick={setTime.bind(this,14)}>14-days</button>
-					<button onClick={setTime.bind(this,30)}>30-days</button>
-					<button onClick={setTime.bind(this,60)}>60-days</button>
-					<button onClick={setTime.bind(this,90)}>90-days</button>
+					<RaisedButton onClick={setTime.bind(this,7)} label='7-days '/>
+					<RaisedButton onClick={setTime.bind(this,14)} label='14-days '/>
+					<RaisedButton onClick={setTime.bind(this,30)} label='30-days '/>
+					<RaisedButton onClick={setTime.bind(this,60)} label='60-days '/>
+					<RaisedButton onClick={setTime.bind(this,90)} label='90-days '/>
 				</div>
 				<div className ='nutr-filters'>
-					<button onClick={setFilter.bind(this,'nf_calories')}>Calories/day</button>
-					<button onClick={setFilter.bind(this,'nf_protein')}>Protein g/day</button>
-					<button onClick={setFilter.bind(this,'nf_total_carbohydrate')}>Carbs g/day</button>
-					<button onClick={setFilter.bind(this,'nf_total_fat')}>Fat g/day</button>
+					<RaisedButton onClick={setFilter.bind(this,'nf_calories')} label='Calories/day' />
+					<RaisedButton onClick={setFilter.bind(this,'nf_protein')} label='Protein g/day'/>
+					<RaisedButton onClick={setFilter.bind(this,'nf_total_carbohydrate')} label='Carbs g/day' />
+					<RaisedButton onClick={setFilter.bind(this,'nf_total_fat')} label='Fat g/day' />
 				</div>
 			</div>
 		</div>
