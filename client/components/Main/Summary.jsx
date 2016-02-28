@@ -17,9 +17,6 @@ const Summary = ({user}) => {
 		let NFdailyAvg = _.values(nutrByDate).reduce( (prev, nutrObj, index) => {
 			return _.mergeWith({}, prev, nutrObj, (prevV, nutrV) => ((prevV || 0)*(index) + (nutrV || 0))/(index + 1));
 		});
-		let gramAvgSum = NFdailyAvg['nf_protein'] + NFdailyAvg['nf_total_carbohydrate'] + NFdailyAvg['nf_total_fat'];
-		let NFpercAvgMass = _.mapValues(NFdailyAvg, (gramAvg) => (gramAvg/gramAvgSum*100));
-		delete NFpercAvgMass['nf_calories'];
 
 		let currDaySum = nutrByDate[dateFunctions.map(func => (new Date())[func]()).join('-')] || getNutritionInfo([]);
 		let currDayGramSum = currDaySum['nf_protein'] + currDaySum['nf_total_carbohydrate'] + currDaySum['nf_total_fat'];
@@ -28,19 +25,17 @@ const Summary = ({user}) => {
 
 		return (
 				<div className = 'summary'>
-					<p>Daily Number of Calories: {NFdailyAvg['nf_calories']}</p>
-					<p>Daily Grams of Protein: {NFdailyAvg['nf_protein']}</p>
-					<p>Daily Grams of Carbs: {NFdailyAvg['nf_total_carbohydrate']}</p>
-					<p>Daily Grams of Fat: {NFdailyAvg['nf_total_fat']}</p>
-					<p>% Daily Average of Protein: {NFpercAvgMass['nf_protein']}</p>
-					<p>% Daily Average of Carbs: {NFpercAvgMass['nf_total_carbohydrate']}</p>
-					<p>% Daily Average of Fat: {NFpercAvgMass['nf_total_fat']}</p>
-					<MacroPieChart macroPercents={NFpercAvgMass} />	
+					<p>Calories Consumed Today: {currDaySum['nf_calories']} </p>
+					<p>Protein Consumed Today: {currDaySum['nf_total_fat']} g</p>
+					<p>Carbohydrates Consumed Today: {currDaySum['nf_total_carbohydrate']} g</p>
+					<p>Fat Consumed Today: {currDaySum['nf_protein']} g</p>
+					<MacroPieChart macroPercents={currDayPerc} />	
 					<br></br>
+					<p>Daily Calorie consumption: {NFdailyAvg['nf_calories']}</p>
+					<p>Daily Protein consumption: {NFdailyAvg['nf_protein']} g</p>
+					<p>Daily Carbohydrate Consumption: {NFdailyAvg['nf_total_carbohydrate']} g</p>
+					<p>Daily Fat Consumption: {NFdailyAvg['nf_total_fat']} g</p>
 					<ProgressBar datedNutr={nutrByDate} />
-					<p>Current Day % of Protein: {currDayPerc['nf_protein']}</p>
-					<p>Current Day % of Carbs: {currDayPerc['nf_total_carbohydrate']}</p>
-					<p>Current Day % of Fat: {currDayPerc['nf_total_fat']}</p>
 				</div>
 			);
 
