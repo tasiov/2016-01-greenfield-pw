@@ -29,12 +29,16 @@ const MacroPieChart = ({macroPercents, options}) => {
 	};
 	let pieChartOptions = Object.assign({}, pieChartDefaults, options);
 
-	let pieChartLegend = (<ul>Current Day's Macronutrients
-			{pieChartData.map(data => <li><span style={{backgroundColor: data.color}}></span>{data.label}</li>)}
-		  </ul>);
 
 	return (
-		<Pie data={pieChartData} options={pieChartOptions} />
+		<div className = 'macro-pie-chart'>
+			<Pie data={pieChartData} options={pieChartOptions} />
+			<div className='pie-chart-legend'>
+				<ul>Current Day's Macronutrients
+					{pieChartData.map(data => <li><span style={{backgroundColor: data.color}}></span>{data.label}</li>)}
+			  </ul>
+			</div>
+		</div>
 	);
 }
 
