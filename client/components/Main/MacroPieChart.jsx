@@ -31,10 +31,11 @@ const MacroPieChart = ({macroPercents, options}) => {
 
 
 	return (
-		<div className = 'macro-pie-chart'>
-			<Pie data={pieChartData} options={pieChartOptions} />
+		<div className='macro-pie-chart'>
+			<div className='pie-chart-title'>Today's Macronutrient Profile </div>
+			<Pie data={pieChartData} options={pieChartOptions} width='500' height='250'/>
 			<div className='pie-chart-legend'>
-				<ul>Current Day's Macronutrients
+				<ul>
 					{pieChartData.map((data, i) => <li key={i}><div className='chart-key' style={{backgroundColor: data.color}}></div>{data.label + ' ' + Math.round(data.value) + '%'}</li>)}
 			  </ul>
 			</div>

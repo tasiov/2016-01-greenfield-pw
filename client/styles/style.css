@@ -20,7 +20,11 @@
 }
 
 .pie-chart-legend > ul {
+  position:relative;
   list-style: none;
+  text-align: left;
+  left: 42%;
+  
 }
 
 .chart-key {
@@ -30,3 +34,9 @@
   margin-left: 10px;
   margin-right: 10px
 }
+
+.filters div {
+  margin: 3px;
+}
+
+

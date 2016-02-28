@@ -40,6 +40,7 @@ const Summary = ({user}) => {
 						<Divider insert={true} />
 					</List>
 					<MacroPieChart macroPercents={currDayPerc} />	
+					<Divider insert={true} />
 					</div>
 					<br></br>
 					<div className = 'nutr-average-summary'>
@@ -51,6 +52,7 @@ const Summary = ({user}) => {
 						<ListItem primaryText="Daily Carbohydrate Consumption:" secondaryText= {NFdailyAvg['nf_total_carbohydrate']}/>
 						<Divider insert={true} />
 						<ListItem primaryText="Daily Fat Consumption:" secondaryText= {NFdailyAvg['nf_total_fat']}/>
+						<Divider insert={true} />
 					<ProgressBarContainer datedNutr={nutrByDate} />
 					</List>
 					</div>

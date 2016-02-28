@@ -51,7 +51,10 @@ const ProgressBar = ({datedNutr, timeWindow, setTime, setFilter, filter}) => {
 
 	return (
 		<div>
-			<Line data={lineChartData} options={chartOptions}/>
+			<br></br>
+			<div className='progress-bar-header'>Progress Chart</div>
+			<br></br>
+			<Line data={lineChartData} options={chartOptions} width="700em" height="350em"/>
 			<div className ='filters'>
 				<div className ='time-filters'>
 					<RaisedButton onClick={setTime.bind(this,7)} label='7-days '/>
