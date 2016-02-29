@@ -43,9 +43,7 @@ const ProgressBar = ({datedNutr, timeWindow, setTime, setFilter, filter}) => {
     pointHitDetectionRadius : 20,
     datasetStroke : true,
     datasetStrokeWidth : 2,
-    datasetFill : true,
-    legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
-
+    datasetFill : true
 };
 
 

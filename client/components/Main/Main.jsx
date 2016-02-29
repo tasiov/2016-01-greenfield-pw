@@ -9,21 +9,10 @@ const colors = styles.Colors;
 
 
 const Main = ({user, logoutUser}) => {
-// const Main = ({page, user}) => {
-  // let currentPage;
-  // if(page === 'Summary') {
-  //   currentPage = <Summary user={user} />;
-  // } else if(page === 'CalorieLog') {
-  //   currentPage = <CalorieLog user={user} />;
-  // } else if(page === 'RecordMeals') {
-  //   currentPage = <RecordMeals user={user} />;
-  // } else {
-  //   currentPage = <Summary user={user} />;
-  // }
 
   return (
     <div className='main-page'>
-      <AppBar style={{"background-color":"rgb(139,189,7)"}} title="Eat.ly" titleStyle={{"textAlign":"center"}}
+      <AppBar style={{backgroundColor:"rgb(139,189,7)"}} title="Eat.ly" titleStyle={{"textAlign":"center"}}
        iconElementRight={ <FlatButton label="Log Out" color={colors.lightBlue50} onClick={logoutUser}/> }
        iconElementLeft={ <Avatar
           color={colors.lightBlue500}
