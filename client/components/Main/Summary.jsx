@@ -8,6 +8,11 @@ import Divider from 'material-ui/lib/divider';
 
 const Summary = ({user}) => {
 	if(Array.isArray(user.meals) && user.meals.length !== 0) {
+		let additionalFields = ['nf_calcium_dv', 'nf_calories_from_fat', 'nf_cholesterol',
+														'nf_dietary_fiber','nf_iron','nf_monounsaturated_fat', 
+														'nf_polyunsaturated_fat', 'nf_saturated_fat', 'nf_sodium',
+														'nf_sugars', 'nf_trans_fatty_acid', 'nf_vitamain_a_dv',
+														'nf_vitamin_cdv'];
 		let dateFunctions = ['getDate', 'getMonth', 'getFullYear'];
 		let mealsByDate = _.transform(user.meals,(result, meal) => {
 			let mealDate = new Date(meal.eatenAt);
@@ -15,7 +20,7 @@ const Summary = ({user}) => {
 			result[dateString] = result[dateString] || [];
 			result[dateString].push(meal);
 		}, {});
-		let nutrByDate = _.mapValues(mealsByDate, mealsArr => getNutritionInfo(mealsArr, user.foods));
+		let nutrByDate = _.mapValues(mealsByDate, mealsArr => getNutritionInfo(mealsArr, user.foods, additionalFields));
 
 		let NFdailyAvg = _.values(nutrByDate).reduce( (prev, nutrObj, index) => {
 			return _.mergeWith({}, prev, nutrObj, (prevV, nutrV) => ((prevV || 0)*(index) + (nutrV || 0))/(index + 1));
@@ -24,7 +29,6 @@ const Summary = ({user}) => {
 		let currDaySum = nutrByDate[dateFunctions.map(func => (new Date())[func]()).join('-')] || getNutritionInfo([]);
 		let currDayGramSum = currDaySum['nf_protein'] + currDaySum['nf_total_carbohydrate'] + currDaySum['nf_total_fat'];
 		let currDayPerc = _.mapValues(currDaySum, (gramAvg) => (gramAvg/currDayGramSum*100));
-		delete currDayPerc['nf_calories'];
 
 		return (
 				<div className = 'summary'>
