@@ -4,15 +4,23 @@ import Signup from './Signup.jsx';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 const Auth = ({page, changePage}) => {
-	var currPage;
 	if(page === "Login") {
-		currPage = <Login change= {changePage} />;
+		return (
+      <div className="landing">
+        <h1>Eat.ly</h1>
+        <Login change= {changePage} />
+      </div>
+    )
 	} else if(page === "Signup") {
-		currPage = <Signup change= {changePage}/>;
+    return (
+      <div className="landing">
+        <h1>Eat.ly</h1>
+        <Signup change= {changePage}/>;
+      </div>
+    )
 	}
 
 	return currPage;
-
 }
 
 export default Auth

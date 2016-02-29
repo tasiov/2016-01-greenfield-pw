@@ -8,11 +8,11 @@ let Login = ({ dispatch, change}) => {
   let password;
 
   const style = {
-    height: 200,
+    height: 240,
     width: 300,
-    margin: '150px auto',
+    margin: '30px auto',
     textAlign: 'center',
-    fontFamily: 'Roboto'
+    backgroundColor: 'rgb(255, 250, 240)'
   };
 
   const handleSubmit = e => {
@@ -32,9 +32,10 @@ let Login = ({ dispatch, change}) => {
   }
 
   return (
-    <div className="login-card">
-      <Paper style={style} zDepth={2}>
-        <h1 className="login-header">Login</h1>
+    <div className="card">
+      <Paper style={style} zDepth={4}>
+
+        <h3 className="header">Login</h3>
         <br/>
         <form onSubmit={handleSubmit}>
           <input type="text" name="username" placeholder="Username" ref={(ref) => username = ref} />
@@ -44,7 +45,7 @@ let Login = ({ dispatch, change}) => {
           <input type="submit" />
         </form>
         <div className="login-help">
-          <a href="#" onClick= {changePage} >Signup</a>
+          <a href="#" onClick= {changePage}>Signup</a>
         </div>
       </Paper>
     </div>
