@@ -16,7 +16,7 @@ Promise.promisifyAll(fs);
 Promise.promisifyAll(Users);
 Promise.promisifyAll(Meals);
 
-
+// takes a query and makes a get req to the nutritionix api
 module.exports.getSearchResponse = function(query, callback) {
   var nutritionUrl = 'http://api.nutritionix.com/v1_1/search/' + query;
   request({
@@ -86,7 +86,7 @@ module.exports.checkUser = function(username, password, callback) {
 	});
 };
 
-
+// takes a username and password and enters a new user into the db
 module.exports.makeNewUser = function(username, password, callback) {
     Users.find({username:username}, function(err, foundUser){
         if(Array.isArray(foundUser) && foundUser.length !== 0){ //mongodb sends back an empty array if nothing is found.
