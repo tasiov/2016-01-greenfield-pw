@@ -10,7 +10,7 @@ const NavBar = ({user}) => {
 
 	return (
 		<div className="nav-bar">
-				<Tabs tabItemContainerStyle={{"background-color":"rgb(139,189,7)"}}>
+				<Tabs tabItemContainerStyle={{backgroundColor:"rgb(139,189,7)"}}>
 					<Tab label="Summary">
 						<Summary user={user}/>
 					</Tab>

@@ -9,7 +9,6 @@ const MealsList = ({meals, foods}) => {
 		<div className='meals-list'>
 		  {meals.map((meal,i) => <Meal meal={meal} foods={foods} key={i} />)}	
 		</div>
-
 	);
 }
 
