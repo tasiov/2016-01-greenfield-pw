@@ -12,7 +12,7 @@ const Summary = ({user}) => {
 														'nf_dietary_fiber','nf_iron','nf_monounsaturated_fat', 
 														'nf_polyunsaturated_fat', 'nf_saturated_fat', 'nf_sodium',
 														'nf_sugars', 'nf_trans_fatty_acid', 'nf_vitamain_a_dv',
-														'nf_vitamin_cdv'];
+														'nf_vitamin_c_dv'];
 		let dateFunctions = ['getDate', 'getMonth', 'getFullYear'];
 		let mealsByDate = _.transform(user.meals,(result, meal) => {
 			let mealDate = new Date(meal.eatenAt);
@@ -33,32 +33,68 @@ const Summary = ({user}) => {
 		return (
 				<div className = 'summary'>
 					<div className = 'current-day-summary'>
-						<List subheader="Today's Nutrition Info">
-							<ListItem primaryText="Calories Consumed Today:" secondaryText= {currDaySum['nf_calories']} />
-							<Divider insert={true} />
-							<ListItem primaryText = 'Protein Consumed Today:' secondaryText={currDaySum['nf_total_fat']} g />
-							<Divider insert={true} />
-							<ListItem primaryText = 'Carbohydrates Consumed Today:' secondaryText={currDaySum['nf_total_carbohydrate']} g />
-							<Divider insert={true} />
-							<ListItem primaryText = 'Fat Consumed Today:' secondaryText={currDaySum['nf_protein']} g />
-							<Divider insert={true} />
-						</List>
-						<MacroPieChart macroPercents={currDayPerc} />	
+					<List subheader="Today's Nutrition Info">
+						<ListItem primaryText= {"Calories Consumed Today: " + currDaySum['nf_calories']} />
 						<Divider insert={true} />
-						</div>
-						<br></br>
-						<div className = 'nutr-average-summary'>
-						<List subheader="Daily Nutrition Averages">
-							<ListItem primaryText="Daily Calorie consumption:" secondaryText= {NFdailyAvg['nf_calories']}/>
-							<Divider insert={true} />
-							<ListItem primaryText="Daily Protein consumption:" secondaryText= {NFdailyAvg['nf_protein']} />
-							<Divider insert={true} />
-							<ListItem primaryText="Daily Carbohydrate Consumption:" secondaryText= {NFdailyAvg['nf_total_carbohydrate']}/>
-							<Divider insert={true} />
-							<ListItem primaryText="Daily Fat Consumption:" secondaryText= {NFdailyAvg['nf_total_fat']}/>
-							<Divider insert={true} />
-						<ProgressBarContainer datedNutr={nutrByDate} />
-						</List>
+						<ListItem primaryText={'Protein Consumed Today: ' + currDaySum['nf_protein']} />
+						<Divider insert={true} />
+						<ListItem primaryText={'Carbohydrates Consumed Today: ' + currDaySum['nf_total_carbohydrate']} 
+											secondaryText={'Fiber consumed: ' + currDaySum['nf_dietary_fiber'] + '\n' +
+																		 'Sugars consumed: ' + currDaySum['nf_sugars']} />
+						<Divider insert={true} />
+						<ListItem primaryText={'Fat Consumed Today: ' + currDaySum['nf_total_fat']} 
+											secondaryText={'Saturated Fat Consumed: ' + currDaySum['nf_saturated_fat'] + '\n' + 
+																		 'Polyunsaturated Fat Consumed: ' + currDaySum['nf_polyunsaturated_fat'] + '\n' + 
+																		 'Monounsaturated Fat Consumed: ' + currDaySum['nf_monounsaturated_fat'] + '\n' + 
+																		 'Trans Fat consumed: ' + currDaySum['nf_trans_fatty_acid']} />
+						<Divider insert={true} />
+						<ListItem primaryText={'Cholesterol Consumed Today: ' + currDaySum['nf_cholesterol']} />
+						<Divider insert={true} />
+						<ListItem primaryText={'Sodium Consumed Today: ' + currDaySum['nf_sodium']} />
+						<Divider insert={true} />
+						<ListItem primaryText={'Vitamin A Consumed Today: ' + currDaySum['nf_vitamain_a_dv']} />
+						<Divider insert={true} />
+						<ListItem primaryText={'Vitamin C Consumed Today: ' + currDaySum['nf_vitamin_c_dv']} />
+						<Divider insert={true} />
+						<ListItem primaryText={'Calcium Consumed Today: ' + currDaySum['nf_calcium_dv']} />
+						<Divider insert={true} />
+						<ListItem primaryText={'Iron Consumed Today: ' + currDaySum['nf_iron']} />
+						<Divider insert={true} />
+					</List>
+					<MacroPieChart macroPercents={currDayPerc} />	
+					<Divider insert={true} />
+					</div>
+					<br></br>
+					<div className = 'nutr-average-summary'>
+					<List subheader="Daily Nutrition Averages">
+						<ListItem primaryText= {"Daily Caloric Consumption: " + NFdailyAvg['nf_calories']} />
+						<Divider insert={true} />
+						<ListItem primaryText={'Daily Protein Consumption: ' + NFdailyAvg['nf_protein']} />
+						<Divider insert={true} />
+						<ListItem primaryText={'Daily Carb Consumption: ' + NFdailyAvg['nf_total_carbohydrate']} 
+											secondaryText={'Daily Fiber Consumption: ' + NFdailyAvg['nf_dietary_fiber'] + '\n' +
+																		 'Daily Sugar Consumption: ' + NFdailyAvg['nf_sugars']} />
+						<Divider insert={true} />
+						<ListItem primaryText={'Daily Fat Consumption ' + NFdailyAvg['nf_total_fat']} 
+											secondaryText={'Daily Saturated Fat Consumption: ' + NFdailyAvg['nf_saturated_fat'] + '\n' + 
+																		 'Daily Polyunsaturated Fat Consumption: ' + NFdailyAvg['nf_polyunsaturated_fat'] + '\n' + 
+																		 'Daily Monounsaturated Fat Consumption: ' + NFdailyAvg['nf_monounsaturated_fat'] + '\n' + 
+																		 'Daily Trans Fatty Acid Consumption: ' + NFdailyAvg['nf_trans_fatty_acid']} />
+						<Divider insert={true} />
+						<ListItem primaryText={'Daily Cholesterol Consumption: ' + NFdailyAvg['nf_cholesterol']} />
+						<Divider insert={true} />
+						<ListItem primaryText={'Daily Sodium Consumption: ' + NFdailyAvg['nf_sodium']} />
+						<Divider insert={true} />
+						<ListItem primaryText={'Daily Vitamin A Consumption: ' + NFdailyAvg['nf_vitamain_a_dv']} />
+						<Divider insert={true} />
+						<ListItem primaryText={'Daily Vitamin C Consumption: ' + NFdailyAvg['nf_vitamin_c_dv']} />
+						<Divider insert={true} />
+						<ListItem primaryText={'Daily Calcium Consumption: ' + NFdailyAvg['nf_calcium_dv']} />
+						<Divider insert={true} />
+						<ListItem primaryText={'Daily Iron Consumption: ' + NFdailyAvg['nf_iron']} />
+						<Divider insert={true} />
+					<ProgressBarContainer datedNutr={nutrByDate} />
+					</List>
 					</div>
 				</div>
 			);
