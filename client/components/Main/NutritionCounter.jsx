@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
+import TableRow from 'material-ui/lib/table/table-row';
+import TableRowColumn from 'material-ui/lib/table/table-row-column';
+import TableHeaderColumn from 'material-ui/lib/table/table-header-column';
 
 //Function
 export const getNutritionInfo = (meals, foods, additionals) => {
@@ -31,12 +33,12 @@ export const getNutritionInfo = (meals, foods, additionals) => {
 export const NutritionCounter = ({meals,foods}) => {
 	let NF = getNutritionInfo(meals, foods);	
 	return (
-			<div className='nutrition-info'>
-				<span className='nutrition-info-calories'>Calories: {NF['nf_calories']}</span>
-				<span className='nutrition-info-protein'>Protein: {NF['nf_protein']}</span>
-				<span className='nutrition-info-carbs'>Carbs: {NF['nf_total_carbohydrate']}</span>
-				<span className='nutrition-info-fat'>Fat: {NF['nf_total_fat']}</span>
-			</div>
+			<TableRow className='nutrition-info'>
+				<TableHeaderColumn className='nutrition-info-calories'>Total Calories: {NF['nf_calories']}</TableHeaderColumn>
+				<TableHeaderColumn className='nutrition-info-protein'>Total Protein: {NF['nf_protein']}g</TableHeaderColumn>
+				<TableHeaderColumn className='nutrition-info-carbs'>Total Carbs: {NF['nf_total_carbohydrate']}g</TableHeaderColumn>
+				<TableHeaderColumn className='nutrition-info-fat'>Total Fat: {NF['nf_total_fat']}g</TableHeaderColumn>
+			</TableRow>
 		);
 }
 

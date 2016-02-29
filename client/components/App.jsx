@@ -4,10 +4,7 @@ import Login from './Auth/Login.jsx';
 import AuthContainer from '../containers/AuthContainer.jsx';
 import MainContainer from '../containers/MainContainer.jsx';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-<<<<<<< HEAD
-=======
 
->>>>>>> implements early version of login styles
 injectTapEventPlugin();
 
 const App = ({user, getUser}) => {
