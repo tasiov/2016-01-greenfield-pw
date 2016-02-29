@@ -3,13 +3,13 @@ import { setSearchResults } from '../actions/index.jsx';
 import { setFood, deleteFood } from '../actions/index.jsx';
 import Search from '../components/Main/Search.jsx';
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
     foodList: state.foodQueries,
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     queryFoods: (query) => {
       $.post( "/search", {"query": query})

@@ -1,0 +1,42 @@
+.group:before,
+.group:after {
+  content: "";
+  display: table;
+}
+.group:after {
+  clear: both;
+}
+.group {
+  clear: both;
+  *zoom: 1;
+}
+
+.summary {
+  position: relative;
+  display: block;
+  text-align: center;
+  left: 17%;
+  width: 66%;
+}
+
+.pie-chart-legend > ul {
+  position:relative;
+  list-style: none;
+  text-align: left;
+  left: 42%;
+  
+}
+
+.chart-key {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-left: 10px;
+  margin-right: 10px
+}
+
+.filters div {
+  margin: 3px;
+}
+
+

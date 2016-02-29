@@ -50,11 +50,23 @@ const configureFood = (state = {}, action) => {
 	}
 }
 
+const configureProgress = (state = {timeWindow: 7, filter: 'nf_calories'}, action) => {
+	switch(action.type) {
+		case 'PROGRESS_TIME_SET':
+			return Object.assign({}, state, {timeWindow: action.timeWindow});
+		case 'PROGRESS_FILTER_SET':
+			return Object.assign({}, state, {filter: action.filter});
+		default:
+			return state;
+	}
+}
+
 const foodAppHandler = combineReducers({
 	user: configureUser,
 	page: configurePage,
 	foodQueries: configureSearch,
-	selectedFoods: configureFood
+	selectedFoods: configureFood,
+	progressBar: configureProgress
 });
 
 export default foodAppHandler;
