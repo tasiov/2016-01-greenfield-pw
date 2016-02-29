@@ -7,7 +7,7 @@ import NutritionCounter from './NutritionCounter.jsx';
 const MealsList = ({meals, foods}) => {	
 	return (
 		<div className='meals-list'>
-		{meals.map(meal => <Meal meal={meal} foods={foods} key={meal['_id']} />)}	
+		{meals.map((meal,i) => <Meal meal={meal} foods={foods} key={i} />)}	
 		</div>
 
 	);
