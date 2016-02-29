@@ -6,6 +6,7 @@ import TableRow from 'material-ui/lib/table/table-row';
 import TableHeader from 'material-ui/lib/table/table-header';
 import TableRowColumn from 'material-ui/lib/table/table-row-column';
 import TableBody from 'material-ui/lib/table/table-body';
+import RaisedButton from 'material-ui/lib/raised-button';
 
 const SelectFood = ({selectedFoods, removeFood, user, sendMeal, sendFoodItems}) => {
   let timesEaten = [];
@@ -30,10 +31,10 @@ const SelectFood = ({selectedFoods, removeFood, user, sendMeal, sendFoodItems}) 
         newFoodIds.push(food.item_id);
       }
     }));
-    
+
     sendFoodItems(newFoodIds)
     .then(sendMeal.bind(this, meals));
-    
+
     _.values(selectedFoods).forEach(removeSelectedFood);
 
   }
@@ -50,7 +51,7 @@ const SelectFood = ({selectedFoods, removeFood, user, sendMeal, sendFoodItems}) 
         { _.values(selectedFoods).map((food, index) => {
           let id = food['item_id'];
           return (
-            <Food 
+            <Food
               numEaten={(ref) => timesEaten[index] = ref}
               className='selectedFoodEntry'
               food={food}
@@ -65,7 +66,7 @@ const SelectFood = ({selectedFoods, removeFood, user, sendMeal, sendFoodItems}) 
     );
   }
 
-   
+
   return (
     <div className='select-food'>
       <h5>What I Ate:</h5>
@@ -83,7 +84,7 @@ const SelectFood = ({selectedFoods, removeFood, user, sendMeal, sendFoodItems}) 
         </TableHeader>
          {selectedFoodsDisplay}
       </Table>
-      {_.isEmpty(selectedFoods) ? null : <button onClick={submitMeal}>Submit</button> }
+      {_.isEmpty(selectedFoods) ? null : <RaisedButton label="Submit" style={{margin:"8px"}} onMouseDown={submitMeal}/> }
     </div>
   );
 }
