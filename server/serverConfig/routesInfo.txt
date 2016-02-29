@@ -17,9 +17,15 @@ GET /login
 
 POST /login
 ->Use: Client makes this request to sign in
-->Req: req.bod.username and req.body.password
+->Req: req.body.username and req.body.password
 ->Res: if password isn't valid, sends 'Invalid Password'
         else, sends UserObj as described above
+
+GET /logout
+->User: Client makes this request to logout
+->Req: no data passed in the req.body
+->Res: if req.session is non null, destroy the user session and
+       sends 'You have been logged out. See you next time!'
 
 
 POST /signup
@@ -30,14 +36,25 @@ POST /signup
 POST /search
 ->Use: Client makes this request to search for a food item, use Nutritionix API for resp
 ->Req: req.body.query with an object => {query: "food-name"}
-->res: server makes get request to Nutrionix and responds with res.result where result is
+->Res: server makes get request to Nutrionix and responds with res.result where result is
        the result object obtained from the Nutrionix API
+
+GET /meals
+->Use: Client makes this request to receive all the meals the session user has eaten
+->Req: no data passed in the req.body
+->Res: if user is logged in, sends back meals array, else sends back 'Please Log in to check meals.'
 
 POST /meals
  ->Use: Client has added a meal entry for logging
- ->Req: req.body.entry, entry is an object
+ ->Req: req.body.meal, meal is an object
                                     -username: primitive string
                                     -newMeal: array of food identifiers
                                     -foods: object with each food identifier
                                             as a property and a value that is
                                             an object with al that food's info
+
+
+POST /food_id
+->Use: Client makes this request to add an eaten food to the database
+->Req: req.body['food_id'] as the food identifier
+->Res: sends back the food object that pertains to that id

@@ -32,6 +32,10 @@ module.exports.getSearchResponse = function(query, callback) {
   });
 };
 
+/*  takes in a food id and finds the food object
+ *  first checks to see if the food is found in the database
+ *  if not in the database, makes a get req to the nutritionix API
+ */
 module.exports.getFoodItem = function(id, callback) {
   Foods.find({'item_id':id})
   .then(function(foundFood) {
@@ -65,6 +69,7 @@ module.exports.getFoodItem = function(id, callback) {
 module.exports.getFoodItemAsync = Promise.promisify(module.exports.getFoodItem);
 
 
+// checks if the password matches a pre-existing user
 module.exports.checkUser = function(username, password, callback) {
 	Users.find({username:username}, function(err, foundUser){
 		if(Array.isArray(foundUser) && foundUser.length !== 0){
@@ -100,6 +105,7 @@ module.exports.makeNewUser = function(username, password, callback) {
     });
 };
 
+// inputs new meal into the database
 module.exports.makeNewMeal = function(meal, callback) {
     Meals.create(meal, function(err, newMeal){
         if (newMeal) {
@@ -110,6 +116,7 @@ module.exports.makeNewMeal = function(meal, callback) {
     });
 };
 
+// takes the passed in username and returns all the meals that user has eaten
 module.exports.checkMealsByUser = function(username, callback) {
     Meals.find({eatenBy:username}, function(err, foundMeals){
         if (Array.isArray(foundMeals) && foundMeals.length !== 0) {
@@ -119,7 +126,6 @@ module.exports.checkMealsByUser = function(username, callback) {
         }
     });
 };
-
 
 module.exports.sendUserStateInfo = function(username, callback) {
     Promise.all([Users.findAsync({username:username}),
