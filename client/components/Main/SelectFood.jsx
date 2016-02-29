@@ -42,7 +42,8 @@ const SelectFood = ({selectedFoods, removeFood, user, sendMeal, sendFoodItems}) 
         <div className='selectedFoodEntry' key={id}>
           <input type='number' defaultValue="1" ref={(ref) => timesEaten[index] = ref} />
           <Food name={name} brand={brand} key={id}/>
-        <span onClick={removeSelectedFood.bind(this,food)}>[X]</span></div>
+          <span onClick={removeSelectedFood.bind(this,food)}>[X]</span>
+        </div>
       );
     }));
 
