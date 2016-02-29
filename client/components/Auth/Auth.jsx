@@ -1,7 +1,6 @@
 import React from 'react';
 import Login from './Login.jsx';
 import Signup from './Signup.jsx';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 
 const Auth = ({page, changePage}) => {
 	if(page === "Login") {
