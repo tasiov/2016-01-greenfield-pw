@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { setUser } from '../../actions/index.jsx';
 import Paper from 'material-ui/lib/paper';
+import RaisedButton from 'material-ui/lib/raised-button';
+
 
 let Login = ({ dispatch, change}) => {
   let username;
@@ -34,17 +36,15 @@ let Login = ({ dispatch, change}) => {
   return (
     <div className="card">
       <Paper style={style} zDepth={4}>
-
         <h3 className="header">Login</h3>
         <br/>
-        <form onSubmit={handleSubmit}>
-          <input type="text" name="username" placeholder="Username" ref={(ref) => username = ref} />
-          <br/>
-          <input type="password" name="password" placeholder="Password" ref={(ref) => password = ref} />
-          <br/>
-          <input type="submit" />
-        </form>
-        <div className="login-help">
+        <input type="text" name="username" placeholder="Username" ref={(ref) => username = ref} />
+        <br/>
+        <input type="password" name="password" placeholder="Password" ref={(ref) => password = ref} />
+        <br/>
+        <RaisedButton label="Submit" onMouseDown={handleSubmit}/>
+        <br/>
+        <div className="card-help">
           <a href="#" onClick= {changePage}>Signup</a>
         </div>
       </Paper>
