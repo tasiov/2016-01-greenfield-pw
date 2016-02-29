@@ -15,6 +15,7 @@ export const setSearchResults = (searchResults) => {
   };
 };
 
+//Used to set the filter option on the Progres line chart ('calories, protein, etc')
 //Used to add a food element to the selectedFood box, which are
 //food entries that the user is about to log in the 'record meals'
 //page but need to assign a quantity to before storing
@@ -70,5 +71,13 @@ export const setFilterOnProgress = (filter) => {
   return {
     type: 'PROGRESS_FILTER_SET',
     filter
+  };
+};
+
+//Used to change the page on the Auth side of the app (whether it's signup or login)
+export const changePage = (newPage) => {
+  return {
+    type: 'CHANGE_PAGE',
+    newPage
   };
 };

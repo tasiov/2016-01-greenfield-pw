@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
-
+//This reducer is used to configure the user object or one of it's
+//properties, such as meal or food
 const configureUser = (state = null, action) => {
 	switch(action.type) {
 		case 'SET_USER':
@@ -17,15 +18,9 @@ const configureUser = (state = null, action) => {
 	}
 }
 
-const configurePage = (state = 'Login', action) => {
-	switch(action.type) {
-		case 'CHANGE_PAGE':
-			return action.newPage;
-		default:
-			return state;
-	}
-}
-
+//This reducer is used to configure the results obtained by searching for
+//a food element to log. This is a list of queried foods obtained from the
+//server, which receives that list from the Nutrionix API
 const configureSearch = (state = [], action) => {
 	switch(action.type) {
 		case 'SET_SEARCH_RESULTS':
@@ -35,7 +30,9 @@ const configureSearch = (state = [], action) => {
 	}
 }
 
-const configureFood = (state = {}, action) => {
+//This reducer is used to configure the results which the user has added
+//and staged for logging. 
+const configureSelectedFood = (state = {}, action) => {
 	switch(action.type) {
 		case 'SELECT_FOOD':
 			let id = action.selectedFood['item_id'];
@@ -50,6 +47,7 @@ const configureFood = (state = {}, action) => {
 	}
 }
 
+//This reducer is used to configure parameters on the Progress Line Chart
 const configureProgress = (state = {timeWindow: 7, filter: 'nf_calories'}, action) => {
 	switch(action.type) {
 		case 'PROGRESS_TIME_SET':
@@ -61,11 +59,22 @@ const configureProgress = (state = {timeWindow: 7, filter: 'nf_calories'}, actio
 	}
 }
 
+//This reducer is used to configure the page on the AuthContainer (whether its
+//the login page or the signup page)
+const configurePage = (state = 'Login', action) => {
+	switch(action.type) {
+		case 'CHANGE_PAGE':
+			return action.newPage;
+		default:
+			return state;
+	}
+}
+
 const foodAppHandler = combineReducers({
 	user: configureUser,
 	page: configurePage,
 	foodQueries: configureSearch,
-	selectedFoods: configureFood,
+	selectedFoods: configureSelectedFood,
 	progressBar: configureProgress
 });
 
