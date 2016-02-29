@@ -24,7 +24,7 @@
   list-style: none;
   text-align: left;
   left: 42%;
-  
+
 }
 
 .chart-key {
@@ -39,4 +39,42 @@
   margin: 3px;
 }
 
+.landing {
+  background: url(http://athleticadvantagellc.com/wp-content/uploads/2015/12/Back.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.card {
+  padding-top: 20px;
+  background-color: transparent;
+  border: none;
+  height: 240;
+  width: 300;
+  margin: 30px auto;
+  text-align: center;
+}
+
+.card .header {
+  padding-top: 20px;
+}
+
+.card input {
+  margin-bottom: 7px;
+}
+
+.landing h1 {
+  font-family: 'Josefin Sans', cursive;
+  font-weight: bold;
+  color: rgb(196, 255, 41);
+  font-weight: lighter;
+  text-align: center;
+  margin-top: 150px;
+  font-size: 120px;
+}
 

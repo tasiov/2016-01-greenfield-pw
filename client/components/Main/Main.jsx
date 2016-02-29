@@ -23,7 +23,7 @@ const Main = ({user, logoutUser}) => {
 
   return (
     <div className='main-page'>
-      <AppBar title="Eat.ly" titleStyle={{"textAlign":"center"}}
+      <AppBar style={{"background-color":"rgb(139,189,7)"}} title="Eat.ly" titleStyle={{"textAlign":"center"}}
        iconElementRight={ <FlatButton label="Log Out" color={colors.lightBlue50} onClick={logoutUser}/> }
        iconElementLeft={ <Avatar
           color={colors.lightBlue500}
