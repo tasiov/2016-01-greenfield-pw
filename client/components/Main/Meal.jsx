@@ -29,7 +29,7 @@ const Meal = ({meal, foods}) => {
 			{_.keys(meal.foodsEaten).map((foodId) => {
 				let name = foods[foodId]['item_name'];
 				return (
-						<Food className='food-entry' key={foodId} name={name} meal />
+						<Food className='food-entry' key={foodId} food ={foods[foodId]} id={foodId} />
 					);
 				})
 			}

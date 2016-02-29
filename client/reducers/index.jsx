@@ -5,7 +5,7 @@ const configureUser = (state = null, action) => {
 		case 'SET_USER':
 			return action.userObj === "Invalid User" ? state : action.userObj;
 		case 'SET_MEAL':
-		  let mealsArr = state.meals.concat(action.meal);
+		  let mealsArr = [].concat(action.meal, state.meals);
 			return Object.assign({}, state, {meals: mealsArr});
     case 'ADD_FOOD_ID':
       let totalFoods = Object.assign({}, state.foods, action.foodIds);

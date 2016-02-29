@@ -6,9 +6,13 @@ import ContentAdd from 'material-ui/lib/svg-icons/content/add';
 import ContentRemove from 'material-ui/lib/svg-icons/content/remove';
 
 const Food = ({food, key, buttonAction, buttonIcon, numEaten}) => {
-  let name = food['item_name'];
-  let brand = food['brand_name'];
+  let name;
+  let brand;
 
+  if (food) {
+    name = food['item_name'];
+    brand = food['brand_name'];
+  }
 
   let buttonColumn;
   if(buttonAction){

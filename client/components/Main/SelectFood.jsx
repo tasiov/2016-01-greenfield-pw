@@ -38,46 +38,51 @@ const SelectFood = ({selectedFoods, removeFood, user, sendMeal, sendFoodItems}) 
 
   }
 
-  let selectedFoodsDisplay = _.isEmpty(selectedFoods) ?
-    <div>No entry selected</div> :
-    (_.values(selectedFoods).map((food, index) => {
+  let selectedFoodsDisplay;
 
-      let id = food['item_id'];
-      return (
+  if(_.isEmpty(selectedFoods)){
+    selectedFoodsDisplay = <div>No entry selected</div>;
+  } else {
+    selectedFoodsDisplay = (
+      <TableBody
+         displayRowCheckbox={false}
+      >
+        { _.values(selectedFoods).map((food, index) => {
+          let id = food['item_id'];
+          return (
+            <Food 
+              numEaten={(ref) => timesEaten[index] = ref}
+              className='selectedFoodEntry'
+              food={food}
+              key={id}
+              buttonAction={removeSelectedFood.bind(this,food)}
+              buttonIcon="remove"
+            />
+          );
+        })
+      }
+      </TableBody>
+    );
+  }
 
-        <Table>
-
-          <TableHeader
-            displaySelectAll={false}
-          >
-            <TableRow>
-              <TableHeaderColumn>Name</TableHeaderColumn>
-              <TableHeaderColumn>Made By</TableHeaderColumn>
-              <TableHeaderColumn></TableHeaderColumn>
-            </TableRow>
-          </TableHeader>
-
-          <TableBody
-            displayRowCheckbox={false}
-          >
-              <Food 
-                numEaten={(ref) => timesEaten[index] = ref}
-                className='selectedFoodEntry'
-                food={food}
-                key={id}
-                buttonAction={removeSelectedFood.bind(this,food)}
-                buttonIcon="remove"
-              />
-              
-          </TableBody>
-        </Table>
-      );
-    }));
-
+   
   return (
     <div className='select-food'>
       <h5>What I Ate:</h5>
-      {selectedFoodsDisplay}
+      <Table>
+
+        <TableHeader
+          displaySelectAll={false}
+        >
+          <TableRow>
+            <TableHeaderColumn>Quantity</TableHeaderColumn>
+            <TableHeaderColumn>Name</TableHeaderColumn>
+            <TableHeaderColumn>Made By</TableHeaderColumn>
+            <TableHeaderColumn></TableHeaderColumn>
+          </TableRow>
+        </TableHeader>
+         {selectedFoodsDisplay}
+      </Table>
       {_.isEmpty(selectedFoods) ? null : <button onClick={submitMeal}>Submit</button> }
     </div>
   );
