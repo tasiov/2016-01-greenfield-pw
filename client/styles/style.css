@@ -69,11 +69,12 @@
 }
 
 .landing h1 {
+  font-family: 'Josefin Sans', cursive;
+  font-weight: bold;
   color: rgb(196, 255, 41);
   font-weight: lighter;
   text-align: center;
   margin-top: 150px;
   font-size: 120px;
 }
-
 
