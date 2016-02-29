@@ -13,26 +13,28 @@ const Meal = ({meal, foods}) => {
 	<div className='meal-element'>
 		<Table>
 
-		 <TableHeader className='meal-title'>
+		 <TableHeader 
+		 	className='meal-title'
+		 	displaySelectAll={false}
+		 >
         <TableRow>
-          <TableHeaderColumn>{meal.createdAt}</TableHeaderColumn>
+          <TableHeaderColumn>Meal From: {meal.eatenAt}</TableHeaderColumn>
         </TableRow>
+				<NutritionCounter meals={[meal]} foods={foods} />
       </TableHeader>
 
-      <TableBody>
+      <TableBody
+      	displayRowCheckbox={false}
+      >
 			{_.keys(meal.foodsEaten).map((foodId) => {
 				let name = foods[foodId]['item_name'];
 				return (
-					<div className='food-entry' key={foodId}>
-						<span className='num-eaten'>{meal.foodsEaten[foodId]}</span>
-						<Food name={name}  />
-					</div>
+						<Food className='food-entry' key={foodId} name={name} meal />
 					);
 				})
 			}
 			</TableBody>
 		</Table>
-	<NutritionCounter meals={[meal]} foods={foods} />
 	</div>
 	);
 }

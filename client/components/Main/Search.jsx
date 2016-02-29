@@ -1,5 +1,10 @@
 import React from 'react';
 import Food from './Food.jsx';
+
+import RaisedButton from 'material-ui/lib/raised-button';
+import TextField from 'material-ui/lib/text-field';
+import SearchIcon from 'material-ui/lib/svg-icons/actions/search';
+
 import Table from 'material-ui/lib/table/table';
 import TableHeaderColumn from 'material-ui/lib/table/table-header-column';
 import TableRow from 'material-ui/lib/table/table-row';
@@ -20,32 +25,47 @@ const Search = ({foodList, queryFoods, selectFood}) => {
   }
 
   return (
+    
     <div className='search'>
-      <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="What did you eat?" ref={(ref) => query = ref} />
-        <input type="submit" />
-      </form>
-      <br/>
+     <form onsubmit={handleSubmit}>
+      <TextField 
+        ref={(ref) => query = ref}
+        hintText="What did you Eat?"
+      />
+      <RaisedButton 
+        icon={<SearchIcon />}
+      />
+    </form>
+    <br/>
 
        <Table>
 
-        <TableHeader>
+        <TableHeader
+          displaySelectAll={false}
+        >
           <TableRow>
-            <TableHeaderColumn>ID</TableHeaderColumn>
             <TableHeaderColumn>Name</TableHeaderColumn>
             <TableHeaderColumn>Made By</TableHeaderColumn>
+            <TableHeaderColumn></TableHeaderColumn>
           </TableRow>
         </TableHeader>
 
-        <TableBody>
+        <TableBody
+          displayRowCheckbox={false}
+        >
         {_.values(foodList).map( (food, i) => {
           return (
-            <div key={i} onClick={onFoodClick.bind(this,food)}>
-              <Food name={food['item_name']} brand={food['brand_name']}/>
-            </div>);
+              <Food 
+                name={food['item_name']} 
+                brand={food['brand_name']}
+                key={i} 
+                buttonAction = {onFoodClick.bind(this,food)}
+                buttonIcon = "add"
+              />
+          );
         })}
         </TableBody>
-        </Table>
+      </Table>
     </div>
   );
 }
