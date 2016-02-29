@@ -24,9 +24,10 @@ const SelectFood = ({selectedFoods, removeFood, user, sendMeal, sendFoodItems}) 
         newFoodIds.push(food.item_id);
       }
     }));
-
-    sendMeal(meals);
-    sendFoodItems(newFoodIds);
+    
+    sendFoodItems(newFoodIds)
+    .then(sendMeal.bind(this, meals));
+    
     _.values(selectedFoods).forEach(removeSelectedFood);
 
   }

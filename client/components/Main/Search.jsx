@@ -21,9 +21,9 @@ const Search = ({foodList, queryFoods, selectFood}) => {
         <input type="submit" />
       </form>
       <br/>
-        {_.values(foodList).map( (food) => {
+        {_.values(foodList).map( (food, i) => {
           return (
-            <div onClick={onFoodClick.bind(this,food)}>
+            <div key={i} onClick={onFoodClick.bind(this,food)}>
               <Food name={food['item_name']} brand={food['brand_name']}/>
             </div>);
         })}
