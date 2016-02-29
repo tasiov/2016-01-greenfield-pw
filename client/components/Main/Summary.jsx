@@ -29,32 +29,32 @@ const Summary = ({user}) => {
 		return (
 				<div className = 'summary'>
 					<div className = 'current-day-summary'>
-					<List subheader="Today's Nutrition Info">
-						<ListItem primaryText="Calories Consumed Today:" secondaryText= {currDaySum['nf_calories']} />
+						<List subheader="Today's Nutrition Info">
+							<ListItem primaryText="Calories Consumed Today:" secondaryText= {currDaySum['nf_calories']} />
+							<Divider insert={true} />
+							<ListItem primaryText = 'Protein Consumed Today:' secondaryText={currDaySum['nf_total_fat']} g />
+							<Divider insert={true} />
+							<ListItem primaryText = 'Carbohydrates Consumed Today:' secondaryText={currDaySum['nf_total_carbohydrate']} g />
+							<Divider insert={true} />
+							<ListItem primaryText = 'Fat Consumed Today:' secondaryText={currDaySum['nf_protein']} g />
+							<Divider insert={true} />
+						</List>
+						<MacroPieChart macroPercents={currDayPerc} />	
 						<Divider insert={true} />
-						<ListItem primaryText = 'Protein Consumed Today:' secondaryText={currDaySum['nf_total_fat']} g />
-						<Divider insert={true} />
-						<ListItem primaryText = 'Carbohydrates Consumed Today:' secondaryText={currDaySum['nf_total_carbohydrate']} g />
-						<Divider insert={true} />
-						<ListItem primaryText = 'Fat Consumed Today:' secondaryText={currDaySum['nf_protein']} g />
-						<Divider insert={true} />
-					</List>
-					<MacroPieChart macroPercents={currDayPerc} />	
-					<Divider insert={true} />
-					</div>
-					<br></br>
-					<div className = 'nutr-average-summary'>
-					<List subheader="Daily Nutrition Averages">
-						<ListItem primaryText="Daily Calorie consumption:" secondaryText= {NFdailyAvg['nf_calories']}/>
-						<Divider insert={true} />
-						<ListItem primaryText="Daily Protein consumption:" secondaryText= {NFdailyAvg['nf_protein']} />
-						<Divider insert={true} />
-						<ListItem primaryText="Daily Carbohydrate Consumption:" secondaryText= {NFdailyAvg['nf_total_carbohydrate']}/>
-						<Divider insert={true} />
-						<ListItem primaryText="Daily Fat Consumption:" secondaryText= {NFdailyAvg['nf_total_fat']}/>
-						<Divider insert={true} />
-					<ProgressBarContainer datedNutr={nutrByDate} />
-					</List>
+						</div>
+						<br></br>
+						<div className = 'nutr-average-summary'>
+						<List subheader="Daily Nutrition Averages">
+							<ListItem primaryText="Daily Calorie consumption:" secondaryText= {NFdailyAvg['nf_calories']}/>
+							<Divider insert={true} />
+							<ListItem primaryText="Daily Protein consumption:" secondaryText= {NFdailyAvg['nf_protein']} />
+							<Divider insert={true} />
+							<ListItem primaryText="Daily Carbohydrate Consumption:" secondaryText= {NFdailyAvg['nf_total_carbohydrate']}/>
+							<Divider insert={true} />
+							<ListItem primaryText="Daily Fat Consumption:" secondaryText= {NFdailyAvg['nf_total_fat']}/>
+							<Divider insert={true} />
+						<ProgressBarContainer datedNutr={nutrByDate} />
+						</List>
 					</div>
 				</div>
 			);
