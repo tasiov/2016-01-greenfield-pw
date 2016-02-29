@@ -18,7 +18,9 @@ const Meal = ({meal, foods}) => {
 		 	displaySelectAll={false}
 		 >
         <TableRow>
-          <TableHeaderColumn>Meal From: {meal.eatenAt}</TableHeaderColumn>
+          <TableHeaderColumn>
+          	<h3> Meal From: {meal.eatenAt} </h3>
+          </TableHeaderColumn>
         </TableRow>
 				<NutritionCounter meals={[meal]} foods={foods} />
       </TableHeader>
@@ -29,7 +31,12 @@ const Meal = ({meal, foods}) => {
 			{_.keys(meal.foodsEaten).map((foodId) => {
 				let name = foods[foodId]['item_name'];
 				return (
-						<Food className='food-entry' key={foodId} food ={foods[foodId]} id={foodId} />
+						<Food className='food-entry' 
+							key={foodId} 
+							food={foods[foodId]} 
+							id={foodId} 
+							eatenInMeal={meal.foodsEaten[foodId]}
+						/>
 					);
 				})
 			}

@@ -33,11 +33,21 @@ export const getNutritionInfo = (meals, foods, additionals) => {
 export const NutritionCounter = ({meals,foods}) => {
 	let NF = getNutritionInfo(meals, foods);	
 	return (
-			<TableRow className='nutrition-info'>
-				<TableHeaderColumn className='nutrition-info-calories'>Total Calories: {NF['nf_calories']}</TableHeaderColumn>
-				<TableHeaderColumn className='nutrition-info-protein'>Total Protein: {NF['nf_protein']}g</TableHeaderColumn>
-				<TableHeaderColumn className='nutrition-info-carbs'>Total Carbs: {NF['nf_total_carbohydrate']}g</TableHeaderColumn>
-				<TableHeaderColumn className='nutrition-info-fat'>Total Fat: {NF['nf_total_fat']}g</TableHeaderColumn>
+			<TableRow>
+				<TableHeaderColumn>
+					<h4>Total Calories: {NF['nf_calories']}cal</h4>
+				</TableHeaderColumn>
+				<TableHeaderColumn>
+				</TableHeaderColumn>
+				<TableHeaderColumn>
+					<h4>Total Protein: {NF['nf_protein']}g</h4>
+				</TableHeaderColumn>
+				<TableHeaderColumn>
+					<h4>Total Carbs: {NF['nf_total_carbohydrate']}g</h4>
+				</TableHeaderColumn>
+				<TableHeaderColumn>
+					<h4>Total Fat: {NF['nf_total_fat']}g</h4>
+				</TableHeaderColumn>
 			</TableRow>
 		);
 }
