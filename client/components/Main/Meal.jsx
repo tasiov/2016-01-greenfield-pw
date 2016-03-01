@@ -13,7 +13,7 @@ const Meal = ({meal, foods}) => {
 	<div className='meal-element'>
 		<Table>
 
-		 <TableHeader 
+		 <TableHeader
 		 	className='meal-title'
 		 	displaySelectAll={false}
 		 >
@@ -31,10 +31,10 @@ const Meal = ({meal, foods}) => {
 			{_.keys(meal.foodsEaten).map((foodId) => {
 				let name = foods[foodId]['item_name'];
 				return (
-						<Food className='food-entry' 
-							key={foodId} 
-							food={foods[foodId]} 
-							id={foodId} 
+						<Food className='food-entry'
+							key={foodId}
+							food={foods[foodId]}
+							id={foodId}
 							eatenInMeal={meal.foodsEaten[foodId]}
 						/>
 					);

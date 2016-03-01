@@ -6,6 +6,7 @@ import TableRow from 'material-ui/lib/table/table-row';
 import TableHeader from 'material-ui/lib/table/table-header';
 import TableRowColumn from 'material-ui/lib/table/table-row-column';
 import TableBody from 'material-ui/lib/table/table-body';
+import RaisedButton from 'material-ui/lib/raised-button';
 
 const Search = ({foodList, queryFoods, selectFood}) => {
   let query;
@@ -21,10 +22,8 @@ const Search = ({foodList, queryFoods, selectFood}) => {
 
   return (
     <div className='search'>
-      <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="What did you eat?" ref={(ref) => query = ref} />
-        <input type="submit" />
-      </form>
+      <input type="text" placeholder="What did you eat?" ref={(ref) => query = ref} />
+      <RaisedButton label="Submit" style={{margin:"8px"}} onMouseDown={handleSubmit}/>
       <br/>
 
        <Table>
@@ -44,9 +43,9 @@ const Search = ({foodList, queryFoods, selectFood}) => {
         >
         {_.values(foodList).map( (food, i) => {
           return (
-              <Food 
+              <Food
                 food={food}
-                key={i} 
+                key={i}
                 buttonAction = {onFoodClick.bind(this,food)}
                 buttonIcon = "add"
               />
