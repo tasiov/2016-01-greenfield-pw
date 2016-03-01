@@ -19,7 +19,7 @@ const Meal = ({meal, foods}) => {
 		 >
         <TableRow>
           <TableHeaderColumn>
-          	<h3> Meal From: {meal.eatenAt} </h3>
+          	<h3> Meal From: {meal.eatenAt.slice(0,10)}</h3>
           </TableHeaderColumn>
         </TableRow>
 				<NutritionCounter meals={[meal]} foods={foods} />
@@ -42,6 +42,7 @@ const Meal = ({meal, foods}) => {
 			}
 			</TableBody>
 		</Table>
+    <br/>
 	</div>
 	);
 }

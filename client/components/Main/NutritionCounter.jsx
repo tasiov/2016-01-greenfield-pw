@@ -36,18 +36,21 @@ export const NutritionCounter = ({meals,foods}) => {
 	return (
 			<TableRow>
 				<TableHeaderColumn>
-					<h4>Total Calories: {NF['nf_calories']} cal</h4>
+					<h5>Items</h5>
+				</TableHeaderColumn>
+				<TableHeaderColumn>
+					<h5>Total Calories: {NF['nf_calories']} cal</h5>
 				</TableHeaderColumn>
 				<TableHeaderColumn>
 				</TableHeaderColumn>
 				<TableHeaderColumn>
-					<h4>Total Protein: {NF['nf_protein']}g</h4>
+					<h5>Total Protein: {NF['nf_protein']}g</h5>
 				</TableHeaderColumn>
 				<TableHeaderColumn>
-					<h4>Total Carbs: {NF['nf_total_carbohydrate']}g</h4>
+					<h5>Total Carbs: {NF['nf_total_carbohydrate']}g</h5>
 				</TableHeaderColumn>
 				<TableHeaderColumn>
-					<h4>Total Fat: {NF['nf_total_fat']}g</h4>
+					<h5>Total Fat: {NF['nf_total_fat']}g</h5>
 				</TableHeaderColumn>
 			</TableRow>
 		);
