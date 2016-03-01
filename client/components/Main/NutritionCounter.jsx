@@ -32,12 +32,26 @@ export const getNutritionInfo = (meals, foods, additionals) => {
 //React Component
 export const NutritionCounter = ({meals,foods}) => {
 	let NF = getNutritionInfo(meals, foods);	
+	NF = _.mapValues(NF, (num) => num.toFixed(2));
 	return (
-			<TableRow className='nutrition-info'>
-				<TableHeaderColumn className='nutrition-info-calories'>Total Calories: {NF['nf_calories']}</TableHeaderColumn>
-				<TableHeaderColumn className='nutrition-info-protein'>Total Protein: {NF['nf_protein']}g</TableHeaderColumn>
-				<TableHeaderColumn className='nutrition-info-carbs'>Total Carbs: {NF['nf_total_carbohydrate']}g</TableHeaderColumn>
-				<TableHeaderColumn className='nutrition-info-fat'>Total Fat: {NF['nf_total_fat']}g</TableHeaderColumn>
+			<TableRow>
+				<TableHeaderColumn>
+					<h5>Items</h5>
+				</TableHeaderColumn>
+				<TableHeaderColumn>
+				</TableHeaderColumn>
+				<TableHeaderColumn>
+					<h5> Calories: {NF['nf_calories']} cal</h5>
+				</TableHeaderColumn>
+				<TableHeaderColumn>
+					<h5> Protein: {NF['nf_protein']}g</h5>
+				</TableHeaderColumn>
+				<TableHeaderColumn>
+					<h5> Carbs: {NF['nf_total_carbohydrate']}g</h5>
+				</TableHeaderColumn>
+				<TableHeaderColumn>
+					<h5> Fat: {NF['nf_total_fat']}g</h5>
+				</TableHeaderColumn>
 			</TableRow>
 		);
 }

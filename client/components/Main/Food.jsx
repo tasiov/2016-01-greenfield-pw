@@ -5,7 +5,7 @@ import FloatingActionButton from 'material-ui/lib/floating-action-button';
 import ContentAdd from 'material-ui/lib/svg-icons/content/add';
 import ContentRemove from 'material-ui/lib/svg-icons/content/remove';
 
-const Food = ({food, key, buttonAction, buttonIcon, numEaten}) => {
+const Food = ({food, key, buttonAction, buttonIcon, numEaten, eatenInMeal}) => {
   let name;
   let brand;
 
@@ -29,20 +29,42 @@ const Food = ({food, key, buttonAction, buttonIcon, numEaten}) => {
     );
    }
 
+  let servingColumn;
+  if(buttonIcon !== "remove"){
+    eatenInMeal = eatenInMeal || food.nf_serving_size_qty;
+    servingColumn = (
+      <TableRowColumn>
+        <p>{ eatenInMeal + " - " +food.nf_serving_size_unit}</p>
+      </TableRowColumn>
+    );
+   }
+
   let inputColumn;
   if(numEaten){
     inputColumn = (
       <TableRowColumn>
-        <input type="number" ref = {numEaten} />
+        <input type="number" ref = {numEaten} placeholder={1}/>
       </TableRowColumn>
     );
    }
+
+   let calorieColumn;
+   if(eatenInMeal){
+    <TableRowColumn>
+      <p>{Math.floor(food.nf_calories) + "cal x " + eatenInMeal + " = " + food.nf_calories * eatenInMeal +" cal"}</p>
+    </TableRowColumn>
+   }
+
     // Assign Icon based on Button Action
     return (
       <TableRow className='food-item'>
         {inputColumn} 
-        <TableRowColumn>{name}</TableRowColumn>
-        <TableRowColumn>{brand}</TableRowColumn>
+        <TableRowColumn>
+          <h5>{name}</h5>
+          <h6>{brand}</h6>
+        </TableRowColumn>
+        {servingColumn}
+        {calorieColumn}
         {buttonColumn}
       </TableRow>
     )
