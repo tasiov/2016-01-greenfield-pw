@@ -31,7 +31,7 @@ export const getNutritionInfo = (meals, foods, additionals) => {
 
 //React Component
 export const NutritionCounter = ({meals,foods}) => {
-	let NF = getNutritionInfo(meals, foods);	
+	let NF = getNutritionInfo(meals, foods);
 	NF = _.mapValues(NF, (num) => num.toFixed(2));
 	return (
 			<TableRow>
@@ -39,6 +39,7 @@ export const NutritionCounter = ({meals,foods}) => {
 					<h5>Items</h5>
 				</TableHeaderColumn>
 				<TableHeaderColumn>
+					<h5>Total Calories: {NF['nf_calories']} cal</h5>
 				</TableHeaderColumn>
 				<TableHeaderColumn>
 					<h5> Calories: {NF['nf_calories']} cal</h5>
