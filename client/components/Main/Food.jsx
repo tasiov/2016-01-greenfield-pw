@@ -29,6 +29,16 @@ const Food = ({food, key, buttonAction, buttonIcon, numEaten, eatenInMeal}) => {
     );
    }
 
+  let servingColumn;
+  if(buttonIcon !== "remove"){
+    eatenInMeal = eatenInMeal || food.nf_serving_size_qty;
+    servingColumn = (
+      <TableRowColumn>
+        { eatenInMeal + " - " +food.nf_serving_size_unit}
+      </TableRowColumn>
+    );
+   }
+
   let inputColumn;
   if(numEaten){
     inputColumn = (
@@ -53,6 +63,7 @@ const Food = ({food, key, buttonAction, buttonIcon, numEaten, eatenInMeal}) => {
           <h5>{name}</h5>
           <h6>{brand}</h6>
         </TableRowColumn>
+        {servingColumn}
         {calorieColumn}
         {buttonColumn}
       </TableRow>
