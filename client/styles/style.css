@@ -86,3 +86,8 @@
 .card-help {
   margin-top: 10px;
 }
+
+.secondaryText {
+  color: rgba(0,0,0,0.53);
+  font-size: 0.85em;
+}
