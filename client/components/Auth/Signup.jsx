@@ -8,6 +8,7 @@ let Signup = ({ dispatch, change}) => {
   let username;
   let password;
 
+  // Styling for Paper component
   const style = {
     height: 240,
     width: 300,
@@ -16,6 +17,10 @@ let Signup = ({ dispatch, change}) => {
     backgroundColor: 'rgb(255, 250, 240)'
   };
 
+  /*  This function is called when the user submits their
+   *  username and password. A post request is made to the
+   *  signup endpoint using username and password.
+   */
   const handleSubmit = e => {
     e.preventDefault();
     $.post( "/signup", {username: username.value, password: password.value})
