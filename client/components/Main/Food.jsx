@@ -34,7 +34,7 @@ const Food = ({food, key, buttonAction, buttonIcon, numEaten, eatenInMeal}) => {
     eatenInMeal = eatenInMeal || food.nf_serving_size_qty;
     servingColumn = (
       <TableRowColumn>
-        { eatenInMeal + " - " +food.nf_serving_size_unit}
+        <p>{ eatenInMeal + " - " +food.nf_serving_size_unit}</p>
       </TableRowColumn>
     );
    }
