@@ -43,16 +43,16 @@ const Summary = ({user}) => {
 						<Divider insert={true} />
 						<ListItem>
 								<div className='primaryText'>{'Carbohydrates Consumed Today: ' + currDaySum['nf_total_carbohydrate'] + 'g'}</div> 
-											<div className='secondaryText'>{'Fiber consumed: ' + currDaySum['nf_dietary_fiber'] + 'g, ' +
-																		 'Sugars consumed: ' + currDaySum['nf_sugars'] + 'g'} </div>
+											<div className='secondaryText'>{'Fiber consumed: ' + currDaySum['nf_dietary_fiber'] + 'g'}<br/>
+																		 {'Sugars consumed: ' + currDaySum['nf_sugars'] + 'g'} </div>
 						</ListItem>
 						<Divider insert={true} />
 						<ListItem>
 							<div className='primaryText'>{'Fat Consumed Today: ' + currDaySum['nf_total_fat'] + 'g'}</div> 
-							<div className='secondaryText'>{'Saturated Fat Consumed: ' + currDaySum['nf_saturated_fat'] + 'g, ' + 
-																		 'Polyunsaturated Fat Consumed: ' + currDaySum['nf_polyunsaturated_fat'] + 'g, ' + 
-																		 'Monounsaturated Fat Consumed: ' + currDaySum['nf_monounsaturated_fat'] + 'g, ' + 
-																		 'Trans Fat consumed: ' + currDaySum['nf_trans_fatty_acid'] + 'g'}</div>
+							<div className='secondaryText'>{'Saturated Fat Consumed: ' + currDaySum['nf_saturated_fat'] + 'g'}<br/>  
+																		 {'Polyunsaturated Fat Consumed: ' + currDaySum['nf_polyunsaturated_fat'] + 'g'}<br/>
+																		 {'Monounsaturated Fat Consumed: ' + currDaySum['nf_monounsaturated_fat'] + 'g'}<br/>
+																		 {'Trans Fat consumed: ' + currDaySum['nf_trans_fatty_acid'] + 'g'}</div>
 						</ListItem>
 						<Divider insert={true} />
 						<ListItem primaryText={'Cholesterol Consumed Today: ' + currDaySum['nf_cholesterol'] + 'mg'} />
@@ -80,16 +80,16 @@ const Summary = ({user}) => {
 						<Divider insert={true} />
 						<ListItem> 
 							<div className='primaryText'>{'Daily Carb Consumption: ' + NFdailyAvg['nf_total_carbohydrate'] + 'g'}</div>
-							<div className='secondaryText'>{'Daily Fiber Consumption: ' + NFdailyAvg['nf_dietary_fiber'] + 'g, ' +
-														 'Daily Sugar Consumption: ' + NFdailyAvg['nf_sugars']}</div>
+							<div className='secondaryText'>{'Daily Fiber Consumption: ' + NFdailyAvg['nf_dietary_fiber'] + 'g'}<br/>
+														 {'Daily Sugar Consumption: ' + NFdailyAvg['nf_sugars']}</div>
 					</ListItem>
 					<Divider insert={true} />
 						<ListItem> 
 							<div className='primaryText'>{'Daily Fat Consumption ' + NFdailyAvg['nf_total_fat'] + 'g'}</div>
-							<div className='secondaryText'>{'Daily Saturated Fat Consumption: ' + NFdailyAvg['nf_saturated_fat'] + 'g, ' + 
-																		 'Daily Polyunsaturated Fat Consumption: ' + NFdailyAvg['nf_polyunsaturated_fat'] + 'g, ' + 
-																		 'Daily Monounsaturated Fat Consumption: ' + NFdailyAvg['nf_monounsaturated_fat'] + 'g, ' + 
-																		 'Daily Trans Fat Consumption: ' + NFdailyAvg['nf_trans_fatty_acid'] + 'g'}</div>
+							<div className='secondaryText'>{'Daily Saturated Fat Consumption: ' + NFdailyAvg['nf_saturated_fat'] + 'g'}<br/> 
+																		 {'Daily Polyunsaturated Fat Consumption: ' + NFdailyAvg['nf_polyunsaturated_fat'] + 'g'}<br/>
+																		 {'Daily Monounsaturated Fat Consumption: ' + NFdailyAvg['nf_monounsaturated_fat'] + 'g'}<br/>
+																		 {'Daily Trans Fat Consumption: ' + NFdailyAvg['nf_trans_fatty_acid'] + 'g'}</div>
 						</ListItem>
 						<Divider insert={true} />
 						<ListItem primaryText={'Daily Cholesterol Consumption: ' + NFdailyAvg['nf_cholesterol'] + 'mg'} />
